@@ -1,0 +1,111 @@
+#include "message.h"
+#include "client.h"
+#include "result.h"
+#include <xmmsc/xmmsc_idnumbers.h>
+
+#include <QIODevice>
+#include <QFile>
+
+XmmsClient::XmmsClient (QObject *parent, const QString &name) : QObject (parent)
+{
+	m_name = name;
+	m_cookie = 0;
+	m_readmsg = NULL;
+}
+
+void
+XmmsClient::doConnect (const QString &host, quint32 port)
+{
+	m_socket.connectToHost (host, port);
+	connect (&m_socket, SIGNAL (connected ()), this, SLOT (socketConnected ()));
+	connect (&m_socket, SIGNAL (error (QAbstractSocket::SocketError)),
+			 this, SLOT (socketError (QAbstractSocket::SocketError)));
+	connect (&m_socket, SIGNAL (readyRead ()), this, SLOT (socketRead ()));
+}
+
+void
+XmmsClient::socketConnected ()
+{
+	qDebug ("connected");
+	emit connected (true);
+	hello ();
+}
+
+void
+XmmsClient::socketError (QAbstractSocket::SocketError error)
+{
+	Q_UNUSED (error);
+	emit connected (false);
+	qDebug ("Error: %s", qPrintable (m_socket.errorString ()));
+}
+
+void
+XmmsClient::socketRead ()
+{
+	qDebug ("we have data on the socket!");
+	
+	while (!m_socket.atEnd ()) {
+		if (!m_readmsg.headerComplete ()) {
+			if (m_socket.peek (16).size () == 16) {
+				m_readmsg.processHeader (m_socket.read (16));
+			} else {
+				return;
+			}
+		}
+				
+		if (m_readmsg.process (&m_socket)) {
+			qDebug ("we have complete message with cookie %d", m_readmsg.cookie ());
+		
+			parseMessage ();
+		
+			/* reset it */
+			m_readmsg = XmmsMessage ();
+			qDebug ("done with msg ... moving further");
+		}
+	}
+}
+
+void
+XmmsClient::parseMessage ()
+{
+	if (m_readmsg.cmd () == XMMS_IPC_CMD_ERROR) {
+		qWarning ("error on command %d", m_readmsg.cookie ());
+	}
+	if (m_resmap.contains (m_readmsg.cookie ())) {
+		qDebug ("found a result");
+		XmmsResult res = m_resmap.take (m_readmsg.cookie ());
+		res.exec (m_readmsg);
+	}
+}
+
+void
+XmmsClient::hello ()
+{
+	XmmsMessage msg (XMMS_IPC_OBJECT_MAIN, XMMS_IPC_CMD_HELLO);
+	msg.add (XMMS_IPC_PROTOCOL_VERSION);
+	msg.add (m_name);
+	queueMsg (msg);
+}
+
+XmmsResult
+XmmsClient::playlistCurrentPos ()
+{
+	XmmsMessage msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_CURRENT_POS);
+	msg.add ("_active");
+	
+	return queueMsg (msg);
+}
+
+XmmsResult
+XmmsClient::queueMsg (const XmmsMessage &msg)
+{
+	qDebug ("queuing ..");
+	QByteArray b = msg.finish (m_cookie ++);
+	qint32 len = m_socket.write (b);
+	qDebug ("len = %d", len);
+	if (len != b.size ()) {
+		qWarning ("wtf!");
+	}
+	
+	return XmmsResult (this, m_cookie);
+}
