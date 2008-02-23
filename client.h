@@ -17,9 +17,10 @@ class XmmsClient : public QObject
 		XmmsResult playlistCurrentPos ();
 		
 		void setResult (const XmmsResult &res) {
+			qDebug ("adding %d", res.cookie ());
 			m_resmap[res.cookie()] = res;
 		};
-				
+		
 	private:
 		QString m_name;
 		quint32 m_cookie;
@@ -31,7 +32,6 @@ class XmmsClient : public QObject
 		QTcpSocket m_socket;
 		
 		QMap<quint32, XmmsResult> m_resmap;
-		
 	signals:
 		void connected (bool);
 		
@@ -39,6 +39,7 @@ class XmmsClient : public QObject
 		void socketError (QAbstractSocket::SocketError);
 		void socketRead ();
 		void socketConnected ();
+
 };
 
 #endif

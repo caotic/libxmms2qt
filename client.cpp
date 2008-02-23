@@ -27,7 +27,6 @@ void
 XmmsClient::socketConnected ()
 {
 	qDebug ("connected");
-	emit connected (true);
 	hello ();
 }
 
@@ -54,13 +53,10 @@ XmmsClient::socketRead ()
 		}
 				
 		if (m_readmsg.process (&m_socket)) {
-			qDebug ("we have complete message with cookie %d", m_readmsg.cookie ());
-		
 			parseMessage ();
 		
 			/* reset it */
 			m_readmsg = XmmsMessage ();
-			qDebug ("done with msg ... moving further");
 		}
 	}
 }
@@ -71,6 +67,16 @@ XmmsClient::parseMessage ()
 	if (m_readmsg.cmd () == XMMS_IPC_CMD_ERROR) {
 		qWarning ("error on command %d", m_readmsg.cookie ());
 	}
+	
+	if (m_readmsg.cookie () == 0) {
+		/* hello reply, let's fulhack it for now */
+		qDebug ("got hello package!");
+		emit connected (true);
+		return;
+	}
+	
+	qDebug ("we have complete message with cookie %d cmd %d and object %d", m_readmsg.cookie (), m_readmsg.cmd (), m_readmsg.object ());
+	
 	if (m_resmap.contains (m_readmsg.cookie ())) {
 		qDebug ("found a result");
 		XmmsResult res = m_resmap.take (m_readmsg.cookie ());
@@ -99,13 +105,13 @@ XmmsClient::playlistCurrentPos ()
 XmmsResult
 XmmsClient::queueMsg (const XmmsMessage &msg)
 {
-	qDebug ("queuing ..");
-	QByteArray b = msg.finish (m_cookie ++);
+	qDebug ("queuing .. %d", m_cookie);
+	QByteArray b = msg.finish (m_cookie);
 	qint32 len = m_socket.write (b);
 	qDebug ("len = %d", len);
 	if (len != b.size ()) {
 		qWarning ("wtf!");
 	}
 	
-	return XmmsResult (this, m_cookie);
+	return XmmsResult (this, m_cookie ++);
 }

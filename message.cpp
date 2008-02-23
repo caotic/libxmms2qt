@@ -1,7 +1,10 @@
 #include "message.h"
 
+#include <QFile>
 #include <QStringList>
 #include <qendian.h>
+
+#include <xmmsc/xmmsc_idnumbers.h>
 
 XmmsMessage::XmmsMessage (quint32 object, quint32 cmd)
 {
@@ -14,6 +17,19 @@ XmmsMessage::XmmsMessage (quint32 object, quint32 cmd)
 bool
 XmmsMessage::processHeader (const QByteArray &b)
 {
+	
+	if (b.size () != 16) {
+		qWarning ("Didn't get 16 bytes from parent!");
+		return false;
+	}
+	
+	QFile fp ("/tmp/dbghdr");
+	fp.open (QIODevice::WriteOnly);
+	
+	fp.write (b);
+	fp.close ();
+	
+	
 	QDataStream r (b);
 	if (!headerComplete ()) {
 		r >> m_object;
@@ -38,6 +54,13 @@ XmmsMessage::process (QIODevice *r)
 	}
 	
 	if (m_bytearray.size () == m_length) {
+		
+		QFile fp ("/tmp/dbg");
+		fp.open(QIODevice::WriteOnly);
+		
+		fp.write(m_bytearray);
+		fp.close();
+		
 		return true;
 	} else {
 		return false;
@@ -103,6 +126,12 @@ XmmsMessage::finish (quint32 cookie) const
 quint32
 XmmsMessage::getUInt32 ()
 {
+	qint32 type;
+	*m_stream >> type;
+	if (type != XMMS_OBJECT_CMD_ARG_UINT32) {
+		qWarning ("wanted type %d but got %d", XMMS_OBJECT_CMD_ARG_UINT32, type);
+		return 0;
+	}
 	quint32 r;
 	*m_stream >> r;
 	return r;
@@ -111,6 +140,12 @@ XmmsMessage::getUInt32 ()
 qint32
 XmmsMessage::getInt32 ()
 {
+	qint32 type;
+	*m_stream >> type;
+	if (type != XMMS_OBJECT_CMD_ARG_INT32) {
+		qWarning ("wanted type %d but got %d", XMMS_OBJECT_CMD_ARG_INT32, type);
+		return 0;
+	}
 	qint32 r;
 	*m_stream >> r;
 	return r;
@@ -126,6 +161,12 @@ XmmsMessage::getReal ()
 QString
 XmmsMessage::getString ()
 {
+	qint32 type;
+	*m_stream >> type;
+	if (type != XMMS_OBJECT_CMD_ARG_STRING) {
+		qWarning ("wanted type %d but got %d", XMMS_OBJECT_CMD_ARG_STRING, type);
+		return QString ();
+	}
 	char *str;
 	*m_stream >> str;
 	QString r = QString::fromUtf8 (str);

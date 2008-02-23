@@ -1,48 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>client.cpp</string>
+	<string>message.cpp</string>
 	<key>documents</key>
 	<array>
 		<dict>
 			<key>filename</key>
 			<string>xmms2qt.pro</string>
 			<key>lastUsed</key>
-			<date>2007-09-02T03:54:15Z</date>
+			<date>2008-02-21T17:34:34Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>testclient.h</string>
+			<key>lastUsed</key>
+			<date>2008-02-21T18:43:08Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>main.cpp</string>
 			<key>lastUsed</key>
-			<date>2007-09-02T19:27:40Z</date>
+			<date>2008-02-21T18:43:36Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>message.cpp</string>
 			<key>lastUsed</key>
-			<date>2007-09-02T19:27:49Z</date>
+			<date>2008-02-21T19:51:15Z</date>
+			<key>selected</key>
+			<true/>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>message.h</string>
 			<key>lastUsed</key>
-			<date>2007-09-02T19:27:57Z</date>
+			<date>2008-02-21T19:38:14Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>client.h</string>
 			<key>lastUsed</key>
-			<date>2007-09-02T19:27:53Z</date>
+			<date>2008-02-21T18:42:20Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>client.cpp</string>
 			<key>lastUsed</key>
-			<date>2007-09-02T19:27:57Z</date>
-			<key>selected</key>
-			<true/>
+			<date>2008-02-21T19:51:15Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>result.cpp</string>
+			<key>lastUsed</key>
+			<date>2008-02-21T19:50:59Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>result.h</string>
+			<key>lastUsed</key>
+			<date>2008-02-21T18:51:37Z</date>
 		</dict>
 	</array>
 	<key>fileHierarchyDrawerWidth</key>
@@ -54,37 +72,37 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>15</integer>
 				<key>line</key>
-				<integer>64</integer>
+				<integer>86</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>43</integer>
 		</dict>
 		<key>client.h</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>16</integer>
+				<integer>14</integer>
 				<key>line</key>
-				<integer>20</integer>
+				<integer>25</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>6</integer>
 		</dict>
 		<key>main.cpp</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>13</integer>
 				<key>line</key>
-				<integer>8</integer>
+				<integer>15</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -96,23 +114,65 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>10</integer>
+				<integer>44</integer>
 				<key>line</key>
-				<integer>40</integer>
+				<integer>41</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>24</integer>
+			<integer>19</integer>
 		</dict>
 		<key>message.h</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
+				<integer>3</integer>
+				<key>line</key>
+				<integer>67</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>9</integer>
+		</dict>
+		<key>result.cpp</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>49</integer>
+				<key>line</key>
+				<integer>33</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>15</integer>
+		</dict>
+		<key>result.h</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
 				<integer>0</integer>
 				<key>line</key>
-				<integer>5</integer>
+				<integer>61</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>36</integer>
+		</dict>
+		<key>testclient.h</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>6</integer>
+				<key>line</key>
+				<integer>14</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -124,9 +184,9 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>13</integer>
+				<integer>51</integer>
 				<key>line</key>
-				<integer>9</integer>
+				<integer>12</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -138,7 +198,10 @@
 	<array>
 		<string>message.cpp</string>
 		<string>main.cpp</string>
+		<string>testclient.h</string>
 		<string>client.cpp</string>
+		<string>result.h</string>
+		<string>result.cpp</string>
 		<string>client.h</string>
 		<string>xmms2qt.pro</string>
 		<string>message.h</string>
@@ -146,6 +209,6 @@
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{3, 70}, {811, 708}}</string>
+	<string>{{250, 39}, {811, 708}}</string>
 </dict>
 </plist>

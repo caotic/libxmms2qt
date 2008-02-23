@@ -67,6 +67,10 @@ public:
 		return m_cmd;
 	};
 	
+	quint32 object () const {
+		return m_object;
+	};
+	
 private:
 	quint32 m_object;
 	quint32 m_cmd;
