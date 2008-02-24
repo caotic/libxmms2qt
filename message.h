@@ -1,4 +1,6 @@
 #include <QDataStream>
+#include <QVariant>
+#include <QList>
 
 #ifndef __XMMS_MESSAGE_H__
 #define __XMMS_MESSAGE_H__
@@ -43,6 +45,8 @@ public:
 	qint32 getInt32 ();
 	qreal getReal ();
 	QString getString ();
+	QVariant getValue ();
+	QList<QVariant> getList ();
 	
 	QByteArray finish (quint32 cookie) const;
 	bool process (QIODevice *);

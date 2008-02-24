@@ -20,7 +20,7 @@ XmmsResult::exec (const XmmsMessage &msg)
 	if (m_object && m_slot) {
 		QByteArray sig (m_object->metaObject ()->normalizedSignature (m_slot).mid (1));
 		qDebug ("we have object and slot: %s, woot!", sig.constData ());
-		
+
 		qint32 methidx = m_object->metaObject ()->indexOfMethod (sig.constData ());
 		if (methidx == -1) {
 			qWarning ("the object doesn't have that slot!");
@@ -32,6 +32,9 @@ XmmsResult::exec (const XmmsMessage &msg)
 		QGenericArgument arg;
 		if (param == "quint32") {
 			arg = Q_ARG (quint32, m_message.getUInt32 ());
+		} else if (param == "QList<QVariant>") {
+			QList<QVariant> l = m_message.getList ();
+			arg = Q_ARG (QList<QVariant>, l);
 /*		} else if (param == "qint32") {
 			arg = Q_ARG (qint32, )
 		} else if (param == "QString") {

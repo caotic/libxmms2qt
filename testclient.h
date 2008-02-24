@@ -12,7 +12,7 @@ class XmmsTestClient : public QObject
 		XmmsTestClient ();
 	public slots:
 		void connected (bool);
-		bool apa (quint32);
+		bool apa (const QList<QVariant> &);
 	private:
 		XmmsClient m_client;
 };

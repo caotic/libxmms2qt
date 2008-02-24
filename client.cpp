@@ -6,7 +6,7 @@
 #include <QIODevice>
 #include <QFile>
 
-XmmsClient::XmmsClient (QObject *parent, const QString &name) : QObject (parent)
+XmmsClient::XmmsClient (QObject *parent, const QString &name) : QObject (parent), playlist (this)
 {
 	m_name = name;
 	m_cookie = 0;
@@ -66,6 +66,10 @@ XmmsClient::parseMessage ()
 {
 	if (m_readmsg.cmd () == XMMS_IPC_CMD_ERROR) {
 		qWarning ("error on command %d", m_readmsg.cookie ());
+		/* we need a good way to handle this later ... */
+		QString s = m_readmsg.getString ();
+		qWarning ("Error: %s", qPrintable (s));
+		return;
 	}
 	
 	if (m_readmsg.cookie () == 0) {
@@ -94,23 +98,12 @@ XmmsClient::hello ()
 }
 
 XmmsResult
-XmmsClient::playlistCurrentPos ()
-{
-	XmmsMessage msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_CURRENT_POS);
-	msg.add ("_active");
-	
-	return queueMsg (msg);
-}
-
-XmmsResult
 XmmsClient::queueMsg (const XmmsMessage &msg)
 {
-	qDebug ("queuing .. %d", m_cookie);
 	QByteArray b = msg.finish (m_cookie);
 	qint32 len = m_socket.write (b);
-	qDebug ("len = %d", len);
 	if (len != b.size ()) {
-		qWarning ("wtf!");
+		qWarning ("socket.write didn't accept all our output for message %d!", m_cookie);
 	}
 	
 	return XmmsResult (this, m_cookie ++);

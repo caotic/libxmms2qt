@@ -4,8 +4,12 @@
 #include "message.h"
 #include "result.h"
 
+class XmmsClient;
+
 #ifndef __XMMS_CLIENT_H__
 #define __XMMS_CLIENT_H__
+
+#include "playlist.h"
 
 class XmmsClient : public QObject
 {
@@ -13,13 +17,16 @@ class XmmsClient : public QObject
 	public:
 		XmmsClient (QObject *parent, const QString &name);
 		void doConnect (const QString &, quint32);
-		
-		XmmsResult playlistCurrentPos ();
-		
+				
 		void setResult (const XmmsResult &res) {
 			qDebug ("adding %d", res.cookie ());
 			m_resmap[res.cookie()] = res;
 		};
+
+		XmmsResult queueMsg (const XmmsMessage &);
+		
+		/* the sub objects here */
+		Playlist playlist;
 		
 	private:
 		QString m_name;
@@ -27,7 +34,6 @@ class XmmsClient : public QObject
 		XmmsMessage m_readmsg;
 		
 		void hello ();
-		XmmsResult queueMsg (const XmmsMessage &);
 		void parseMessage ();
 		QTcpSocket m_socket;
 		

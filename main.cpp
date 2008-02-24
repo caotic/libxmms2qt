@@ -9,10 +9,13 @@ XmmsTestClient::XmmsTestClient () : QObject (), m_client (this, "xmms2qttest")
 }
 
 bool
-XmmsTestClient::apa (quint32 pos)
+XmmsTestClient::apa (const QList<QVariant> &list)
 {
-	qDebug ("the callback was called with %d as pos", pos);
-	
+	qDebug ("%d", list.size ());
+	for (int i = 0; i < list.size (); i ++)
+	{
+		qDebug ("%d = %d", i, list[i].toUInt());
+	}
 	return true;
 }
 
@@ -23,7 +26,7 @@ XmmsTestClient::connected (bool ok)
 		qDebug ("we failed!");
 		exit (0);
 	}
-	m_client.playlistCurrentPos () (this, SLOT(apa (quint32)));
+	m_client.playlist.list () (this, SLOT(apa (QList<QVariant>)));
 }
 
 int main (int argc, char **argv)

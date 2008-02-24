@@ -22,14 +22,7 @@ XmmsMessage::processHeader (const QByteArray &b)
 		qWarning ("Didn't get 16 bytes from parent!");
 		return false;
 	}
-	
-	QFile fp ("/tmp/dbghdr");
-	fp.open (QIODevice::WriteOnly);
-	
-	fp.write (b);
-	fp.close ();
-	
-	
+		
 	QDataStream r (b);
 	if (!headerComplete ()) {
 		r >> m_object;
@@ -54,13 +47,6 @@ XmmsMessage::process (QIODevice *r)
 	}
 	
 	if (m_bytearray.size () == m_length) {
-		
-		QFile fp ("/tmp/dbg");
-		fp.open(QIODevice::WriteOnly);
-		
-		fp.write(m_bytearray);
-		fp.close();
-		
 		return true;
 	} else {
 		return false;
@@ -123,6 +109,28 @@ XmmsMessage::finish (quint32 cookie) const
 	return retarray;
 }
 
+QVariant
+XmmsMessage::getValue ()
+{
+	qint32 type;
+	*m_stream >> type;
+	switch (type) {
+		case XMMS_OBJECT_CMD_ARG_UINT32:
+			quint32 ui;
+			*m_stream >> ui;
+			return QVariant (ui);
+		case XMMS_OBJECT_CMD_ARG_INT32:
+			qint32 i;
+			*m_stream >> i;
+			return QVariant (i);
+		case XMMS_OBJECT_CMD_ARG_STRING:
+			QString s;
+			*m_stream >> s;
+			return QVariant (s);
+	}
+	return QVariant ();
+}
+
 quint32
 XmmsMessage::getUInt32 ()
 {
@@ -135,6 +143,27 @@ XmmsMessage::getUInt32 ()
 	quint32 r;
 	*m_stream >> r;
 	return r;
+}
+
+QList<QVariant>
+XmmsMessage::getList ()
+{
+	qint32 type;
+	*m_stream >> type;
+	if (type != XMMS_OBJECT_CMD_ARG_LIST) {
+		qWarning ("wanted type %d but got %d", XMMS_OBJECT_CMD_ARG_LIST, type);
+		return QList<QVariant> ();
+	}
+	qint32 size;
+	*m_stream >> size;
+	
+	QList<QVariant> ret;
+	for (int i = 0; i < size; i ++)
+	{
+		ret.append (getValue ());
+	}
+	
+	return ret;
 }
 
 qint32
