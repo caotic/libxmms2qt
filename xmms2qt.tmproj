@@ -3,58 +3,76 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>message.cpp</string>
+	<string>playlist.cpp</string>
 	<key>documents</key>
 	<array>
 		<dict>
 			<key>filename</key>
-			<string>xmms2qt.pro</string>
+			<string>playlist.cpp</string>
 			<key>lastUsed</key>
-			<date>2008-02-21T17:34:34Z</date>
-		</dict>
-		<dict>
-			<key>filename</key>
-			<string>testclient.h</string>
-			<key>lastUsed</key>
-			<date>2008-02-21T18:43:08Z</date>
-		</dict>
-		<dict>
-			<key>filename</key>
-			<string>main.cpp</string>
-			<key>lastUsed</key>
-			<date>2008-02-21T18:43:36Z</date>
-		</dict>
-		<dict>
-			<key>filename</key>
-			<string>message.cpp</string>
-			<key>lastUsed</key>
-			<date>2008-02-21T19:51:15Z</date>
+			<date>2008-02-24T15:52:47Z</date>
 			<key>selected</key>
 			<true/>
 		</dict>
 		<dict>
 			<key>filename</key>
+			<string>playlist.h</string>
+			<key>lastUsed</key>
+			<date>2008-02-23T16:55:16Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>xmms2qt.pro</string>
+			<key>lastUsed</key>
+			<date>2008-02-23T17:32:44Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>testclient.h</string>
+			<key>lastUsed</key>
+			<date>2008-02-23T17:38:15Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>main.cpp</string>
+			<key>lastUsed</key>
+			<date>2008-02-24T09:57:48Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>message.cpp</string>
+			<key>lastUsed</key>
+			<date>2008-02-24T11:13:31Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
 			<string>message.h</string>
 			<key>lastUsed</key>
-			<date>2008-02-21T19:38:14Z</date>
+			<date>2008-02-23T16:53:44Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>client.h</string>
 			<key>lastUsed</key>
-			<date>2008-02-21T18:42:20Z</date>
+			<date>2008-02-23T16:05:41Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>object.h</string>
+			<key>lastUsed</key>
+			<date>2008-02-23T17:57:32Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>client.cpp</string>
 			<key>lastUsed</key>
-			<date>2008-02-21T19:51:15Z</date>
+			<date>2008-02-24T10:23:53Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>result.cpp</string>
 			<key>lastUsed</key>
-			<date>2008-02-21T19:50:59Z</date>
+			<date>2008-02-23T17:57:30Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
@@ -72,84 +90,126 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>15</integer>
+				<integer>39</integer>
 				<key>line</key>
-				<integer>86</integer>
+				<integer>70</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>43</integer>
+			<integer>61</integer>
 		</dict>
 		<key>client.h</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>14</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>25</integer>
+				<integer>12</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>6</integer>
+			<integer>5</integer>
 		</dict>
 		<key>main.cpp</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>13</integer>
+				<integer>29</integer>
 				<key>line</key>
-				<integer>15</integer>
+				<integer>13</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>8</integer>
 		</dict>
 		<key>message.cpp</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>44</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>41</integer>
+				<integer>162</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>19</integer>
+			<integer>92</integer>
 		</dict>
 		<key>message.h</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>3</integer>
+				<integer>15</integer>
 				<key>line</key>
-				<integer>67</integer>
+				<integer>2</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>9</integer>
+			<integer>0</integer>
+		</dict>
+		<key>object.h</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>9</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>playlist.cpp</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>20</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>playlist.h</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>47</integer>
+				<key>line</key>
+				<integer>17</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
 		</dict>
 		<key>result.cpp</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>49</integer>
+				<integer>9</integer>
 				<key>line</key>
-				<integer>33</integer>
+				<integer>35</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>15</integer>
+			<integer>0</integer>
 		</dict>
 		<key>result.h</key>
 		<dict>
@@ -170,7 +230,7 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>6</integer>
+				<integer>32</integer>
 				<key>line</key>
 				<integer>14</integer>
 			</dict>
@@ -184,9 +244,9 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>51</integer>
+				<integer>66</integer>
 				<key>line</key>
-				<integer>12</integer>
+				<integer>13</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -200,15 +260,18 @@
 		<string>main.cpp</string>
 		<string>testclient.h</string>
 		<string>client.cpp</string>
+		<string>object.h</string>
 		<string>result.h</string>
 		<string>result.cpp</string>
 		<string>client.h</string>
 		<string>xmms2qt.pro</string>
+		<string>playlist.h</string>
+		<string>playlist.cpp</string>
 		<string>message.h</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{250, 39}, {811, 708}}</string>
+	<string>{{159, 110}, {811, 578}}</string>
 </dict>
 </plist>

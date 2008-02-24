@@ -46,7 +46,7 @@ public:
 	qreal getReal ();
 	QString getString ();
 	QVariant getValue ();
-	QList<QVariant> getList ();
+	QVariantList getList ();
 	
 	QByteArray finish (quint32 cookie) const;
 	bool process (QIODevice *);

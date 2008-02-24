@@ -145,7 +145,7 @@ XmmsMessage::getUInt32 ()
 	return r;
 }
 
-QList<QVariant>
+QVariantList
 XmmsMessage::getList ()
 {
 	qint32 type;
@@ -157,7 +157,7 @@ XmmsMessage::getList ()
 	qint32 size;
 	*m_stream >> size;
 	
-	QList<QVariant> ret;
+	QVariantList ret;
 	for (int i = 0; i < size; i ++)
 	{
 		ret.append (getValue ());

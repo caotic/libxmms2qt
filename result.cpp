@@ -29,23 +29,25 @@ XmmsResult::exec (const XmmsMessage &msg)
 		
 		QMetaMethod meth = m_object->metaObject ()->method (methidx);
 		QByteArray param = meth.parameterTypes ()[0];
-		QGenericArgument arg;
+
+		sig = sig.left(sig.indexOf('('));
+		bool ret;
+	
 		if (param == "quint32") {
-			arg = Q_ARG (quint32, m_message.getUInt32 ());
-		} else if (param == "QList<QVariant>") {
-			QList<QVariant> l = m_message.getList ();
-			arg = Q_ARG (QList<QVariant>, l);
+			QMetaObject::invokeMethod (m_object, sig, 
+									   Q_RETURN_ARG (bool, ret),
+									   Q_ARG (quint32, m_message.getUInt32 ()));
+			
+		} else if (param == "QVariantList") {
+			QMetaObject::invokeMethod (m_object, sig, 
+									   Q_RETURN_ARG (bool, ret),
+									   Q_ARG (QVariantList, m_message.getList ()));
 /*		} else if (param == "qint32") {
 			arg = Q_ARG (qint32, )
 		} else if (param == "QString") {
 			arg = Q_ARG (QString, )*/
 		}
 		
-		sig = sig.left(sig.indexOf('('));
-		bool ret;
-		QMetaObject::invokeMethod (m_object, sig, 
-								   Q_RETURN_ARG (bool, ret),
-								   arg);
 	}
 	
 	qDebug ("done with exec of result %d", m_cookie);

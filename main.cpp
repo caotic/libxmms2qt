@@ -9,7 +9,7 @@ XmmsTestClient::XmmsTestClient () : QObject (), m_client (this, "xmms2qttest")
 }
 
 bool
-XmmsTestClient::apa (const QList<QVariant> &list)
+XmmsTestClient::apa (const QVariantList &list)
 {
 	qDebug ("%d", list.size ());
 	for (int i = 0; i < list.size (); i ++)
@@ -26,7 +26,7 @@ XmmsTestClient::connected (bool ok)
 		qDebug ("we failed!");
 		exit (0);
 	}
-	m_client.playlist.list () (this, SLOT(apa (QList<QVariant>)));
+	m_client.playlist.list () (this, SLOT(apa (const QVariantList &)));
 }
 
 int main (int argc, char **argv)
