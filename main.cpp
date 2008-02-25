@@ -14,8 +14,15 @@ XmmsTestClient::apa (const QVariantList &list)
 	qDebug ("%d", list.size ());
 	for (int i = 0; i < list.size (); i ++)
 	{
-		qDebug ("%d = %d", i, list[i].toUInt());
+		m_client.medialib.info (list.at (i).toUInt ()) (this, SLOT (minfo(const PropDict &)));
 	}
+	return true;
+}
+
+bool
+XmmsTestClient::minfo (const PropDict &dict)
+{
+	qDebug ("%s", qPrintable (dict["size"].toString ()));
 	return true;
 }
 

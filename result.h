@@ -6,6 +6,8 @@
 #ifndef __XMMS_RESULT_H__
 #define __XMMS_RESULT_H__
 
+#include "propdict.h"
+
 class XmmsClient;
 
 class XmmsResult : public QObject

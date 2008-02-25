@@ -10,5 +10,5 @@ CONFIG -= app_bundle
 QT += network
 
 # Input
-HEADERS += testclient.h message.h client.h result.h object.h playlist.h
-SOURCES += message.cpp main.cpp client.cpp result.cpp playlist.cpp
+HEADERS += testclient.h message.h client.h result.h object.h playlist.h medialib.h propdict.h
+SOURCES += message.cpp main.cpp client.cpp result.cpp playlist.cpp medialib.cpp

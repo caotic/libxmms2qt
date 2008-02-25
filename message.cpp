@@ -4,6 +4,8 @@
 #include <QStringList>
 #include <qendian.h>
 
+#include "propdict.h"
+
 #include <xmmsc/xmmsc_idnumbers.h>
 
 XmmsMessage::XmmsMessage (quint32 object, quint32 cmd)
@@ -47,6 +49,12 @@ XmmsMessage::process (QIODevice *r)
 	}
 	
 	if (m_bytearray.size () == m_length) {
+#if 1
+		QFile fp("/tmp/dbg");
+		fp.open (QIODevice::WriteOnly);
+		fp.write (m_bytearray);
+		fp.close ();
+#endif
 		return true;
 	} else {
 		return false;
@@ -124,8 +132,7 @@ XmmsMessage::getValue ()
 			*m_stream >> i;
 			return QVariant (i);
 		case XMMS_OBJECT_CMD_ARG_STRING:
-			QString s;
-			*m_stream >> s;
+			QString s = getString (false);
 			return QVariant (s);
 	}
 	return QVariant ();
@@ -145,15 +152,52 @@ XmmsMessage::getUInt32 ()
 	return r;
 }
 
-QVariantList
-XmmsMessage::getList ()
+PropDict
+XmmsMessage::getDict ()
 {
+	PropDict ret;
+	
 	qint32 type;
 	*m_stream >> type;
-	if (type != XMMS_OBJECT_CMD_ARG_LIST) {
-		qWarning ("wanted type %d but got %d", XMMS_OBJECT_CMD_ARG_LIST, type);
-		return QList<QVariant> ();
+	
+	if (type == XMMS_OBJECT_CMD_ARG_DICT) {
+		qDebug ("'normal' dict found");
+		QVariantList l = getList (false);
+		for (int i = 0; i < l.size (); i ++)
+		{
+			QString key = l.at (i ++).toString ();
+			QVariant value = l.at (i);
+			ret.add (key, value);
+		}
+	} else if (type == XMMS_OBJECT_CMD_ARG_PROPDICT) {
+		qDebug ("'prop' dict found");
+		QVariantList l = getList (false);
+		
+		qDebug ("list is %d", l.size ());
+		for (int i = 0; i < l.size (); i ++)
+		{
+			QString source = l.at (i ++).toString ();
+			QString key = l.at (i ++).toString ();
+			QVariant value = l.at (i);
+			ret.add (key, value, source);
+		}
 	}
+	
+	return ret;
+}
+
+QVariantList
+XmmsMessage::getList (const bool &checktype)
+{
+	if (checktype) {
+		qint32 type;
+		*m_stream >> type;
+		if (type != XMMS_OBJECT_CMD_ARG_LIST) {
+			qWarning ("wanted type %d but got %d", XMMS_OBJECT_CMD_ARG_LIST, type);
+			return QList<QVariant> ();
+		}
+	}
+	
 	qint32 size;
 	*m_stream >> size;
 	
@@ -188,16 +232,20 @@ XmmsMessage::getReal ()
 }
 
 QString
-XmmsMessage::getString ()
+XmmsMessage::getString (const bool &checktype)
 {
-	qint32 type;
-	*m_stream >> type;
-	if (type != XMMS_OBJECT_CMD_ARG_STRING) {
-		qWarning ("wanted type %d but got %d", XMMS_OBJECT_CMD_ARG_STRING, type);
-		return QString ();
+	if (checktype) {
+		qint32 type;
+		*m_stream >> type;
+		if (type != XMMS_OBJECT_CMD_ARG_STRING) {
+			qWarning ("wanted type %d but got %d", XMMS_OBJECT_CMD_ARG_STRING, type);
+			return QString ();
+		}
 	}
-	char *str;
-	*m_stream >> str;
+	quint32 len;
+	*m_stream >> len;
+	char *str = (char *) malloc (len + 1);
+	m_stream->readRawData (str, len);
 	QString r = QString::fromUtf8 (str);
 	delete str;
 	

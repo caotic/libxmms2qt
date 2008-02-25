@@ -6,7 +6,7 @@
 #include <QIODevice>
 #include <QFile>
 
-XmmsClient::XmmsClient (QObject *parent, const QString &name) : QObject (parent), playlist (this)
+XmmsClient::XmmsClient (QObject *parent, const QString &name) : QObject (parent), playlist (this), medialib (this)
 {
 	m_name = name;
 	m_cookie = 0;
@@ -64,10 +64,14 @@ XmmsClient::socketRead ()
 void
 XmmsClient::parseMessage ()
 {
+	
+	qDebug ("we have complete message with cookie %d cmd %d and object %d", m_readmsg.cookie (), m_readmsg.cmd (), m_readmsg.object ());
+	
 	if (m_readmsg.cmd () == XMMS_IPC_CMD_ERROR) {
-		qWarning ("error on command %d", m_readmsg.cookie ());
+		XmmsMessage m = m_readmsg;
+		qWarning ("error on command %d", m.cookie ());
 		/* we need a good way to handle this later ... */
-		QString s = m_readmsg.getString ();
+		QString s = m.getString (false);
 		qWarning ("Error: %s", qPrintable (s));
 		return;
 	}
@@ -78,9 +82,7 @@ XmmsClient::parseMessage ()
 		emit connected (true);
 		return;
 	}
-	
-	qDebug ("we have complete message with cookie %d cmd %d and object %d", m_readmsg.cookie (), m_readmsg.cmd (), m_readmsg.object ());
-	
+		
 	if (m_resmap.contains (m_readmsg.cookie ())) {
 		qDebug ("found a result");
 		XmmsResult res = m_resmap.take (m_readmsg.cookie ());

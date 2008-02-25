@@ -10,6 +10,7 @@ class XmmsClient;
 #define __XMMS_CLIENT_H__
 
 #include "playlist.h"
+#include "medialib.h"
 
 class XmmsClient : public QObject
 {
@@ -27,6 +28,7 @@ class XmmsClient : public QObject
 		
 		/* the sub objects here */
 		Playlist playlist;
+		Medialib medialib;
 		
 	private:
 		QString m_name;

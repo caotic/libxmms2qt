@@ -5,6 +5,8 @@
 #ifndef __XMMS_MESSAGE_H__
 #define __XMMS_MESSAGE_H__
 
+#include "propdict.h"
+
 class XmmsMessage {
 public:
 	XmmsMessage (quint32 object = 0, quint32 cmd = 0);
@@ -44,9 +46,10 @@ public:
 	quint32 getUInt32 ();
 	qint32 getInt32 ();
 	qreal getReal ();
-	QString getString ();
+	QString getString (const bool &checktype = true);
 	QVariant getValue ();
-	QVariantList getList ();
+	QVariantList getList (const bool &checktype = true);
+	PropDict getDict ();
 	
 	QByteArray finish (quint32 cookie) const;
 	bool process (QIODevice *);
