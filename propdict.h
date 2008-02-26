@@ -6,6 +6,7 @@
 #ifndef __PROPDICT_H__
 #define __PROPDICT_H__
 
+
 class PropDict : public QObject
 {
 	Q_OBJECT
@@ -37,7 +38,6 @@ class PropDict : public QObject
 		
 		void add (const QString &key, const QVariant &val, const QString &source = QString ())
 		{
-			qDebug ("adding %s with source %s", qPrintable (key), qPrintable (source));
 			QVariantList l;
 			if (m_prop.contains (key)) {
 				l = m_prop[key];
@@ -51,12 +51,10 @@ class PropDict : public QObject
 		
 		QVariant operator[] (const QString &key) const
 		{
-			qDebug ("someone asking for %s", qPrintable (key));
 			if (m_prop.contains (key)) {
 				QVariantList l = m_prop[key];
 				QVariant ret;
 				qint32 lsrc = 0;
-				qDebug ("we have %s it contains %d paths", qPrintable (key), l.size () / 2);
 				for (int i = 0; i < l.size (); i ++)
 				{
 					QString source = l.at (i ++).toString ();

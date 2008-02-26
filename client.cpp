@@ -26,7 +26,7 @@ XmmsClient::doConnect (const QString &host, quint32 port)
 void
 XmmsClient::socketConnected ()
 {
-	qDebug ("connected");
+	DBGIPC ("connected");
 	hello ();
 }
 
@@ -35,13 +35,13 @@ XmmsClient::socketError (QAbstractSocket::SocketError error)
 {
 	Q_UNUSED (error);
 	emit connected (false);
-	qDebug ("Error: %s", qPrintable (m_socket.errorString ()));
+	qWarning ("Error: %s", qPrintable (m_socket.errorString ()));
 }
 
 void
 XmmsClient::socketRead ()
 {
-	qDebug ("we have data on the socket!");
+	DBGIPC ("we have data on the socket!");
 	
 	while (!m_socket.atEnd ()) {
 		if (!m_readmsg.headerComplete ()) {
@@ -65,7 +65,7 @@ void
 XmmsClient::parseMessage ()
 {
 	
-	qDebug ("we have complete message with cookie %d cmd %d and object %d", m_readmsg.cookie (), m_readmsg.cmd (), m_readmsg.object ());
+	DBGIPC ("we have complete message with cookie %d cmd %d and object %d", m_readmsg.cookie (), m_readmsg.cmd (), m_readmsg.object ());
 	
 	if (m_readmsg.cmd () == XMMS_IPC_CMD_ERROR) {
 		XmmsMessage m = m_readmsg;
@@ -78,13 +78,13 @@ XmmsClient::parseMessage ()
 	
 	if (m_readmsg.cookie () == 0) {
 		/* hello reply, let's fulhack it for now */
-		qDebug ("got hello package!");
+		DBGIPC ("got hello package!");
 		emit connected (true);
 		return;
 	}
 		
 	if (m_resmap.contains (m_readmsg.cookie ())) {
-		qDebug ("found a result");
+		DBGIPC ("found a result");
 		XmmsResult res = m_resmap.take (m_readmsg.cookie ());
 		res.exec (m_readmsg);
 	}

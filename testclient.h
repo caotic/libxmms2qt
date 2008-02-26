@@ -16,6 +16,7 @@ class XmmsTestClient : public QObject
 		bool minfo (const PropDict &);
 	private:
 		XmmsClient m_client;
+        int m_entries;
 };
 
 

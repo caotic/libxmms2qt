@@ -12,6 +12,14 @@ class XmmsClient;
 #include "playlist.h"
 #include "medialib.h"
 
+#undef __DEBUG_IPC__
+
+#ifdef __DEBUG_IPC__
+#define DBGIPC(fmt, ...) qDebug("DEBUG IPC: " fmt, ## __VA_ARGS__)
+#else
+#define DBGIPC(fmt, ...)
+#endif
+
 class XmmsClient : public QObject
 {
 	Q_OBJECT
@@ -20,7 +28,7 @@ class XmmsClient : public QObject
 		void doConnect (const QString &, quint32);
 				
 		void setResult (const XmmsResult &res) {
-			qDebug ("adding %d", res.cookie ());
+			DBGIPC ("adding %d", res.cookie ());
 			m_resmap[res.cookie()] = res;
 		};
 

@@ -11,7 +11,7 @@ XmmsTestClient::XmmsTestClient () : QObject (), m_client (this, "xmms2qttest")
 bool
 XmmsTestClient::apa (const QVariantList &list)
 {
-	qDebug ("%d", list.size ());
+    m_entries = list.size ();
 	for (int i = 0; i < list.size (); i ++)
 	{
 		m_client.medialib.info (list.at (i).toUInt ()) (this, SLOT (minfo(const PropDict &)));
@@ -22,7 +22,11 @@ XmmsTestClient::apa (const QVariantList &list)
 bool
 XmmsTestClient::minfo (const PropDict &dict)
 {
-	qDebug ("%s", qPrintable (dict["size"].toString ()));
+	qDebug ("%s - %s", qPrintable (dict["artist"].toString ()), qPrintable (dict["title"].toString ()));
+    m_entries --;
+    if (m_entries == 0) {
+        qApp->exit (1);
+    }
 	return true;
 }
 

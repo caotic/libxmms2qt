@@ -8,6 +8,14 @@
 
 #include "propdict.h"
 
+#undef __DEBUG_RESULT__
+
+#ifdef __DEBUG_RESULT__
+#define DBGRES(fmt, ...) qDebug("DEBUG RESULT: " fmt, ## __VA_ARGS__)
+#else
+#define DBGRES(fmt, ...)
+#endif
+
 class XmmsClient;
 
 class XmmsResult : public QObject

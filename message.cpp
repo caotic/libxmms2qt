@@ -5,6 +5,8 @@
 #include <qendian.h>
 
 #include "propdict.h"
+#include "client.h"
+#include "result.h"
 
 #include <xmmsc/xmmsc_idnumbers.h>
 
@@ -32,11 +34,12 @@ XmmsMessage::processHeader (const QByteArray &b)
 		r >> m_cookie;
 		r >> m_length;
 		m_headercomplete = true;
-		qDebug ("header is complete! the message is %d", m_length);
+		DBGIPC ("header is complete! the message is %d", m_length);
 		return true;
 	}
 	return false;
 }
+
 
 bool
 XmmsMessage::process (QIODevice *r)
@@ -44,12 +47,12 @@ XmmsMessage::process (QIODevice *r)
 	if (m_bytearray.size () < m_length) {
 		int readsize = m_length - m_bytearray.size ();
 		QByteArray b = r->read (readsize);
-		qDebug ("read %d wanted %d", b.size (), readsize);
+		DBGIPC ("read %d wanted %d", b.size (), readsize);
 		m_bytearray += b;
 	}
 	
 	if (m_bytearray.size () == m_length) {
-#if 1
+#ifdef __DEBUG_IPC_TO_FILE__
 		QFile fp("/tmp/dbg");
 		fp.open (QIODevice::WriteOnly);
 		fp.write (m_bytearray);
@@ -161,7 +164,7 @@ XmmsMessage::getDict ()
 	*m_stream >> type;
 	
 	if (type == XMMS_OBJECT_CMD_ARG_DICT) {
-		qDebug ("'normal' dict found");
+		DBGRES ("'normal' dict found");
 		QVariantList l = getList (false);
 		for (int i = 0; i < l.size (); i ++)
 		{
@@ -170,10 +173,10 @@ XmmsMessage::getDict ()
 			ret.add (key, value);
 		}
 	} else if (type == XMMS_OBJECT_CMD_ARG_PROPDICT) {
-		qDebug ("'prop' dict found");
+		DBGRES ("'prop' dict found");
 		QVariantList l = getList (false);
 		
-		qDebug ("list is %d", l.size ());
+		DBGRES ("list is %d", l.size ());
 		for (int i = 0; i < l.size (); i ++)
 		{
 			QString source = l.at (i ++).toString ();

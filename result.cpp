@@ -19,7 +19,7 @@ XmmsResult::exec (const XmmsMessage &msg)
 		
 	if (m_object && m_slot) {
 		QByteArray sig (m_object->metaObject ()->normalizedSignature (m_slot).mid (1));
-		qDebug ("we have object and slot: %s, woot!", sig.constData ());
+		DBGRES ("we have object and slot: %s, woot!", sig.constData ());
 
 		qint32 methidx = m_object->metaObject ()->indexOfMethod (sig.constData ());
 		if (methidx == -1) {
@@ -54,7 +54,7 @@ XmmsResult::exec (const XmmsMessage &msg)
 		
 	}
 	
-	qDebug ("done with exec of result %d", m_cookie);
+	DBGRES ("done with exec of result %d", m_cookie);
 }
 
 void
