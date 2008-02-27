@@ -55,6 +55,10 @@ XmmsResult::exec (const XmmsMessage &msg)
 			QMetaObject::invokeMethod (m_object, sig,
 									   Q_RETURN_ARG (bool, ret),
 									   Q_ARG (PropDict, m_message.getDict ()));
+		} else if (param == "QByteArray") {
+			QMetaObject::invokeMethod (m_object, sig,
+									   Q_RETURN_ARG (bool, ret),
+									   Q_ARG (QByteArray, m_message.getBindata ()));
 /*		} else if (param == "qint32") {
 			arg = Q_ARG (qint32, )
 		} else if (param == "QString") {

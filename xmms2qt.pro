@@ -16,5 +16,5 @@ MOC_DIR     = .moc
 OBJECTS_DIR = .obj
 
 # Input
-HEADERS += testclient.h message.h client.h result.h object.h playlist.h medialib.h propdict.h playback.h
-SOURCES += message.cpp main.cpp client.cpp result.cpp playlist.cpp medialib.cpp playback.cpp
+HEADERS += testclient.h message.h client.h result.h object.h playlist.h medialib.h propdict.h playback.h bindata.h
+SOURCES += message.cpp main.cpp client.cpp result.cpp playlist.cpp medialib.cpp playback.cpp bindata.cpp

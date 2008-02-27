@@ -12,6 +12,7 @@ class XmmsClient;
 #include "playlist.h"
 #include "medialib.h"
 #include "playback.h"
+#include "bindata.h"
 
 #define __DEBUG_IPC__
 
@@ -39,6 +40,7 @@ class XmmsClient : public QObject
 		Playlist playlist;
 		Medialib medialib;
 		Playback playback;
+		Bindata bindata;
 		
 	private:
 		QString m_name;

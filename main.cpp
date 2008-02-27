@@ -37,6 +37,13 @@ XmmsTestClient::pmtime (quint32 tme)
 	return true;
 }
 
+bool
+XmmsTestClient::bindata (const QByteArray &data)
+{
+	qDebug ("got bindata of size %d", data.size ());
+	return true;
+}
+
 void
 XmmsTestClient::connected (bool ok)
 {
@@ -45,7 +52,8 @@ XmmsTestClient::connected (bool ok)
 		exit (0);
 	}
 	//m_client.playlist.list () (this, SLOT(apa (const QVariantList &)));
-	m_client.playback.signalPlaytime () (this, SLOT(pmtime (quint32)));
+	//m_client.playback.signalPlaytime () (this, SLOT(pmtime (quint32)));
+	m_client.bindata.retrieve ("411a8e6f7c956c8eb564e24143753c32") (this, SLOT (bindata (const QByteArray &)));
 }
 
 int main (int argc, char **argv)

@@ -50,6 +50,7 @@ public:
 	QVariant getValue ();
 	QVariantList getList (const bool &checktype = true);
 	PropDict getDict ();
+	QByteArray getBindata ();
 	
 	QByteArray finish (quint32 cookie) const;
 	bool process (QIODevice *);
@@ -62,7 +63,7 @@ public:
 		return m_cookie;
 	};
 	
-	quint32 fullLenght () const {
+	quint32 fullLength () const {
 		return m_length + 16; /* header is 16 */
 	};
 	

@@ -247,10 +247,36 @@ XmmsMessage::getString (const bool &checktype)
 	}
 	quint32 len;
 	*m_stream >> len;
+	if (len > fullLength ()) {
+		qWarning ("broken lenght, wanted %d but we only have %d", len, fullLength ());
+		return QByteArray ();
+	}
 	char *str = (char *) malloc (len + 1);
 	m_stream->readRawData (str, len);
 	QString r = QString::fromUtf8 (str);
 	delete str;
 	
+	return r;
+}
+
+QByteArray
+XmmsMessage::getBindata ()
+{
+	qint32 type;
+	*m_stream >> type;
+	if (type != XMMS_OBJECT_CMD_ARG_BIN) {
+		qWarning ("wanted type %d but got %d", XMMS_OBJECT_CMD_ARG_BIN, type);
+		return QByteArray ();
+	}
+	
+	quint32 len;
+	*m_stream >> len;
+	if (len > fullLength ()) {
+		qWarning ("broken lenght, wanted %d but we only have %d", len, fullLength ());
+		return QByteArray ();
+	}
+	char *buf = (char *) malloc (len);
+	m_stream->readRawData (buf, len);
+	QByteArray r (buf, len);
 	return r;
 }
