@@ -28,12 +28,20 @@ XmmsResult::exec (const XmmsMessage &msg)
 		}
 		
 		QMetaMethod meth = m_object->metaObject ()->method (methidx);
-		QByteArray param = meth.parameterTypes ()[0];
+		QByteArray param;
+		if (meth.parameterTypes ().size () > 0) {
+			param = meth.parameterTypes ()[0];
+		} else {
+			param = "void";
+		}
 
 		sig = sig.left(sig.indexOf('('));
 		bool ret;
-	
-		if (param == "quint32") {
+
+		if (param == "void") {
+			QMetaObject::invokeMethod (m_object, sig,
+			                           Q_RETURN_ARG (bool, ret));
+		} else if (param == "quint32") {
 			QMetaObject::invokeMethod (m_object, sig, 
 									   Q_RETURN_ARG (bool, ret),
 									   Q_ARG (quint32, m_message.getUInt32 ()));
