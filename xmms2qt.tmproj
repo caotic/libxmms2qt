@@ -3,20 +3,34 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>client.h</string>
+	<string>playback.cpp</string>
 	<key>documents</key>
 	<array>
 		<dict>
 			<key>filename</key>
+			<string>playback.cpp</string>
+			<key>lastUsed</key>
+			<date>2008-02-26T20:40:20Z</date>
+			<key>selected</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>playback.h</string>
+			<key>lastUsed</key>
+			<date>2008-02-26T20:40:20Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
 			<string>playlist.cpp</string>
 			<key>lastUsed</key>
-			<date>2008-02-24T15:53:32Z</date>
+			<date>2008-02-26T20:36:45Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>playlist.h</string>
 			<key>lastUsed</key>
-			<date>2008-02-23T16:55:16Z</date>
+			<date>2008-02-26T20:37:26Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
@@ -28,19 +42,25 @@
 			<key>filename</key>
 			<string>testclient.h</string>
 			<key>lastUsed</key>
-			<date>2008-02-24T20:10:04Z</date>
+			<date>2008-02-26T18:21:00Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>main.cpp</string>
 			<key>lastUsed</key>
-			<date>2008-02-24T20:10:03Z</date>
+			<date>2008-02-26T18:22:13Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>propdict.h</string>
+			<key>lastUsed</key>
+			<date>2008-02-26T18:11:14Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>message.cpp</string>
 			<key>lastUsed</key>
-			<date>2008-02-24T20:09:59Z</date>
+			<date>2008-02-26T18:09:37Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
@@ -52,33 +72,31 @@
 			<key>filename</key>
 			<string>client.h</string>
 			<key>lastUsed</key>
-			<date>2008-02-24T20:10:20Z</date>
-			<key>selected</key>
-			<true/>
+			<date>2008-02-26T18:19:47Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>object.h</string>
 			<key>lastUsed</key>
-			<date>2008-02-24T20:10:13Z</date>
+			<date>2008-02-26T18:14:56Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>client.cpp</string>
 			<key>lastUsed</key>
-			<date>2008-02-24T20:10:11Z</date>
+			<date>2008-02-26T20:36:15Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>result.cpp</string>
 			<key>lastUsed</key>
-			<date>2008-02-24T20:10:20Z</date>
+			<date>2008-02-26T18:11:53Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>result.h</string>
 			<key>lastUsed</key>
-			<date>2008-02-24T20:10:17Z</date>
+			<date>2008-02-26T18:15:07Z</date>
 		</dict>
 	</array>
 	<key>fileHierarchyDrawerWidth</key>
@@ -90,56 +108,72 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>39</integer>
+				<integer>5</integer>
 				<key>line</key>
-				<integer>70</integer>
+				<integer>110</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>80</integer>
 		</dict>
 		<key>client.h</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>9</integer>
 				<key>line</key>
-				<integer>12</integer>
+				<integer>30</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>12</integer>
+			<integer>16</integer>
 		</dict>
 		<key>main.cpp</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>64</integer>
+				<integer>21</integer>
 				<key>line</key>
-				<integer>28</integer>
+				<integer>27</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>8</integer>
+			<integer>14</integer>
 		</dict>
 		<key>message.cpp</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>13</integer>
+				<integer>20</integer>
 				<key>line</key>
-				<integer>159</integer>
+				<integer>158</integer>
 			</dict>
+			<key>columnSelection</key>
+			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>166</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>13</integer>
+				<key>line</key>
+				<integer>158</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>20</integer>
+				<key>line</key>
+				<integer>158</integer>
+			</dict>
 		</dict>
 		<key>message.h</key>
 		<dict>
@@ -169,6 +203,34 @@
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
+		<key>playback.cpp</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>17</integer>
+				<key>line</key>
+				<integer>6</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>playback.h</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>41</integer>
+				<key>line</key>
+				<integer>19</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
 		<key>playlist.cpp</key>
 		<dict>
 			<key>caret</key>
@@ -192,33 +254,63 @@
 				<key>line</key>
 				<integer>17</integer>
 			</dict>
+			<key>columnSelection</key>
+			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>0</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>6</integer>
+				<key>line</key>
+				<integer>20</integer>
+			</dict>
+		</dict>
+		<key>propdict.h</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>57</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>40</integer>
 		</dict>
 		<key>result.cpp</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>7</integer>
 				<key>line</key>
-				<integer>50</integer>
+				<integer>56</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>33</integer>
+			<integer>32</integer>
 		</dict>
 		<key>result.h</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>23</integer>
 				<key>line</key>
-				<integer>61</integer>
+				<integer>10</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -230,9 +322,9 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>30</integer>
+				<integer>22</integer>
 				<key>line</key>
-				<integer>14</integer>
+				<integer>18</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -257,6 +349,7 @@
 	<key>openDocuments</key>
 	<array>
 		<string>message.cpp</string>
+		<string>propdict.h</string>
 		<string>main.cpp</string>
 		<string>testclient.h</string>
 		<string>client.cpp</string>
@@ -267,11 +360,13 @@
 		<string>xmms2qt.pro</string>
 		<string>playlist.h</string>
 		<string>playlist.cpp</string>
+		<string>playback.h</string>
+		<string>playback.cpp</string>
 		<string>message.h</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{45, 98}, {811, 578}}</string>
+	<string>{{320, 110}, {812, 668}}</string>
 </dict>
 </plist>
