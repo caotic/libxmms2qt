@@ -11,6 +11,7 @@ class Playback;
 
 class Playback : public BaseObject
 {
+	Q_OBJECT
 	public:
 		Playback (XmmsClient *client) : BaseObject (client)
 		{
@@ -18,6 +19,11 @@ class Playback : public BaseObject
 		
 		XmmsResult signalPlaytime ();
 		XmmsResult broadcastCurrentId ();
+
+	public slots:
+		XmmsResult start ();
+		XmmsResult pause ();
+		XmmsResult stop ();
 };
 
 #endif

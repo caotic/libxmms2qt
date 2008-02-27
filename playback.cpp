@@ -16,3 +16,27 @@ Playback::broadcastCurrentId ()
 	msg.add (XMMS_IPC_SIGNAL_OUTPUT_CURRENTID);
 	return m_client->queueMsg (msg);
 }
+
+XmmsResult
+Playback::start ()
+{
+	XmmsMessage msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_START);
+
+	return m_client->queueMsg (msg);
+}
+
+XmmsResult
+Playback::pause ()
+{
+	XmmsMessage msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_PAUSE);
+
+	return m_client->queueMsg (msg);
+}
+
+XmmsResult
+Playback::stop ()
+{
+	XmmsMessage msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_STOP);
+
+	return m_client->queueMsg (msg);
+}
