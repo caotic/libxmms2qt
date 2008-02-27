@@ -1,7 +1,7 @@
 #include <QObject>
 #include <QMap>
 #include <QRegExp>
-#include <Qvariant>
+#include <QVariant>
 
 #ifndef __PROPDICT_H__
 #define __PROPDICT_H__

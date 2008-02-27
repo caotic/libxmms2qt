@@ -9,6 +9,12 @@ INCLUDEPATH += . /opt/local/include/xmms2
 CONFIG -= app_bundle
 QT += network
 
+CONFIG += link_pkgconfig
+PKGCONFIG += xmms2-plugin
+
+MOC_DIR     = .moc
+OBJECTS_DIR = .obj
+
 # Input
 HEADERS += testclient.h message.h client.h result.h object.h playlist.h medialib.h propdict.h
 SOURCES += message.cpp main.cpp client.cpp result.cpp playlist.cpp medialib.cpp

@@ -25,7 +25,7 @@ XmmsTestClient::minfo (const PropDict &dict)
 	qDebug ("%s - %s", qPrintable (dict["artist"].toString ()), qPrintable (dict["title"].toString ()));
     m_entries --;
     if (m_entries == 0) {
-        qApp->exit (1);
+        QCoreApplication::instance()->exit (1);
     }
 	return true;
 }
