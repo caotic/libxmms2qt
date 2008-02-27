@@ -26,10 +26,21 @@ XmmsResult::exec (const XmmsMessage &msg)
 		qint32 methidx = m_object->metaObject ()->indexOfMethod (sig.constData ());
 		if (methidx == -1) {
 			qWarning ("the object doesn't have that slot!");
+			qWarning ("Class %s has no slot '%s'",
+			           m_object->metaObject ()->className (),
+			           sig.constData ());
 			return;
 		}
 		
 		QMetaMethod meth = m_object->metaObject ()->method (methidx);
+
+		const char *rettype = meth.typeName ();
+		if (rettype != QLatin1String("bool")) {
+			qWarning ("Wrong returntype: %s::%s must return 'bool'",
+			m_object->metaObject ()->className (), sig.constData ());
+		}
+
+
 		QByteArray param;
 		if (meth.parameterTypes ().size () > 0) {
 			param = meth.parameterTypes ()[0];
