@@ -17,7 +17,7 @@ class Playback : public BaseObject
 		};
 		
 		XmmsResult signalPlaytime ();
-        XmmsResult broadcastCurrentId ();
+		XmmsResult broadcastCurrentId ();
 };
 
 #endif

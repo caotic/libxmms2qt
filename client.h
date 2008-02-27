@@ -38,7 +38,7 @@ class XmmsClient : public QObject
 		/* the sub objects here */
 		Playlist playlist;
 		Medialib medialib;
-        Playback playback;
+		Playback playback;
 		
 	private:
 		QString m_name;
@@ -57,7 +57,7 @@ class XmmsClient : public QObject
 		void socketError (QAbstractSocket::SocketError);
 		void socketRead ();
 		void socketConnected ();
-        void bytesWritten (qint64);
+		void bytesWritten (qint64);
 
 };
 

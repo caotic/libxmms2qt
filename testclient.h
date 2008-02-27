@@ -14,10 +14,10 @@ class XmmsTestClient : public QObject
 		void connected (bool);
 		bool apa (const QVariantList &);
 		bool minfo (const PropDict &);
-        bool pmtime (quint32);
+		bool pmtime (quint32);
 	private:
 		XmmsClient m_client;
-        int m_entries;
+		int m_entries;
 };
 
 

@@ -22,14 +22,14 @@ XmmsClient::doConnect (const QString &host, quint32 port)
 			 this, SLOT (socketError (QAbstractSocket::SocketError)));
 	connect (&m_socket, SIGNAL (readyRead ()), this, SLOT (socketRead ()));
 	#ifdef __DEBUG_IPC__
-    connect (&m_socket, SIGNAL (bytesWritten (qint64)), this, SLOT (bytesWritten (qint64)));
-    #endif
+	connect (&m_socket, SIGNAL (bytesWritten (qint64)), this, SLOT (bytesWritten (qint64)));
+	#endif
 }
 
 void
 XmmsClient::bytesWritten (qint64 b)
 {
-    DBGIPC ("we wrote %lld bytes", b);
+	DBGIPC ("we wrote %lld bytes", b);
 }
 
 void
@@ -119,11 +119,11 @@ XmmsClient::queueMsg (const XmmsMessage &msg, quint32 restartsignal)
 	
 	XmmsResult ret (this, m_cookie ++);
 	if (msg.object () == XMMS_IPC_OBJECT_SIGNAL && msg.cmd () == XMMS_IPC_CMD_SIGNAL && restartsignal) {
-        DBGIPC ("got signal, setting restart bit to %d", restartsignal);
-        ret.setRestartSignal (restartsignal);
+		DBGIPC ("got signal, setting restart bit to %d", restartsignal);
+		ret.setRestartSignal (restartsignal);
 	} else if (msg.object () == XMMS_IPC_OBJECT_SIGNAL && msg.cmd () == XMMS_IPC_CMD_BROADCAST) {
-        ret.setBroadcast (true);
+		ret.setBroadcast (true);
 	}
 	
-    return ret;
+	return ret;
 }

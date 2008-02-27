@@ -11,7 +11,7 @@ XmmsTestClient::XmmsTestClient () : QObject (), m_client (this, "xmms2qttest")
 bool
 XmmsTestClient::apa (const QVariantList &list)
 {
-    m_entries = list.size ();
+	m_entries = list.size ();
 	for (int i = 0; i < list.size (); i ++)
 	{
 		m_client.medialib.info (list.at (i).toUInt ()) (this, SLOT (minfo(const PropDict &)));
@@ -23,18 +23,18 @@ bool
 XmmsTestClient::minfo (const PropDict &dict)
 {
 	qDebug ("%s - %s", qPrintable (dict["artist"].toString ()), qPrintable (dict["title"].toString ()));
-    m_entries --;
-    if (m_entries == 0) {
-        QCoreApplication::instance()->exit (1);
-    }
+	m_entries --;
+	if (m_entries == 0) {
+		QCoreApplication::instance()->exit (1);
+	}
 	return true;
 }
 
 bool
 XmmsTestClient::pmtime (quint32 tme)
 {
-    qDebug ("id %d", tme);
-    return true;
+	qDebug ("pmtime %d", tme);
+	return true;
 }
 
 void
@@ -45,7 +45,7 @@ XmmsTestClient::connected (bool ok)
 		exit (0);
 	}
 	//m_client.playlist.list () (this, SLOT(apa (const QVariantList &)));
-    m_client.playback.broadcastCurrentId () (this, SLOT(pmtime (quint32)));
+	m_client.playback.signalPlaytime () (this, SLOT(pmtime (quint32)));
 }
 
 int main (int argc, char **argv)

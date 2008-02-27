@@ -30,7 +30,7 @@ class XmmsResult : public QObject
 			m_client = src.client ();
 			m_message = src.message ();
 			m_restartsignal = src.m_restartsignal;
-            m_broadcast = src.m_broadcast;
+			m_broadcast = src.m_broadcast;
 		};
 		
 		XmmsResult (XmmsClient *, int cookie);
@@ -45,8 +45,8 @@ class XmmsResult : public QObject
 			m_slot = src.slot ();
 			m_client = src.client ();
 			m_message = src.message ();
-            m_restartsignal = src.m_restartsignal;
-            m_broadcast = src.m_broadcast;
+			m_restartsignal = src.m_restartsignal;
+			m_broadcast = src.m_broadcast;
 			return *this;
 		};
 		
@@ -75,14 +75,14 @@ class XmmsResult : public QObject
 		
 		void setRestartSignal (quint32 rsignal)
 		{
-            DBGRES ("got restart signal %d", rsignal);
-            m_restartsignal = rsignal;
-        };
+			DBGRES ("got restart signal %d", rsignal);
+			m_restartsignal = rsignal;
+		};
 		
 		void setBroadcast (bool b)
 		{
-            m_broadcast = b;
-        };
+			m_broadcast = b;
+		};
 		
 		void exec (const XmmsMessage &);
 		
@@ -94,8 +94,8 @@ class XmmsResult : public QObject
 		XmmsMessage m_message;
 		
 	protected:
-        quint32 m_restartsignal;
-        bool m_broadcast;
+		quint32 m_restartsignal;
+		bool m_broadcast;
 };
 
 #endif
