@@ -11,8 +11,9 @@ class XmmsClient;
 
 #include "playlist.h"
 #include "medialib.h"
+#include "playback.h"
 
-#undef __DEBUG_IPC__
+#define __DEBUG_IPC__
 
 #ifdef __DEBUG_IPC__
 #define DBGIPC(fmt, ...) qDebug("DEBUG IPC: " fmt, ## __VA_ARGS__)
@@ -32,11 +33,12 @@ class XmmsClient : public QObject
 			m_resmap[res.cookie()] = res;
 		};
 
-		XmmsResult queueMsg (const XmmsMessage &);
+		XmmsResult queueMsg (const XmmsMessage &msg, quint32 restartsignal = 0);
 		
 		/* the sub objects here */
 		Playlist playlist;
 		Medialib medialib;
+        Playback playback;
 		
 	private:
 		QString m_name;
@@ -55,6 +57,7 @@ class XmmsClient : public QObject
 		void socketError (QAbstractSocket::SocketError);
 		void socketRead ();
 		void socketConnected ();
+        void bytesWritten (qint64);
 
 };
 

@@ -30,6 +30,13 @@ XmmsTestClient::minfo (const PropDict &dict)
 	return true;
 }
 
+bool
+XmmsTestClient::pmtime (quint32 tme)
+{
+    qDebug ("id %d", tme);
+    return true;
+}
+
 void
 XmmsTestClient::connected (bool ok)
 {
@@ -37,7 +44,8 @@ XmmsTestClient::connected (bool ok)
 		qDebug ("we failed!");
 		exit (0);
 	}
-	m_client.playlist.list () (this, SLOT(apa (const QVariantList &)));
+	//m_client.playlist.list () (this, SLOT(apa (const QVariantList &)));
+    m_client.playback.broadcastCurrentId () (this, SLOT(pmtime (quint32)));
 }
 
 int main (int argc, char **argv)

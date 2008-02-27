@@ -10,6 +10,8 @@ XmmsResult::XmmsResult (XmmsClient *client, int cookie) : QObject ()
 	m_object = NULL;
 	m_slot = NULL;
 	m_client = client;
+    m_restartsignal = 0;
+    m_broadcast = false;
 }
 
 void
@@ -45,7 +47,6 @@ XmmsResult::exec (const XmmsMessage &msg)
 			QMetaObject::invokeMethod (m_object, sig, 
 									   Q_RETURN_ARG (bool, ret),
 									   Q_ARG (quint32, m_message.getUInt32 ()));
-			
 		} else if (param == "QVariantList") {
 			QMetaObject::invokeMethod (m_object, sig, 
 									   Q_RETURN_ARG (bool, ret),
@@ -58,6 +59,20 @@ XmmsResult::exec (const XmmsMessage &msg)
 			arg = Q_ARG (qint32, )
 		} else if (param == "QString") {
 			arg = Q_ARG (QString, )*/
+		}
+		
+		if (m_broadcast && ret) {
+            DBGRES ("restarting the broadcast");
+            m_client->setResult (*this);
+		}
+		
+		if (m_restartsignal && ret) {
+		    /* return value is true from the code, lets restart this signal */
+            DBGRES ("going to restart signal %d", m_restartsignal);
+            XmmsMessage msg (XMMS_IPC_OBJECT_SIGNAL, XMMS_IPC_CMD_SIGNAL);
+            msg.add (m_restartsignal);
+            XmmsResult r = m_client->queueMsg (msg, m_restartsignal);
+            r (m_object, m_slot); /* set the same callback shit */
 		}
 		
 	}

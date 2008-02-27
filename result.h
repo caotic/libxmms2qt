@@ -8,7 +8,7 @@
 
 #include "propdict.h"
 
-#undef __DEBUG_RESULT__
+#define __DEBUG_RESULT__
 
 #ifdef __DEBUG_RESULT__
 #define DBGRES(fmt, ...) qDebug("DEBUG RESULT: " fmt, ## __VA_ARGS__)
@@ -29,6 +29,8 @@ class XmmsResult : public QObject
 			m_slot = src.slot ();
 			m_client = src.client ();
 			m_message = src.message ();
+			m_restartsignal = src.m_restartsignal;
+            m_broadcast = src.m_broadcast;
 		};
 		
 		XmmsResult (XmmsClient *, int cookie);
@@ -43,6 +45,8 @@ class XmmsResult : public QObject
 			m_slot = src.slot ();
 			m_client = src.client ();
 			m_message = src.message ();
+            m_restartsignal = src.m_restartsignal;
+            m_broadcast = src.m_broadcast;
 			return *this;
 		};
 		
@@ -69,6 +73,17 @@ class XmmsResult : public QObject
 			return m_message;
 		};
 		
+		void setRestartSignal (quint32 rsignal)
+		{
+            DBGRES ("got restart signal %d", rsignal);
+            m_restartsignal = rsignal;
+        };
+		
+		void setBroadcast (bool b)
+		{
+            m_broadcast = b;
+        };
+		
 		void exec (const XmmsMessage &);
 		
 	private:
@@ -77,6 +92,10 @@ class XmmsResult : public QObject
 		QObject *m_object;
 		XmmsClient *m_client;
 		XmmsMessage m_message;
+		
+	protected:
+        quint32 m_restartsignal;
+        bool m_broadcast;
 };
 
 #endif

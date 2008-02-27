@@ -6,7 +6,7 @@
 #include <QIODevice>
 #include <QFile>
 
-XmmsClient::XmmsClient (QObject *parent, const QString &name) : QObject (parent), playlist (this), medialib (this)
+XmmsClient::XmmsClient (QObject *parent, const QString &name) : QObject (parent), playlist (this), medialib (this), playback (this)
 {
 	m_name = name;
 	m_cookie = 0;
@@ -21,6 +21,15 @@ XmmsClient::doConnect (const QString &host, quint32 port)
 	connect (&m_socket, SIGNAL (error (QAbstractSocket::SocketError)),
 			 this, SLOT (socketError (QAbstractSocket::SocketError)));
 	connect (&m_socket, SIGNAL (readyRead ()), this, SLOT (socketRead ()));
+	#ifdef __DEBUG_IPC__
+    connect (&m_socket, SIGNAL (bytesWritten (qint64)), this, SLOT (bytesWritten (qint64)));
+    #endif
+}
+
+void
+XmmsClient::bytesWritten (qint64 b)
+{
+    DBGIPC ("we wrote %lld bytes", b);
 }
 
 void
@@ -100,7 +109,7 @@ XmmsClient::hello ()
 }
 
 XmmsResult
-XmmsClient::queueMsg (const XmmsMessage &msg)
+XmmsClient::queueMsg (const XmmsMessage &msg, quint32 restartsignal)
 {
 	QByteArray b = msg.finish (m_cookie);
 	qint32 len = m_socket.write (b);
@@ -108,5 +117,13 @@ XmmsClient::queueMsg (const XmmsMessage &msg)
 		qWarning ("socket.write didn't accept all our output for message %d!", m_cookie);
 	}
 	
-	return XmmsResult (this, m_cookie ++);
+	XmmsResult ret (this, m_cookie ++);
+	if (msg.object () == XMMS_IPC_OBJECT_SIGNAL && msg.cmd () == XMMS_IPC_CMD_SIGNAL && restartsignal) {
+        DBGIPC ("got signal, setting restart bit to %d", restartsignal);
+        ret.setRestartSignal (restartsignal);
+	} else if (msg.object () == XMMS_IPC_OBJECT_SIGNAL && msg.cmd () == XMMS_IPC_CMD_BROADCAST) {
+        ret.setBroadcast (true);
+	}
+	
+    return ret;
 }
