@@ -1,6 +1,7 @@
 
 #include "result.h"
 #include "client.h"
+#include "playback.h"
 
 #include <QMetaMethod>
 
@@ -74,6 +75,10 @@ XmmsResult::exec (const XmmsMessage &msg)
 			arg = Q_ARG (qint32, )
 		} else if (param == "QString") {
 			arg = Q_ARG (QString, )*/
+		} else if (param == "Playback::Status") {
+			QMetaObject::invokeMethod (m_object, sig,
+			                           Q_RETURN_ARG (bool, ret),
+			                           Q_ARG (Playback::Status, (Playback::Status) m_message.getUInt32 ()));
 		}
 		
 		if (m_broadcast && ret) {
