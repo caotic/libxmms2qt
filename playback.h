@@ -43,6 +43,9 @@ class Playback : public BaseObject
 		XmmsResult seekMs (quint32 milliseconds);
 		XmmsResult seekMsRel (qint32 milliseconds);
 
+		XmmsResult seekSamples (quint32 samples);
+		XmmsResult seekSamplesRel (qint32 samples);
+
 		XmmsResult setVolume (QString channel, quint32 volume);
 };
 

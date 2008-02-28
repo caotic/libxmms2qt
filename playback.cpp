@@ -127,3 +127,21 @@ Playback::seekMsRel (qint32 milliseconds)
 
 	return m_client->queueMsg (msg);
 }
+
+XmmsResult
+Playback::seekSamples (quint32 samples)
+{
+	XmmsMessage msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_SEEKSAMPLES);
+	msg.add (samples);
+
+	return m_client->queueMsg (msg);
+}
+
+XmmsResult
+Playback::seekSamplesRel (qint32 samples)
+{
+	XmmsMessage msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_SEEKSAMPLES_REL);
+	msg.add (samples);
+
+	return m_client->queueMsg (msg);
+}
