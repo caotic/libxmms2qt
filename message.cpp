@@ -135,8 +135,13 @@ XmmsMessage::getValue ()
 			*m_stream >> i;
 			return QVariant (i);
 		case XMMS_OBJECT_CMD_ARG_STRING:
-			QString s = getString (false);
-			return QVariant (s);
+			{
+				QString s = getString (false);
+				return QVariant (s);
+			}
+		default:
+			qWarning ("XmmsMessage::getValue(): Type not handled: %u", type);
+			return QVariant ();
 	}
 	return QVariant ();
 }
@@ -165,13 +170,25 @@ XmmsMessage::getDict ()
 	
 	if (type == XMMS_OBJECT_CMD_ARG_DICT) {
 		DBGRES ("'normal' dict found");
-		QVariantList l = getList (false);
+		// Dict and PropDict have different serialization forms
+		quint32 size;
+		*m_stream >> size;
+		for (int i = 0; i < size; i ++)
+		{
+			QString key = getString (false);
+			QVariant value = getValue ();
+			ret.add (key, value);
+		}
+		// The serialization of dict differs from the serialization of
+		// PropDict and VariantList. Leaveing this code in here in case
+		// that changes in the future
+		/* QVariantList l = getList (false);
 		for (int i = 0; i < l.size (); i ++)
 		{
 			QString key = l.at (i ++).toString ();
 			QVariant value = l.at (i);
 			ret.add (key, value);
-		}
+		} */
 	} else if (type == XMMS_OBJECT_CMD_ARG_PROPDICT) {
 		DBGRES ("'prop' dict found");
 		QVariantList l = getList (false);

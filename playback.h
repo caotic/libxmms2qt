@@ -26,7 +26,6 @@ class Playback : public BaseObject
 		XmmsResult getPlaytime ();
 		XmmsResult getCurrentId ();
 		XmmsResult getStatus ();
-		// Returns a Hash/Dict, which Result can't handle yet 
 		XmmsResult getVolume ();
 
 		XmmsResult signalPlaytime ();
