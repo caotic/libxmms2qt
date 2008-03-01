@@ -3,191 +3,215 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>playback.cpp</string>
+	<string>playlist.h</string>
 	<key>documents</key>
 	<array>
 		<dict>
 			<key>filename</key>
 			<string>playback.cpp</string>
 			<key>lastUsed</key>
-			<date>2008-02-26T20:40:20Z</date>
-			<key>selected</key>
-			<true/>
+			<date>2008-02-27T17:35:14Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>playback.h</string>
 			<key>lastUsed</key>
-			<date>2008-02-26T20:40:20Z</date>
+			<date>2008-02-27T17:35:21Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>playlist.cpp</string>
 			<key>lastUsed</key>
-			<date>2008-02-26T20:36:45Z</date>
+			<date>2008-02-27T16:28:22Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>playlist.h</string>
 			<key>lastUsed</key>
-			<date>2008-02-26T20:37:26Z</date>
+			<date>2008-02-27T22:08:28Z</date>
+			<key>selected</key>
+			<true/>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>xmms2qt.pro</string>
 			<key>lastUsed</key>
-			<date>2008-02-23T17:32:44Z</date>
+			<date>2008-02-27T17:35:05Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>testclient.h</string>
 			<key>lastUsed</key>
-			<date>2008-02-26T18:21:00Z</date>
+			<date>2008-02-27T17:04:36Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>bindata.cpp</string>
+			<key>lastUsed</key>
+			<date>2008-02-27T17:16:17Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>bindata.h</string>
+			<key>lastUsed</key>
+			<date>2008-02-27T17:16:08Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>main.cpp</string>
 			<key>lastUsed</key>
-			<date>2008-02-26T18:22:13Z</date>
+			<date>2008-02-27T17:20:27Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>propdict.h</string>
 			<key>lastUsed</key>
-			<date>2008-02-26T18:11:14Z</date>
+			<date>2008-02-27T16:46:20Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>message.cpp</string>
 			<key>lastUsed</key>
-			<date>2008-02-26T18:09:37Z</date>
+			<date>2008-02-27T17:13:28Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>message.h</string>
 			<key>lastUsed</key>
-			<date>2008-02-24T15:54:25Z</date>
+			<date>2008-02-27T17:13:43Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>client.h</string>
 			<key>lastUsed</key>
-			<date>2008-02-26T18:19:47Z</date>
+			<date>2008-02-27T17:13:57Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>object.h</string>
 			<key>lastUsed</key>
-			<date>2008-02-26T18:14:56Z</date>
+			<date>2008-02-27T16:29:16Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>client.cpp</string>
 			<key>lastUsed</key>
-			<date>2008-02-26T20:36:15Z</date>
+			<date>2008-02-27T17:14:14Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>result.cpp</string>
 			<key>lastUsed</key>
-			<date>2008-02-26T18:11:53Z</date>
+			<date>2008-02-27T17:14:52Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>result.h</string>
 			<key>lastUsed</key>
-			<date>2008-02-26T18:15:07Z</date>
+			<date>2008-02-27T16:34:19Z</date>
 		</dict>
 	</array>
 	<key>fileHierarchyDrawerWidth</key>
 	<integer>200</integer>
 	<key>metaData</key>
 	<dict>
-		<key>client.cpp</key>
+		<key>bindata.cpp</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
+				<integer>17</integer>
+				<key>line</key>
 				<integer>5</integer>
-				<key>line</key>
-				<integer>110</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>80</integer>
-		</dict>
-		<key>client.h</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>9</integer>
-				<key>line</key>
-				<integer>30</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
 			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>16</integer>
 		</dict>
-		<key>main.cpp</key>
+		<key>bindata.h</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
 				<integer>21</integer>
 				<key>line</key>
-				<integer>27</integer>
+				<integer>19</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>14</integer>
+			<integer>0</integer>
+		</dict>
+		<key>client.cpp</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>147</integer>
+				<key>line</key>
+				<integer>8</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>client.h</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>18</integer>
+				<key>line</key>
+				<integer>42</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>25</integer>
+		</dict>
+		<key>main.cpp</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>3</integer>
+				<key>line</key>
+				<integer>54</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
 		</dict>
 		<key>message.cpp</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>20</integer>
+				<integer>21</integer>
 				<key>line</key>
-				<integer>158</integer>
+				<integer>273</integer>
 			</dict>
-			<key>columnSelection</key>
-			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>166</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>13</integer>
-				<key>line</key>
-				<integer>158</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>20</integer>
-				<key>line</key>
-				<integer>158</integer>
-			</dict>
+			<integer>248</integer>
 		</dict>
 		<key>message.h</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>13</integer>
+				<integer>21</integer>
 				<key>line</key>
-				<integer>48</integer>
+				<integer>70</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>32</integer>
+			<integer>45</integer>
 		</dict>
 		<key>object.h</key>
 		<dict>
@@ -208,9 +232,9 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>17</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>6</integer>
+				<integer>18</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -222,9 +246,9 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>41</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>19</integer>
+				<integer>23</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -250,30 +274,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>47</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>17</integer>
+				<integer>0</integer>
 			</dict>
-			<key>columnSelection</key>
-			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>0</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>6</integer>
-				<key>line</key>
-				<integer>20</integer>
-			</dict>
 		</dict>
 		<key>propdict.h</key>
 		<dict>
@@ -294,23 +302,23 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>7</integer>
+				<integer>43</integer>
 				<key>line</key>
-				<integer>56</integer>
+				<integer>60</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>32</integer>
+			<integer>35</integer>
 		</dict>
 		<key>result.h</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>23</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>10</integer>
+				<integer>35</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -322,9 +330,9 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>22</integer>
+				<integer>36</integer>
 				<key>line</key>
-				<integer>18</integer>
+				<integer>17</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -336,9 +344,9 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>66</integer>
+				<integer>104</integer>
 				<key>line</key>
-				<integer>13</integer>
+				<integer>19</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -351,6 +359,8 @@
 		<string>message.cpp</string>
 		<string>propdict.h</string>
 		<string>main.cpp</string>
+		<string>bindata.h</string>
+		<string>bindata.cpp</string>
 		<string>testclient.h</string>
 		<string>client.cpp</string>
 		<string>object.h</string>
@@ -367,6 +377,6 @@
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{320, 110}, {812, 668}}</string>
+	<string>{{224, 99}, {812, 668}}</string>
 </dict>
 </plist>

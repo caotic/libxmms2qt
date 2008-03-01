@@ -15,6 +15,9 @@ class Medialib : public BaseObject
 		};
 		
 		XmmsResult info (const quint32 &id);
+		
+		
+		static QString encodeUrl (const QString &);
 };
 
 #endif

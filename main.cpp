@@ -53,7 +53,8 @@ XmmsTestClient::connected (bool ok)
 	}
 	//m_client.playlist.list () (this, SLOT(apa (const QVariantList &)));
 	//m_client.playback.signalPlaytime () (this, SLOT(pmtime (quint32)));
-	m_client.bindata.retrieve ("411a8e6f7c956c8eb564e24143753c32") (this, SLOT (bindata (const QByteArray &)));
+	//m_client.bindata.retrieve ("411a8e6f7c956c8eb564e24143753c32") (this, SLOT (bindata (const QByteArray &)));
+	m_client.playlist.add("file:///tmp/foobar korv åäö.mp3");
 }
 
 int main (int argc, char **argv)
