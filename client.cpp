@@ -6,7 +6,7 @@
 #include <QIODevice>
 #include <QFile>
 
-XmmsClient::XmmsClient (QObject *parent, const QString &name) : QObject (parent), playlist (this), medialib (this), playback (this), bindata (this)
+XmmsClient::XmmsClient (QObject *parent, const QString &name) : QObject (parent), playlist (this), medialib (this), playback (this), bindata (this), config (this)
 {
 	m_name = name;
 	m_cookie = 0;
