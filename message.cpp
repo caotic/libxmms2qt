@@ -173,7 +173,7 @@ XmmsMessage::getDict ()
 		// Dict and PropDict have different serialization forms
 		quint32 size;
 		*m_stream >> size;
-		for (int i = 0; i < size; i ++)
+		for (quint32 i = 0; i < size; i ++)
 		{
 			QString key = getString (false);
 			QVariant value = getValue ();
