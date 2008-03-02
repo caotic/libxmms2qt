@@ -26,7 +26,6 @@ XmmsResult::exec (const XmmsMessage &msg)
 
 		qint32 methidx = m_object->metaObject ()->indexOfMethod (sig.constData ());
 		if (methidx == -1) {
-			qWarning ("the object doesn't have that slot!");
 			qWarning ("Class %s has no slot '%s'",
 			           m_object->metaObject ()->className (),
 			           sig.constData ());
@@ -81,6 +80,9 @@ XmmsResult::exec (const XmmsMessage &msg)
 			QMetaObject::invokeMethod (m_object, sig,
 			                           Q_RETURN_ARG (bool, ret),
 			                           Q_ARG (Playback::Status, (Playback::Status) m_message.getUInt32 ()));
+		} else {
+			// TODO: Add some better errorhandling here
+			qDebug () << "Result: Couldn't handle resulttype" << param << "in callback" <<sig.constData ();
 		}
 		
 		if (m_broadcast && ret) {
