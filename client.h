@@ -36,7 +36,9 @@ class XmmsClient : public QObject
 		};
 
 		XmmsResult queueMsg (const XmmsMessage &msg, quint32 restartsignal = 0);
-		
+
+		QString name () const { return m_name; }
+
 		/* the sub objects here */
 		Playlist playlist;
 		Medialib medialib;

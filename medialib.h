@@ -34,6 +34,19 @@ class Medialib : public BaseObject
 
 		XmmsResult rehash (quint32 id = 0) const;
 		XmmsResult remove (quint32) const;
+
+		XmmsResult entryPropertySet (quint32 id, const QString &key,
+		                             const QString &value) const;
+		XmmsResult entryPropertySet (quint32 id, const QString &key,
+		                             const QString &value,
+									 const QString &source) const;
+		XmmsResult entryPropertySet (quint32 id, const QString &key,
+		                             qint32 value) const;
+		XmmsResult entryPropertySet (quint32 id, const QString &key,
+		                             qint32 value, const QString &source) const;
+		XmmsResult entryPropertyRemove (quint32 id, const QString &key) const;
+		XmmsResult entryPropertyRemove (quint32 id, const QString &key,
+		                                const QString &source) const;
 };
 
 #endif
