@@ -7,6 +7,9 @@ class Medialib;
 #include "object.h"
 #include "result.h"
 
+#include <QStringList>
+class QString;
+
 class Medialib : public BaseObject
 {
 	public:
@@ -15,9 +18,22 @@ class Medialib : public BaseObject
 		};
 		
 		XmmsResult info (const quint32 &id);
-		
-		
-		static QString encodeUrl (const QString &);
+
+		XmmsResult broadcastEntryAdded ();
+		XmmsResult broadcastEntryChanged ();
+
+		static QString encodeUrl (const QString &, const QStringList &args = QStringList ());
+
+	public slots:
+		XmmsResult add (const QUrl &, const QStringList &args = QStringList ()) const;
+		XmmsResult add (const QString &, const QStringList &args = QStringList ()) const;
+		XmmsResult addEncoded (const QString &) const;
+		XmmsResult addPath (const QUrl &) const;
+		XmmsResult addPath (const QString &) const;
+		XmmsResult addPathEncoded (const QString &) const;
+
+		XmmsResult rehash (quint32 id = 0) const;
+		XmmsResult remove (quint32) const;
 };
 
 #endif
