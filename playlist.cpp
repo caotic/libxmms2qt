@@ -3,6 +3,8 @@
 #include "client.h"
 #include "medialib.h"
 
+#include <QUrl>
+
 XmmsResult
 Playlist::currentPos (const QString &playlist)
 {
@@ -24,6 +26,12 @@ XmmsResult
 Playlist::add (const QString &url, const QString &playlist)
 {
 	return addEncoded (Medialib::encodeUrl (url), playlist);
+}
+
+XmmsResult
+Playlist::add (const QUrl &url, const QString &playlist)
+{
+	return addEncoded (Medialib::encodeUrl (url.toString ()), playlist);
 }
 
 XmmsResult
