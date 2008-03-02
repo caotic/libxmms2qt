@@ -75,6 +75,66 @@ Medialib::remove (quint32 id) const
 }
 
 XmmsResult
+Medialib::entryPropertySet (quint32 id, const QString &key,
+                            const QString &value) const
+{
+	QString source = "client/" + m_client->name ();
+	return entryPropertySet (id, key, value, source);
+}
+
+XmmsResult
+Medialib::entryPropertySet (quint32 id, const QString &key,
+                            const QString &value, const QString &source) const
+{
+	XmmsMessage msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_PROPERTY_SET_STR);
+	msg.add (id);
+	msg.add (source);
+	msg.add (key);
+	msg.add (value);
+
+	return m_client->queueMsg (msg);
+}
+
+XmmsResult
+Medialib::entryPropertySet (quint32 id, const QString &key, qint32 value) const
+{
+	QString source = "client/" + m_client->name ();
+	return entryPropertySet (id, key, value, source);
+}
+
+XmmsResult
+Medialib::entryPropertySet (quint32 id, const QString &key, qint32 value,
+                             const QString &source) const
+{
+	XmmsMessage msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_PROPERTY_SET_INT);
+	msg.add (id);
+	msg.add (source);
+	msg.add (key);
+	msg.add (value);
+
+	return m_client->queueMsg (msg);
+}
+
+XmmsResult
+Medialib::entryPropertyRemove (quint32 id, const QString &key) const
+{
+	QString source = "client/" + m_client->name ();
+	return entryPropertyRemove (id, key, source);
+}
+
+XmmsResult
+Medialib::entryPropertyRemove (quint32 id, const QString &key,
+                               const QString &source) const
+{
+	XmmsMessage msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_PROPERTY_REMOVE);
+	msg.add (id);
+	msg.add (source);
+	msg.add (key);
+
+	return m_client->queueMsg (msg);
+}
+
+XmmsResult
 Medialib::broadcastEntryAdded ()
 {
 	XmmsMessage msg (XMMS_IPC_OBJECT_SIGNAL, XMMS_IPC_CMD_BROADCAST);
