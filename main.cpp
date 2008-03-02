@@ -37,13 +37,6 @@ XmmsTestClient::pmtime (quint32 tme)
 	return true;
 }
 
-bool
-XmmsTestClient::bindata (const QByteArray &data)
-{
-	qDebug ("got bindata of size %d", data.size ());
-	return true;
-}
-
 void
 XmmsTestClient::connected (bool ok)
 {
@@ -54,7 +47,60 @@ XmmsTestClient::connected (bool ok)
 	//m_client.playlist.list () (this, SLOT(apa (const QVariantList &)));
 	//m_client.playback.signalPlaytime () (this, SLOT(pmtime (quint32)));
 	//m_client.bindata.retrieve ("411a8e6f7c956c8eb564e24143753c32") (this, SLOT (bindata (const QByteArray &)));
-	m_client.playlist.add("file:///tmp/foobar korv åäö.mp3");
+	//m_client.playlist.add("file:///tmp/foobar korv åäö.mp3");
+
+	QFile f("xmms2qt");
+	f.open (QIODevice::ReadOnly);
+	QByteArray t = f.readAll ();
+	m_client.bindata.add (t)(this, SLOT(fileAdded(QString)));
+	f.close ();
+}
+
+bool
+XmmsTestClient::fileAdded(QString hash)
+{
+	qDebug () << "File added: " << hash;
+
+
+	m_client.bindata.list ()(this, SLOT(printList(QVariantList)));
+	m_client.bindata.retrieve (hash)(this, SLOT(bindata (QByteArray)));
+
+	m_client.bindata.remove (hash) (this, SLOT(removed ()));
+	return true;
+}
+
+bool
+XmmsTestClient::printList(QVariantList list)
+{
+	QVariant v;
+	foreach (v, list) {
+		qDebug () << "List" << v.toString ();
+	}
+	return true;
+}
+
+bool
+XmmsTestClient::bindata(QByteArray data)
+{
+    QFile f("xmms2qt");
+	f.open (QIODevice::ReadOnly);
+	QByteArray t = f.readAll ();
+	f.close ();
+	if (t == data) {
+		qDebug () << "Bindata matches";
+	} else {
+		qWarning () << "Bindata wrong!";
+	}
+	
+	return true;
+}
+
+bool
+XmmsTestClient::removed ()
+{
+	qDebug () << "removed";
+
+	return true;
 }
 
 int main (int argc, char **argv)

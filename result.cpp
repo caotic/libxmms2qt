@@ -72,9 +72,11 @@ XmmsResult::exec (const XmmsMessage &msg)
 									   Q_RETURN_ARG (bool, ret),
 									   Q_ARG (QByteArray, m_message.getBindata ()));
 /*		} else if (param == "qint32") {
-			arg = Q_ARG (qint32, )
+			arg = Q_ARG (qint32, ) */
 		} else if (param == "QString") {
-			arg = Q_ARG (QString, )*/
+			QMetaObject::invokeMethod (m_object, sig,
+			                           Q_RETURN_ARG (bool, ret),
+			                           Q_ARG (QString, m_message.getString ()));
 		} else if (param == "Playback::Status") {
 			QMetaObject::invokeMethod (m_object, sig,
 			                           Q_RETURN_ARG (bool, ret),

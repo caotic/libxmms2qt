@@ -40,7 +40,8 @@ public:
 	void add (qreal);
 	void add (const QString &);
 	void add (const QStringList &);
-	
+	void add (const QByteArray &);
+
 	void addData (const QByteArray &);
 	
 	quint32 getUInt32 ();

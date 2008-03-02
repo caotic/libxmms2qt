@@ -5,6 +5,10 @@
 
 #include "client.h"
 
+#include <QFile>
+#include <QByteArray>
+#include <QVariantList>
+
 class XmmsTestClient : public QObject
 {
 	Q_OBJECT
@@ -15,7 +19,10 @@ class XmmsTestClient : public QObject
 		bool apa (const QVariantList &);
 		bool minfo (const PropDict &);
 		bool pmtime (quint32);
-		bool bindata (const QByteArray &);
+		bool bindata (QByteArray);
+		bool removed ();
+		bool printList (QVariantList);
+		bool fileAdded (QString);
 	private:
 		XmmsClient m_client;
 		int m_entries;

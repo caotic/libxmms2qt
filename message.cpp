@@ -104,6 +104,13 @@ XmmsMessage::add (const QStringList &list)
 	}
 }
 
+void
+XmmsMessage::add (const QByteArray &value)
+{
+	add(value.size ());
+	m_stream->writeRawData(value.data (), value.size());
+}
+
 QByteArray
 XmmsMessage::finish (quint32 cookie) const
 {
