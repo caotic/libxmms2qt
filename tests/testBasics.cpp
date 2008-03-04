@@ -37,7 +37,7 @@ TestBasics::testPlaylistAddUrl ()
 {
 	QString path;
 	path += QDir::currentPath ();
-	path += "/tests/files/testfile.mp3";
+	path += "/files/testfile.mp3";
 	if (!QFile::exists (path)) {
 		QSKIP ("This test requires the testfile that I expected to find.", SkipSingle);
 	}

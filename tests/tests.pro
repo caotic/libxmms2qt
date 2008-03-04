@@ -11,6 +11,17 @@ INCLUDEPATH += . .. /opt/local/include/xmms2
 LIBS += -lxmms2qt
 LIBPATH += ..
 
+# workaround broken qmake
+LIBS += -lQtTest
+QMAKE_LFLAGS += -Wl,-rpath,..
+
+
+CONFIG += link_pkgconfig
+PKGCONFIG += xmms2-plugin
+
+
 # Input
 HEADERS += testBasics.h
-SOURCES += testBasics.cpp main.cpp
+
+SOURCES += main.cpp \
+           testBasics.cpp
