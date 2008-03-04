@@ -4,6 +4,7 @@
 
 TEMPLATE = lib
 TARGET = xmms2qt
+VERSION = 0.0.0
 DEPENDPATH += .
 INCLUDEPATH += . /opt/local/include/xmms2
 CONFIG -= app_bundle
