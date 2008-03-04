@@ -15,7 +15,7 @@ Playlist::currentPos (const QString &playlist)
 }
 
 XmmsResult
-Playlist::list (const QString &playlist)
+Playlist::listEntries (const QString &playlist)
 {
 	XmmsMessage msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_LIST);
 	msg.add (playlist);

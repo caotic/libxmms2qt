@@ -15,7 +15,7 @@ class XmmsClient;
 #include "bindata.h"
 #include "config.h"
 
-#define __DEBUG_IPC__
+#undef __DEBUG_IPC__
 
 #ifdef __DEBUG_IPC__
 #define DBGIPC(fmt, ...) qDebug("DEBUG IPC: " fmt, ## __VA_ARGS__)

@@ -15,7 +15,7 @@ class Playlist : public BaseObject
 		};
 		
 		XmmsResult currentPos (const QString &pl = "_active");
-		XmmsResult list (const QString &pl = "_active");
+		XmmsResult listEntries (const QString &pl = "_active");
 		XmmsResult add (const QString &url, const QString &pl = "_active");
 		XmmsResult add (const QUrl &url, const QString &pl = "_active");
 		XmmsResult add (quint32 id, const QString &pl = "_active");
