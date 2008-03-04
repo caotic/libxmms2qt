@@ -9,6 +9,8 @@ main (int argc, char **argv)
 	TestBasics basics;
 	QTest::qExec (&basics);
 
+	TestBindata bindata;
+	QTest::qExec (&bindata);
 }
 
 //QTEST_MAIN(TestBasics);
