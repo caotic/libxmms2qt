@@ -24,6 +24,7 @@ HEADERS += bindata.h \
            playback.h \
            playlist.h \
            result.h \
+           stats.h \
            xform.h \
            object.h \
            propdict.h
@@ -36,4 +37,5 @@ SOURCES += bindata.cpp \
            playback.cpp \
            playlist.cpp \
            result.cpp \
+           stats.cpp \
            xform.cpp
