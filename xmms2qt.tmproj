@@ -3,52 +3,74 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>playlist.h</string>
+	<string>message.h</string>
 	<key>documents</key>
 	<array>
 		<dict>
 			<key>filename</key>
 			<string>playback.cpp</string>
 			<key>lastUsed</key>
-			<date>2008-02-27T17:35:14Z</date>
+			<date>2008-03-01T19:51:33Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>playback.h</string>
 			<key>lastUsed</key>
-			<date>2008-02-27T17:35:21Z</date>
+			<date>2008-03-02T11:17:26Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>config.cpp</string>
+			<key>lastUsed</key>
+			<date>2008-03-02T11:17:50Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>config.h</string>
+			<key>lastUsed</key>
+			<date>2008-03-02T11:17:49Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>medialib.h</string>
+			<key>lastUsed</key>
+			<date>2008-03-02T11:17:47Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>medialib.cpp</string>
+			<key>lastUsed</key>
+			<date>2008-03-02T11:16:52Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>playlist.cpp</string>
 			<key>lastUsed</key>
-			<date>2008-02-27T16:28:22Z</date>
+			<date>2008-03-02T11:17:58Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>playlist.h</string>
 			<key>lastUsed</key>
-			<date>2008-02-27T22:08:28Z</date>
-			<key>selected</key>
-			<true/>
+			<date>2008-03-02T11:18:06Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>xmms2qt.pro</string>
 			<key>lastUsed</key>
-			<date>2008-02-27T17:35:05Z</date>
+			<date>2008-03-01T20:36:11Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>testclient.h</string>
 			<key>lastUsed</key>
-			<date>2008-02-27T17:04:36Z</date>
+			<date>2008-03-02T11:18:10Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>bindata.cpp</string>
 			<key>lastUsed</key>
-			<date>2008-02-27T17:16:17Z</date>
+			<date>2008-03-01T17:31:46Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
@@ -60,25 +82,27 @@
 			<key>filename</key>
 			<string>main.cpp</string>
 			<key>lastUsed</key>
-			<date>2008-02-27T17:20:27Z</date>
+			<date>2008-03-02T11:16:44Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>propdict.h</string>
 			<key>lastUsed</key>
-			<date>2008-02-27T16:46:20Z</date>
+			<date>2008-03-02T11:18:15Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>message.cpp</string>
 			<key>lastUsed</key>
-			<date>2008-02-27T17:13:28Z</date>
+			<date>2008-03-02T11:18:24Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>message.h</string>
 			<key>lastUsed</key>
-			<date>2008-02-27T17:13:43Z</date>
+			<date>2008-03-02T11:18:24Z</date>
+			<key>selected</key>
+			<true/>
 		</dict>
 		<dict>
 			<key>filename</key>
@@ -120,9 +144,9 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>17</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>5</integer>
+				<integer>11</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -171,33 +195,89 @@
 			<key>firstVisibleLine</key>
 			<integer>25</integer>
 		</dict>
-		<key>main.cpp</key>
+		<key>config.cpp</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>3</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>54</integer>
+				<integer>0</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>17</integer>
+		</dict>
+		<key>config.h</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>0</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
+		<key>main.cpp</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>0</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>52</integer>
+		</dict>
+		<key>medialib.cpp</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>0</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>68</integer>
+		</dict>
+		<key>medialib.h</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>0</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>6</integer>
+		</dict>
 		<key>message.cpp</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>21</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>273</integer>
+				<integer>0</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>248</integer>
+			<integer>273</integer>
 		</dict>
 		<key>message.h</key>
 		<dict>
@@ -211,7 +291,7 @@
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>45</integer>
+			<integer>19</integer>
 		</dict>
 		<key>object.h</key>
 		<dict>
@@ -232,14 +312,30 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>19</integer>
 				<key>line</key>
-				<integer>18</integer>
+				<integer>44</integer>
 			</dict>
+			<key>columnSelection</key>
+			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>29</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>10</integer>
+				<key>line</key>
+				<integer>44</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>19</integer>
+				<key>line</key>
+				<integer>44</integer>
+			</dict>
 		</dict>
 		<key>playback.h</key>
 		<dict>
@@ -262,7 +358,7 @@
 				<key>column</key>
 				<integer>0</integer>
 				<key>line</key>
-				<integer>20</integer>
+				<integer>0</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -281,7 +377,7 @@
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>3</integer>
 		</dict>
 		<key>propdict.h</key>
 		<dict>
@@ -295,7 +391,7 @@
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>40</integer>
+			<integer>0</integer>
 		</dict>
 		<key>result.cpp</key>
 		<dict>
@@ -330,7 +426,7 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>36</integer>
+				<integer>24</integer>
 				<key>line</key>
 				<integer>17</integer>
 			</dict>
@@ -344,14 +440,30 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>104</integer>
+				<integer>13</integer>
 				<key>line</key>
-				<integer>19</integer>
+				<integer>9</integer>
 			</dict>
+			<key>columnSelection</key>
+			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>6</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>10</integer>
+			</dict>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
@@ -370,7 +482,11 @@
 		<string>xmms2qt.pro</string>
 		<string>playlist.h</string>
 		<string>playlist.cpp</string>
+		<string>medialib.cpp</string>
+		<string>medialib.h</string>
 		<string>playback.h</string>
+		<string>config.cpp</string>
+		<string>config.h</string>
 		<string>playback.cpp</string>
 		<string>message.h</string>
 	</array>

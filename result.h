@@ -8,7 +8,7 @@
 
 #include "propdict.h"
 
-#define __DEBUG_RESULT__
+#undef __DEBUG_RESULT__
 
 #ifdef __DEBUG_RESULT__
 #define DBGRES(fmt, ...) qDebug("DEBUG RESULT: " fmt, ## __VA_ARGS__)
