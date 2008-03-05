@@ -3,6 +3,7 @@
 ######################################################################
 
 QT += testlib network
+CONFIG += qtestlib
 CONFIG -= app_bundle
 TEMPLATE = app
 TARGET = 
