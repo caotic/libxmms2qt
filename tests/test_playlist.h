@@ -4,18 +4,18 @@
 
 #include "client.h"
 #include "test_common.h"
+#include "test_class.h"
 
 #ifndef __TEST_PLAYLIST_H__
 #define __TEST_PLAYLIST_H__
 
-class TestPlaylist : public QObject
+class TestPlaylist : public TestClass
 {
 	Q_OBJECT
 	public:
-		TestPlaylist () : QObject (), m_client (NULL, "test") {};
+		TestPlaylist () : TestClass () {};
 		
 	public slots:
-		void connected (bool);
 		bool cbClearPL (const QVariantList &);
 		bool cbAddUrl (const QVariantList &);
 		bool cbAddMove (const QVariantList &);
@@ -23,9 +23,6 @@ class TestPlaylist : public QObject
 		bool cbRadd (const QVariantList &);
 				
 	private slots:
-		/* Connect to server */
-		void initTestCase ();		
-		
 		/* playlist tests */
 		void clear ();
 		void addUrl ();
@@ -40,8 +37,6 @@ class TestPlaylist : public QObject
 	
 	private:
 		quint32 m_id;
-		XmmsClient m_client;
-		QEventLoop m_loop;
 };
 
 #endif

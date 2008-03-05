@@ -1,5 +1,6 @@
 #include "test_playlist.h"
 #include "test_bindata.h"
+#include "test_error.h"
 
 int
 main (int argc, char **argv)
@@ -14,6 +15,10 @@ main (int argc, char **argv)
 	{
 		TestBindata bindata;
 		QTest::qExec (&bindata);
+	}
+	{
+		TestError error;
+		QTest::qExec (&error);
 	}
 }
 

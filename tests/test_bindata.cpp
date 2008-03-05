@@ -6,21 +6,6 @@
 #include <QCryptographicHash>
 
 void
-TestBindata::connected (bool b)
-{
-	Q_ASSERT_X (b, "connect", "The connect signal returned error");
-	m_loop.exit ();
-}
-
-void
-TestBindata::initTestCase ()
-{
-	m_client.doConnect ("127.0.0.1", 9667);
-	connect (&m_client, SIGNAL (connected (bool)), this, SLOT (connected (bool)));
-	m_loop.exec ();
-}
-
-void
 TestBindata::add ()
 {
 	// usually we should add a Pixmap here

@@ -24,8 +24,11 @@ PKGCONFIG += xmms2-plugin
 # Input
 HEADERS += test_playlist.h \
            test_bindata.h \
-		   test_common.h
+		   test_common.h \
+		   test_class.h \
+		   test_error.h
 
 SOURCES += main.cpp \
            test_playlist.cpp \
-           test_bindata.cpp
+           test_bindata.cpp \
+		   test_error.cpp
