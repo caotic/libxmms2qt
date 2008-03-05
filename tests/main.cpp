@@ -1,5 +1,5 @@
-#include "testBasics.h"
-#include "testBindata.h"
+#include "test_playlist.h"
+#include "test_bindata.h"
 
 int
 main (int argc, char **argv)
@@ -7,7 +7,7 @@ main (int argc, char **argv)
 	QApplication app (argc, argv);
 
 	{
-		TestBasics basics;
+		TestPlaylist basics;
 		QTest::qExec (&basics);
 	}
 

@@ -1,15 +1,15 @@
-#include "testBasics.h"
+#include "test_playlist.h"
 #include <QtTest/QtTest>
 
 void
-TestBasics::connected (bool b)
+TestPlaylist::connected (bool b)
 {
 	QVERIFY2 (b, "The connect signal returned error");
 	m_loop.exit ();
 }
 
 void
-TestBasics::testConnect ()
+TestPlaylist::initTestCase ()
 {
 	m_client.doConnect ("127.0.0.1", 9667);
 	connect (&m_client, SIGNAL (connected (bool)), this, SLOT (connected (bool)));
@@ -17,7 +17,7 @@ TestBasics::testConnect ()
 }
 
 void
-TestBasics::testPlaylistClear ()
+TestPlaylist::testPlaylistClear ()
 {
 	m_client.playlist.clear ();
 	m_client.playlist.listEntries () (this, SLOT (cbClearPL (const QVariantList &)));
@@ -25,7 +25,7 @@ TestBasics::testPlaylistClear ()
 }
 
 bool
-TestBasics::cbClearPL (const QVariantList &list)
+TestPlaylist::cbClearPL (const QVariantList &list)
 {
 	TVERIFY (list.size () == 0, "list should be 0");
 	m_loop.exit ();
@@ -33,7 +33,7 @@ TestBasics::cbClearPL (const QVariantList &list)
 }
 
 void
-TestBasics::testPlaylistAddUrl ()
+TestPlaylist::testPlaylistAddUrl ()
 {
 	QString path;
 	path += QDir::currentPath ();
@@ -48,7 +48,7 @@ TestBasics::testPlaylistAddUrl ()
 }
 
 bool
-TestBasics::cbAddUrl (const QVariantList &list)
+TestPlaylist::cbAddUrl (const QVariantList &list)
 {
 	TVERIFY (list.size () == 1, "list should be 0");
 	/* save the medialib id of our test song */
@@ -59,7 +59,7 @@ TestBasics::cbAddUrl (const QVariantList &list)
 }
 
 void
-TestBasics::testPlaylistClear2 ()
+TestPlaylist::testPlaylistClear2 ()
 {
 	m_client.playlist.clear ();
 	m_client.playlist.listEntries () (this, SLOT (cbClearPL (const QVariantList &)));
@@ -67,7 +67,7 @@ TestBasics::testPlaylistClear2 ()
 }
 
 void
-TestBasics::testPlaylistAddId ()
+TestPlaylist::testPlaylistAddId ()
 {
 	m_client.playlist.add (m_id);
 	m_client.playlist.listEntries () (this, SLOT (cbAddUrl (const QVariantList &)));
@@ -75,7 +75,7 @@ TestBasics::testPlaylistAddId ()
 }
 
 void
-TestBasics::testPlaylistRemove ()
+TestPlaylist::testPlaylistRemove ()
 {
 	m_client.playlist.remove (0); /* remove first position */
 	m_client.playlist.listEntries () (this, SLOT (cbClearPL (const QVariantList &)));

@@ -3,28 +3,16 @@
 #include <QVariantList>
 
 #include "client.h"
+#include "test_common.h"
 
-#define TVERIFY(statement, description) \
-do {\
-    if (statement) {\
-        if (!QTest::qVerify(true, #statement, (description), __FILE__, __LINE__)) {\
-			m_loop.exit();\
-            return true;\
-		}\
-    } else {\
-        if (!QTest::qVerify(false, #statement, (description), __FILE__, __LINE__)) {\
-			m_loop.exit();\
-            return true;\
-		}\
-    }\
-} while (0)
+#ifndef __TEST_PLAYLIST_H__
+#define __TEST_PLAYLIST_H__
 
-
-class TestBasics : public QObject
+class TestPlaylist : public QObject
 {
 	Q_OBJECT
 	public:
-		TestBasics () : QObject (), m_client (NULL, "test") {};
+		TestPlaylist () : QObject (), m_client (NULL, "test") {};
 		
 	public slots:
 		void connected (bool);
@@ -32,8 +20,8 @@ class TestBasics : public QObject
 		bool cbAddUrl (const QVariantList &);
 				
 	private slots:
-		/* testConnect */
-		void testConnect ();
+		/* Connect to server */
+		void initTestCase ();		
 		
 		/* playlist tests */
 		void testPlaylistClear ();
@@ -48,3 +36,5 @@ class TestBasics : public QObject
 		XmmsClient m_client;
 		QEventLoop m_loop;
 };
+
+#endif

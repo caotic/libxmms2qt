@@ -5,21 +5,10 @@
 
 #include "client.h"
 
-#define TVERIFY(statement, description) \
-do {\
-    if (statement) {\
-        if (!QTest::qVerify(true, #statement, (description), __FILE__, __LINE__)) {\
-			m_loop.exit();\
-            return true;\
-		}\
-    } else {\
-        if (!QTest::qVerify(false, #statement, (description), __FILE__, __LINE__)) {\
-			m_loop.exit();\
-            return true;\
-		}\
-    }\
-} while (0)
+#include "test_common.h"
 
+#ifndef __TEST_BINDATA_H__
+#define __TEST_BINDATA_H__
 
 class TestBindata : public QObject
 {
@@ -57,3 +46,5 @@ class TestBindata : public QObject
 		QByteArray m_testdata; // we cache the testdata, to compare it later
 		QString m_serverhash;
 };
+
+#endif

@@ -22,9 +22,10 @@ PKGCONFIG += xmms2-plugin
 
 
 # Input
-HEADERS += testBasics.h \
-           testBindata.h
+HEADERS += test_playlist.h \
+           test_bindata.h \
+		   test_common.h
 
 SOURCES += main.cpp \
-           testBasics.cpp \
-           testBindata.cpp
+           test_playlist.cpp \
+           test_bindata.cpp

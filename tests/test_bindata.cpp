@@ -1,5 +1,5 @@
 
-#include "testBindata.h"
+#include "test_bindata.h"
 #include <QtTest/QtTest>
 
 #include <QFile>
