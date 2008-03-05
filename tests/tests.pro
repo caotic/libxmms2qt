@@ -6,15 +6,16 @@ QT += testlib network
 CONFIG -= app_bundle
 TEMPLATE = app
 TARGET = 
-DEPENDPATH += . ..
-INCLUDEPATH += . .. /opt/local/include/xmms2
-LIBS += -lxmms2qt
-LIBPATH += ..
+DEPENDPATH += . ../lib
+INCLUDEPATH += . ../lib
+LIBS += -lxmmsclientqt
+LIBPATH += ../lib
+MOC_DIR     = .moc
+OBJECTS_DIR = .obj
 
 # workaround broken qmake
-LIBS += -lQtTest
-QMAKE_LFLAGS += -Wl,-rpath,..
-
+#LIBS += -lQtTest
+#QMAKE_LFLAGS += -Wl,-rpath,..
 
 CONFIG += link_pkgconfig
 PKGCONFIG += xmms2-plugin

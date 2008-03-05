@@ -3,11 +3,12 @@
 ######################################################################
 
 TEMPLATE = lib
-TARGET = xmms2qt
+TARGET = xmmsclientqt
 VERSION = 0.0.0
 DEPENDPATH += .
-INCLUDEPATH += . /opt/local/include/xmms2
+INCLUDEPATH += .
 CONFIG -= app_bundle
+CONFIG += staticlib
 QT += network
 
 CONFIG += link_pkgconfig
