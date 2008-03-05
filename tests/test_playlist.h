@@ -18,17 +18,24 @@ class TestPlaylist : public QObject
 		void connected (bool);
 		bool cbClearPL (const QVariantList &);
 		bool cbAddUrl (const QVariantList &);
+		bool cbAddMove (const QVariantList &);
+		bool cbMove (const QVariantList &);
+		bool cbRadd (const QVariantList &);
 				
 	private slots:
 		/* Connect to server */
 		void initTestCase ();		
 		
 		/* playlist tests */
-		void testPlaylistClear ();
-		void testPlaylistAddUrl ();
-		void testPlaylistClear2 ();
-		void testPlaylistAddId ();
-		void testPlaylistRemove ();
+		void clear ();
+		void addUrl ();
+		void clear2 ();
+		void addId ();
+		void remove ();
+		void prepareMove ();
+		void move ();
+		void shuffle ();
+		void radd ();
 		/*void testPlaylistMove ();*/
 	
 	private:

@@ -21,19 +21,19 @@ TestBindata::initTestCase ()
 }
 
 void
-TestBindata::addBindata()
+TestBindata::add ()
 {
 	// usually we should add a Pixmap here
 	QFile f("files/testfile.mp3");
 	f.open (QIODevice::ReadOnly);
 	m_testdata = f.readAll ();
-	m_client.bindata.add (m_testdata) (this, SLOT (cbAddBindata (QString)));
+	m_client.bindata.add (m_testdata) (this, SLOT (cbAdd (QString)));
 	f.close ();
 	m_loop.exec ();
 }
 
 bool
-TestBindata::cbAddBindata (QString hash)
+TestBindata::cbAdd (QString hash)
 {
 	m_serverhash = hash;
 
@@ -46,15 +46,15 @@ TestBindata::cbAddBindata (QString hash)
 }
 
 void
-TestBindata::listBindata ()
+TestBindata::list ()
 {
-	m_client.bindata.list ()(this, SLOT (cbListBindata (QVariantList)));
+	m_client.bindata.list ()(this, SLOT (cbList (QVariantList)));
 
 	m_loop.exec ();
 }
 
 bool
-TestBindata::cbListBindata (QVariantList list)
+TestBindata::cbList (QVariantList list)
 {
 	QVariant hash (m_serverhash);
 
@@ -65,16 +65,16 @@ TestBindata::cbListBindata (QVariantList list)
 }
 
 void
-TestBindata::retrieveBindata ()
+TestBindata::retrieve ()
 {
 	m_client.bindata.retrieve (m_serverhash)
-	                          (this, SLOT (cbRetrieveBindata (QByteArray)));
+	                          (this, SLOT (cbRetrieve (QByteArray)));
 
 	m_loop.exec ();
 }
 
 bool
-TestBindata::cbRetrieveBindata (QByteArray serverdata)
+TestBindata::cbRetrieve (QByteArray serverdata)
 {
 	TVERIFY (m_testdata == serverdata,
 	         "Our local file is different from the retrieved one");
@@ -85,23 +85,23 @@ TestBindata::cbRetrieveBindata (QByteArray serverdata)
 
 
 void
-TestBindata::removeBindata ()
+TestBindata::remove ()
 {
-	m_client.bindata.remove (m_serverhash) (this, SLOT (cbRemoveBindata ()));
+	m_client.bindata.remove (m_serverhash) (this, SLOT (cbRemove ()));
 
 	m_loop.exec ();
 }
 
 bool
-TestBindata::cbRemoveBindata ()
+TestBindata::cbRemove ()
 {
-	m_client.bindata.list ()(this, SLOT (cbRemoveBindata2 (QVariantList)));
+	m_client.bindata.list ()(this, SLOT (cbRemove2 (QVariantList)));
 
 	return true;
 }
 
 bool
-TestBindata::cbRemoveBindata2 (QVariantList list)
+TestBindata::cbRemove2 (QVariantList list)
 {
 	QVariant hash (m_serverhash);
 

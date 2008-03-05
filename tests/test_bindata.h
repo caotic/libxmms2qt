@@ -19,25 +19,25 @@ class TestBindata : public QObject
 	public slots:
 		void connected (bool);
 
-		bool cbAddBindata (QString hash);
-		bool cbListBindata (QVariantList);
-		bool cbRetrieveBindata (QByteArray);
+		bool cbAdd (QString hash);
+		bool cbList (QVariantList);
+		bool cbRetrieve (QByteArray);
 
 		/* waits for remove to return and feches list */
-		bool cbRemoveBindata ();
+		bool cbRemove ();
 		/* tests if has is still in bindata list */
-		bool cbRemoveBindata2 (QVariantList);
+		bool cbRemove2 (QVariantList);
 
 	private slots:
 		/* Connect to server */
 		void initTestCase ();
 
 		/* bindata tests */
-		void addBindata ();
-		void listBindata ();
-		void retrieveBindata ();
+		void add ();
+		void list ();
+		void retrieve ();
 
-		void removeBindata ();
+		void remove ();
 
 	private:
 		XmmsClient m_client;
