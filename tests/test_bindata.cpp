@@ -8,7 +8,7 @@
 void
 TestBindata::connected (bool b)
 {
-	QVERIFY2 (b, "The connect signal returned error");
+	Q_ASSERT_X (b, "connect", "The connect signal returned error");
 	m_loop.exit ();
 }
 
@@ -19,9 +19,6 @@ TestBindata::initTestCase ()
 	connect (&m_client, SIGNAL (connected (bool)), this, SLOT (connected (bool)));
 	m_loop.exec ();
 }
-
-
-
 
 void
 TestBindata::addBindata()
