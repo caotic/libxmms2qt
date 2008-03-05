@@ -5,20 +5,20 @@
 int
 main (int argc, char **argv)
 {
-	QApplication app (argc, argv);
+	QCoreApplication app (argc, argv);
 
 	{
 		TestPlaylist basics;
-		QTest::qExec (&basics);
+		QTest::qExec (&basics, argc, argv);
 	}
 
 	{
 		TestBindata bindata;
-		QTest::qExec (&bindata);
+		QTest::qExec (&bindata, argc, argv);
 	}
 	{
 		TestError error;
-		QTest::qExec (&error);
+		QTest::qExec (&error, argc, argv);
 	}
 }
 
