@@ -76,15 +76,6 @@ XmmsClient::parseMessage ()
 	
 	DBGIPC ("we have complete message with cookie %d cmd %d and object %d", m_readmsg.cookie (), m_readmsg.cmd (), m_readmsg.object ());
 	
-	if (m_readmsg.cmd () == XMMS_IPC_CMD_ERROR) {
-		XmmsMessage m = m_readmsg;
-		qWarning ("error on command %d", m.cookie ());
-		/* we need a good way to handle this later ... */
-		QString s = m.getString (false);
-		qWarning ("Error: %s", qPrintable (s));
-		return;
-	}
-	
 	if (m_readmsg.cookie () == 0) {
 		/* hello reply, let's fulhack it for now */
 		DBGIPC ("got hello package!");

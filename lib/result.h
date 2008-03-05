@@ -27,6 +27,8 @@ class XmmsResult : public QObject
 			m_cookie = src.cookie ();
 			m_object = src.object ();
 			m_slot = src.slot ();
+			m_errobject = src.m_errobject;
+			m_errslot = src.m_errslot;
 			m_client = src.client ();
 			m_message = src.message ();
 			m_restartsignal = src.m_restartsignal;
@@ -43,6 +45,8 @@ class XmmsResult : public QObject
 			m_cookie = src.cookie ();
 			m_object = src.object ();
 			m_slot = src.slot ();
+			m_errobject = src.m_errobject;
+			m_errslot = src.m_errslot;
 			m_client = src.client ();
 			m_message = src.message ();
 			m_restartsignal = src.m_restartsignal;
@@ -51,6 +55,8 @@ class XmmsResult : public QObject
 		};
 		
 		void operator() (QObject *object, const char *slot);
+		void operator() (QObject *object, const char *slot, const char *errslot);
+		void operator() (QObject *object, const char *slot, QObject *errobject, const char *errslot);
 
 		int cookie () const { return m_cookie; };
 		void setCookie (int c) {
@@ -88,10 +94,17 @@ class XmmsResult : public QObject
 		
 	private:
 		int m_cookie;
+		
 		const char *m_slot;
 		QObject *m_object;
+		
+		const char *m_errslot;
+		QObject *m_errobject;
+		
 		XmmsClient *m_client;
 		XmmsMessage m_message;
+		
+		void setSlots (QObject *object, const char *slot, QObject *errobject, const char *errslot);
 		
 	protected:
 		quint32 m_restartsignal;

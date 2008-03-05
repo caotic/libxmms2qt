@@ -19,6 +19,19 @@ void
 XmmsResult::exec (const XmmsMessage &msg)
 {
 	m_message = msg;
+	
+	if (msg.cmd () == XMMS_IPC_CMD_ERROR) {
+		/* oops something went wrong ... */
+		if (m_object && m_errslot) {
+			DBGRES ("error message, let's call the error method");
+			QObject *object = m_errobject ? m_errobject : m_object;
+			QString error = m_message.getString (false);
+			QByteArray sig (object->metaObject ()->normalizedSignature (m_errslot).mid (1));
+			sig = sig.left(sig.indexOf('('));
+			QMetaObject::invokeMethod (object, sig, Q_ARG(QString, error));
+		}
+		return;
+	}
 		
 	if (m_object && m_slot) {
 		QByteArray sig (m_object->metaObject ()->normalizedSignature (m_slot).mid (1));
@@ -107,7 +120,28 @@ XmmsResult::exec (const XmmsMessage &msg)
 void
 XmmsResult::operator() (QObject *object, const char *slot)
 {
+	setSlots (object, slot, NULL, NULL);
+}
+
+void
+XmmsResult::operator() (QObject *object, const char *slot, const char *errslot)
+{
+	setSlots (object, slot, NULL, errslot);
+}
+
+void
+XmmsResult::operator() (QObject *object, const char *slot, QObject *errobject, const char *errslot)
+{
+	setSlots (object, slot, errobject, errslot);
+}
+
+void
+XmmsResult::setSlots (QObject *object, const char *slot, QObject *errobject, const char *errslot)
+{
 	m_object = object;
 	m_slot = slot;
+	m_errobject = errobject;
+	m_errslot = errslot;
 	m_client->setResult (*this);
 }
+
