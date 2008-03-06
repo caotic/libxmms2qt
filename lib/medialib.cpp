@@ -57,6 +57,23 @@ Medialib::info (const quint32 &id)
 }
 
 XmmsResult
+Medialib::id (const QUrl &url) const
+{
+	return id (url.toString ());
+}
+
+XmmsResult
+Medialib::id (const QString &url) const
+{
+	// TODO: Check if the server really wants an unencoded url
+	// looking at the c lib it seems so
+	XmmsMessage msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_GET_ID);
+	msg.add (url);
+
+	return m_client->queueMsg (msg);
+}
+
+XmmsResult
 Medialib::rehash (quint32 id) const
 {
 	XmmsMessage msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_REHASH);
@@ -70,6 +87,22 @@ Medialib::remove (quint32 id) const
 {
 	XmmsMessage msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_REMOVE_ID);
 	msg.add (id);
+
+	return m_client->queueMsg (msg);
+}
+
+XmmsResult
+Medialib::move (quint32 id, const QUrl &url) const
+{
+	return move (id, url.toString ());
+}
+
+XmmsResult
+Medialib::move (quint32 id, const QString &url) const
+{
+	XmmsMessage msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_MOVE_URL);
+	msg.add (id);
+	msg.add (url);
 
 	return m_client->queueMsg (msg);
 }

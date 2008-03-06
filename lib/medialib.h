@@ -19,6 +19,9 @@ class Medialib : public BaseObject
 		
 		XmmsResult info (const quint32 &id);
 
+		XmmsResult id (const QUrl &) const;
+		XmmsResult id (const QString &) const;
+
 		XmmsResult broadcastEntryAdded ();
 		XmmsResult broadcastEntryChanged ();
 
@@ -34,6 +37,9 @@ class Medialib : public BaseObject
 
 		XmmsResult rehash (quint32 id = 0) const;
 		XmmsResult remove (quint32) const;
+
+		XmmsResult move (quint32 id, const QUrl &) const;
+		XmmsResult move (quint32 id, const QString &) const;
 
 		XmmsResult entryPropertySet (quint32 id, const QString &key,
 		                             const QString &value) const;
