@@ -115,6 +115,21 @@ Playlist::recursiveAdd (const QString &url, const QString &playlist)
 }
 
 XmmsResult
+Playlist::activePlaylist () const
+{
+	XmmsMessage msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_CURRENT_ACTIVE);
+	return m_client->queueMsg (msg);
+}
+
+XmmsResult
+Playlist::loadPlaylist (const QString &name) const
+{
+	XmmsMessage msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_LOAD);
+	msg.add (name);
+	return m_client->queueMsg (msg);
+}
+
+XmmsResult
 Playlist::broadcastPlaylistChanged ()
 {
 	XmmsMessage msg (XMMS_IPC_OBJECT_SIGNAL, XMMS_IPC_CMD_BROADCAST);

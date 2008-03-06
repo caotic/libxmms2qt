@@ -27,7 +27,10 @@ class Playlist : public BaseObject
 		XmmsResult setNextRel (quint32 pos);
 		XmmsResult move (quint32 opos, quint32 npos, const QString &playlist = "_active");
 		XmmsResult recursiveAdd (const QString &url, const QString &playlist = "_active");
-		
+
+		XmmsResult activePlaylist () const;
+		XmmsResult loadPlaylist (const QString &name) const;
+
 		XmmsResult broadcastPlaylistChanged ();
 		XmmsResult broadcastPlaylistCurrentPos ();
 		XmmsResult broadcastPlaylistLoaded ();
