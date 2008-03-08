@@ -41,17 +41,17 @@ class Medialib : public BaseObject
 		XmmsResult move (quint32 id, const QUrl &) const;
 		XmmsResult move (quint32 id, const QString &) const;
 
-		XmmsResult entryPropertySet (quint32 id, const QString &key,
+		XmmsResult setEntryProperty (quint32 id, const QString &key,
 		                             const QString &value) const;
-		XmmsResult entryPropertySet (quint32 id, const QString &key,
+		XmmsResult setEntryProperty (quint32 id, const QString &key,
 		                             const QString &value,
 									 const QString &source) const;
-		XmmsResult entryPropertySet (quint32 id, const QString &key,
+		XmmsResult setEntryProperty (quint32 id, const QString &key,
 		                             qint32 value) const;
-		XmmsResult entryPropertySet (quint32 id, const QString &key,
+		XmmsResult setEntryProperty (quint32 id, const QString &key,
 		                             qint32 value, const QString &source) const;
-		XmmsResult entryPropertyRemove (quint32 id, const QString &key) const;
-		XmmsResult entryPropertyRemove (quint32 id, const QString &key,
+		XmmsResult removeEntryProperty (quint32 id, const QString &key) const;
+		XmmsResult removeEntryProperty (quint32 id, const QString &key,
 		                                const QString &source) const;
 };
 

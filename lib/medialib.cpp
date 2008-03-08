@@ -108,15 +108,15 @@ Medialib::move (quint32 id, const QString &url) const
 }
 
 XmmsResult
-Medialib::entryPropertySet (quint32 id, const QString &key,
+Medialib::setEntryProperty (quint32 id, const QString &key,
                             const QString &value) const
 {
 	QString source = "client/" + m_client->name ();
-	return entryPropertySet (id, key, value, source);
+	return setEntryProperty (id, key, value, source);
 }
 
 XmmsResult
-Medialib::entryPropertySet (quint32 id, const QString &key,
+Medialib::setEntryProperty (quint32 id, const QString &key,
                             const QString &value, const QString &source) const
 {
 	XmmsMessage msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_PROPERTY_SET_STR);
@@ -129,14 +129,14 @@ Medialib::entryPropertySet (quint32 id, const QString &key,
 }
 
 XmmsResult
-Medialib::entryPropertySet (quint32 id, const QString &key, qint32 value) const
+Medialib::setEntryProperty (quint32 id, const QString &key, qint32 value) const
 {
 	QString source = "client/" + m_client->name ();
-	return entryPropertySet (id, key, value, source);
+	return setEntryProperty (id, key, value, source);
 }
 
 XmmsResult
-Medialib::entryPropertySet (quint32 id, const QString &key, qint32 value,
+Medialib::setEntryProperty (quint32 id, const QString &key, qint32 value,
                              const QString &source) const
 {
 	XmmsMessage msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_PROPERTY_SET_INT);
@@ -149,14 +149,14 @@ Medialib::entryPropertySet (quint32 id, const QString &key, qint32 value,
 }
 
 XmmsResult
-Medialib::entryPropertyRemove (quint32 id, const QString &key) const
+Medialib::removeEntryProperty (quint32 id, const QString &key) const
 {
 	QString source = "client/" + m_client->name ();
-	return entryPropertyRemove (id, key, source);
+	return removeEntryProperty (id, key, source);
 }
 
 XmmsResult
-Medialib::entryPropertyRemove (quint32 id, const QString &key,
+Medialib::removeEntryProperty (quint32 id, const QString &key,
                                const QString &source) const
 {
 	XmmsMessage msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_PROPERTY_REMOVE);
