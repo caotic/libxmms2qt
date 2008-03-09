@@ -1,5 +1,6 @@
 
 #include <QObject>
+#include <QPointer>
 
 #include "message.h"
 
@@ -96,11 +97,11 @@ class XmmsResult : public QObject
 		int m_cookie;
 		
 		const char *m_slot;
-		QObject *m_object;
-		
+		QPointer<QObject> m_object;
+
 		const char *m_errslot;
-		QObject *m_errobject;
-		
+		QPointer<QObject> m_errobject;
+
 		XmmsClient *m_client;
 		XmmsMessage m_message;
 		
