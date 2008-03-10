@@ -11,6 +11,8 @@
 #ifndef __TEST_BINDATA_H__
 #define __TEST_BINDATA_H__
 
+using namespace XMMSQt;
+
 class TestBindata : public TestClass
 {
 	Q_OBJECT

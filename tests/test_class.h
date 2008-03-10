@@ -7,6 +7,8 @@
 #ifndef __TEST_CLASS_H__
 #define __TEST_CLASS_H__
 
+using namespace XMMSQt;
+
 class TestClass : public QObject
 {
 	Q_OBJECT

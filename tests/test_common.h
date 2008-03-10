@@ -1,5 +1,7 @@
 #include <QtTest/QtTest>
 
+using namespace XMMSQt;
+
 #ifndef __TEST_COMMON_H__
 #define __TEST_COMMON_H__
 
