@@ -72,48 +72,44 @@ namespace XMMSQt
 			}
 
 
-			QByteArray param;
-			if (meth.parameterTypes ().size () > 0) {
-				param = meth.parameterTypes ()[0];
-			} else {
-				param = "void";
-			}
-
-			sig = sig.left(sig.indexOf('('));
 			bool ret;
-
-			if (param == "void") {
+			sig = sig.left(sig.indexOf('('));
+			if (meth.parameterTypes ().size () == 0) {
 				QMetaObject::invokeMethod (m_object, sig,
-										   Q_RETURN_ARG (bool, ret));
-			} else if (param == "quint32") {
-				QMetaObject::invokeMethod (m_object, sig, 
-										   Q_RETURN_ARG (bool, ret),
-										   Q_ARG (quint32, m_message.getUInt32 ()));
-			} else if (param == "QVariantList") {
-				QMetaObject::invokeMethod (m_object, sig, 
-										   Q_RETURN_ARG (bool, ret),
-										   Q_ARG (QVariantList, m_message.getList ()));
-			} else if (param == "PropDict") {
-				QMetaObject::invokeMethod (m_object, sig,
-										   Q_RETURN_ARG (bool, ret),
-										   Q_ARG (PropDict, m_message.getDict ()));
-			} else if (param == "QByteArray") {
-				QMetaObject::invokeMethod (m_object, sig,
-										   Q_RETURN_ARG (bool, ret),
-										   Q_ARG (QByteArray, m_message.getBindata ()));
-	/*		} else if (param == "qint32") {
-				arg = Q_ARG (qint32, ) */
-			} else if (param == "QString") {
-				QMetaObject::invokeMethod (m_object, sig,
-										   Q_RETURN_ARG (bool, ret),
-										   Q_ARG (QString, m_message.getString ()));
-			} else if (param == "Playback::Status") {
-				QMetaObject::invokeMethod (m_object, sig,
-										   Q_RETURN_ARG (bool, ret),
-										   Q_ARG (Playback::Status, (Playback::Status) m_message.getUInt32 ()));
+				                           Q_RETURN_ARG (bool, ret));
 			} else {
-				// TODO: Add some better errorhandling here
-				qDebug () << "Result: Couldn't handle resulttype" << param << "in callback" <<sig.constData ();
+				QByteArray param = meth.parameterTypes ()[0];
+
+				if (param == "quint32") {
+					QMetaObject::invokeMethod (m_object, sig, 
+					                           Q_RETURN_ARG (bool, ret),
+					                           Q_ARG (quint32, m_message.getUInt32 ()));
+				} else if (param == "QVariantList") {
+					QMetaObject::invokeMethod (m_object, sig, 
+					                           Q_RETURN_ARG (bool, ret),
+					                           Q_ARG (QVariantList, m_message.getList ()));
+				} else if (param == "PropDict") {
+					QMetaObject::invokeMethod (m_object, sig,
+					                           Q_RETURN_ARG (bool, ret),
+					                           Q_ARG (PropDict, m_message.getDict ()));
+				} else if (param == "QByteArray") {
+					QMetaObject::invokeMethod (m_object, sig,
+					                           Q_RETURN_ARG (bool, ret),
+					                           Q_ARG (QByteArray, m_message.getBindata ()));
+		/*		} else if (param == "qint32") {
+					arg = Q_ARG (qint32, ) */
+				} else if (param == "QString") {
+					QMetaObject::invokeMethod (m_object, sig,
+					                           Q_RETURN_ARG (bool, ret),
+					                           Q_ARG (QString, m_message.getString ()));
+				} else if (param == "Playback::Status") {
+					QMetaObject::invokeMethod (m_object, sig,
+					                           Q_RETURN_ARG (bool, ret),
+					                           Q_ARG (Playback::Status, (Playback::Status) m_message.getUInt32 ()));
+				} else {
+					// TODO: Add some better errorhandling here
+					qDebug () << "Result: Couldn't handle resulttype" << param << "in callback" <<sig.constData ();
+				}
 			}
 			
 			if (m_broadcast && ret) {
