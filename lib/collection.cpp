@@ -14,6 +14,7 @@
  *  Lesser General Public License for more details.
  */
 
+#include "client.h"
 #include "collection.h"
 
 namespace XMMSQt
@@ -25,28 +26,43 @@ namespace XMMSQt
 
 	Collection::~Collection()
 	{
-		XmmsMessage msg;
 	}
 
 	XmmsResult
 	Collection::get (const QString &name, Namespace nsname) const
 	{
+		XmmsMessage msg (XMMS_IPC_OBJECT_COLLECTION, XMMS_IPC_CMD_COLLECTION_GET);
+		msg.add (name);
+		msg.add (QString (nsname));
+		return m_client->queueMsg (msg);
 	}
 
 	XmmsResult
 	Collection::list (Namespace nsname) const
 	{
+		XmmsMessage msg (XMMS_IPC_OBJECT_COLLECTION, XMMS_IPC_CMD_COLLECTION_LIST);
+		msg.add (QString (nsname));
+		return m_client->queueMsg (msg);
 	}
 
 	XmmsResult
 	Collection::save (const Coll::Coll& coll, const QString &name,
 	                  Namespace nsname) const
 	{
+		XmmsMessage msg (XMMS_IPC_OBJECT_COLLECTION, XMMS_IPC_CMD_COLLECTION_SAVE);
+		msg.add (name);
+		msg.add (QString (nsname));
+		msg.add (coll);
+		return m_client->queueMsg (msg);
 	}
 
 	XmmsResult
 	Collection::remove (const QString &name, Namespace nsname) const
 	{
+		XmmsMessage msg (XMMS_IPC_OBJECT_COLLECTION, XMMS_IPC_CMD_COLLECTION_REMOVE);
+		msg.add (name);
+		msg.add (QString (nsname));
+		return m_client->queueMsg (msg);		
 	}
 
 	XmmsResult

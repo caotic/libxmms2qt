@@ -23,6 +23,7 @@
 #include "propdict.h"
 #include "client.h"
 #include "result.h"
+#include "coll.h"
 
 #include <xmmsc/xmmsc_idnumbers.h>
 
@@ -129,6 +130,31 @@ namespace XMMSQt
 		add(value.size ());
 		m_stream->writeRawData(value.data (), value.size());
 	}
+	
+	void
+	XmmsMessage::add (const Coll::Coll &coll)
+	{
+		/* add type */
+		add (coll.getType ());
+		
+		/* add the attribute list */
+		QStringList attrlist = coll.getAttributeList ();
+		add (attrlist);
+		
+		QList<quint32> idlist = coll.getIdList ();
+		add (idlist.size ());
+		for (int i = 0; i < idlist.size (); i ++)
+		{
+			add (idlist.at (i));
+		}
+		
+		QList<Coll::Coll *> operlist = coll.getOperandList ();
+		add (operlist.size ());
+		for (int i = 0; i < operlist.size (); i ++)
+		{
+			add (*operlist.at (i));
+		}
+	}
 
 	QByteArray
 	XmmsMessage::finish (quint32 cookie) const
@@ -144,6 +170,16 @@ namespace XMMSQt
 		ret.writeRawData (m_bytearray.data (), m_bytearray.size ());
 
 		return retarray;
+	}
+	
+	Coll::Coll
+	XmmsMessage::getColl ()
+	{
+		quint32 t;
+		*m_stream >> t;
+		Coll::Coll ret ((Coll::Type) t);
+		
+		return ret;
 	}
 
 	QVariant

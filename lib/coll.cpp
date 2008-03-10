@@ -25,13 +25,7 @@ namespace XMMSQt
 
 	Coll::Coll (Type type)
 	{
-		Q_UNUSED (type);
-	}
-
-	Coll Coll::operator= (const Coll& src)
-	{
-		Q_UNUSED (src);
-		return *this;
+		m_type = type;
 	}
 
 	Coll::~Coll()
@@ -65,6 +59,31 @@ namespace XMMSQt
 	Coll::getAttribute (const QString &attrname) const
 	{
 		return m_attributes[attrname];
+	}
+	
+	QStringList
+	Coll::getAttributeList () const
+	{
+		QStringList ret;
+		QStringList keys = m_attributes.keys ();
+		for (int i = 0; i < keys.size (); i++)
+		{
+			ret.append (keys[i]);
+			ret.append (m_attributes[keys[i]]);
+		}
+		return ret;
+	}
+	
+	QList<quint32>
+	Coll::getIdList () const
+	{
+		return m_idlist;
+	}
+	
+	QList<Coll *>
+	Coll::getOperandList () const
+	{
+		return m_operands;
 	}
 
 	void
@@ -133,6 +152,7 @@ namespace XMMSQt
  	quint32
 	Coll::size () const {
 		qWarning ("Wrong type!");
+		return 0;
 	}
 
 /*	IdlistElement

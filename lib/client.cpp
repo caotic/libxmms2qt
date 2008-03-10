@@ -27,7 +27,7 @@ namespace XMMSQt
 
 	XmmsClient::XmmsClient (QObject *parent, const QString &name)
 		: QObject (parent), playlist (this), medialib (this), playback (this),
-		  bindata (this), config (this)
+		  bindata (this), config (this), collection (this)
 	{
 		m_name = name;
 		m_cookie = 0;
@@ -52,6 +52,7 @@ namespace XMMSQt
 	void
 	XmmsClient::bytesWritten (qint64 b)
 	{
+		Q_UNUSED (b);
 		DBGIPC ("we wrote %lld bytes", b);
 	}
 

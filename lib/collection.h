@@ -43,6 +43,7 @@ namespace XMMSQt
 			static const Namespace COLLECTIONS;
 			static const Namespace PLAYLISTS;
 
+			Collection (XmmsClient *client) : BaseObject (client) {};
 
 			/** Destructor.
 			 */
@@ -259,7 +260,6 @@ namespace XMMSQt
 
 			// Constructor, only to be called by Xmms::Client
 			friend class Client;
-			Collection (XmmsClient *client);
 
 			// Copy-constructor / operator=
 			Collection (const Collection& src);

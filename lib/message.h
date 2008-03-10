@@ -22,6 +22,7 @@
 #define __XMMS_MESSAGE_H__
 
 #include "propdict.h"
+#include "coll.h"
 
 namespace XMMSQt
 {
@@ -60,6 +61,7 @@ namespace XMMSQt
 		void add (const QString &);
 		void add (const QStringList &);
 		void add (const QByteArray &);
+		void add (const Coll::Coll &);
 
 		void addData (const QByteArray &);
 		
@@ -71,6 +73,7 @@ namespace XMMSQt
 		QVariantList getList (const bool &checktype = true);
 		PropDict getDict ();
 		QByteArray getBindata ();
+		Coll::Coll getColl ();
 		
 		QByteArray finish (quint32 cookie) const;
 		bool process (QIODevice *);

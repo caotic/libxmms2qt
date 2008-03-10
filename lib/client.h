@@ -30,6 +30,7 @@ class XMMSQt::XmmsClient;
 #include "playback.h"
 #include "bindata.h"
 #include "config.h"
+#include "collection.h"
 
 #undef __DEBUG_IPC__
 
@@ -64,6 +65,7 @@ namespace XMMSQt
 			Playback playback;
 			Bindata bindata;
 			Config config;
+			Collection collection;
 			
 		private:
 			QString m_name;

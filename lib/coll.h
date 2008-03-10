@@ -54,6 +54,14 @@ namespace XMMSQt
 		class Coll
 		{
 			public:
+				Coll (const Coll& src)
+				{
+					m_type = src.m_type;
+					m_operands = src.m_operands;
+					m_attributes = src.m_attributes;
+					m_idlist = src.m_idlist;
+				};
+				Coll (Type type);
 
 				/** Destructor.
 				 */
@@ -65,6 +73,17 @@ namespace XMMSQt
 				void setAttribute (const QString &attrname, const QString &value);
 				QString getAttribute (const QString &attrname) const;
 				void removeAttribute (const QString &attrname);
+				QStringList getAttributeList () const;
+				QList<quint32> getIdList () const;
+				QList<Coll *> getOperandList () const;
+				Coll Coll::operator= (const Coll& src)
+				{
+					m_type = src.m_type;
+					m_operands = src.m_operands;
+					m_attributes = src.m_attributes;
+					m_idlist = src.m_idlist;
+					return *this;
+				};
 
 				virtual void addOperand (Coll *operand);
 				virtual void removeOperand (Coll *operand);
@@ -87,10 +106,6 @@ namespace XMMSQt
 				friend class ::XMMSQt::CollResult;
 				friend class Unary;
 				friend class Nary;
-
-				Coll (Type type);
-				Coll (const Coll& src);
-				Coll operator= (const Coll& src);
 
 				void setIndex (quint32 index, quint32 value);
 				unsigned int getIndex (quint32 index) const;

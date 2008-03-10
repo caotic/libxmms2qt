@@ -7,8 +7,8 @@
 #include "test_common.h"
 #include "test_class.h"
 
-#ifndef __TEST_ERROR_H__
-#define __TEST_ERROR_H__
+#ifndef __TEST_COLL_H__
+#define __TEST_COLL_H__
 
 class TestColl : public TestClass
 {
@@ -17,10 +17,10 @@ class TestColl : public TestClass
 		TestColl () : TestClass () {};
 		
 	public slots:
-		bool cbQueryIds (const QList<quint32> &);
+		bool cbList (const QVariantList &);
 		
 	private slots:
-		void queryIds ();
+		void list ();
 };
 
 #endif

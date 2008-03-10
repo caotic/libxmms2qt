@@ -162,5 +162,5 @@ namespace XMMSQt
 		m_errslot = errslot;
 		m_client->setResult (*this);
 	}
-
+	
 }
