@@ -25,7 +25,7 @@ namespace XMMSQt
 
 	Collection::~Collection()
 	{
-		XmmsMessage &msg;
+		XmmsMessage msg;
 	}
 
 	XmmsResult

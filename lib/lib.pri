@@ -29,7 +29,7 @@ HEADERS += bindata.h \
            object.h \
            propdict.h \
 		   coll.h \
-		   collections.h \
+		   collection.h \
 		   typedefs.h
 
 SOURCES += bindata.cpp \
@@ -43,4 +43,4 @@ SOURCES += bindata.cpp \
            stats.cpp \
            xform.cpp \
 		   coll.cpp \
-		   collections.cpp
+		   collection.cpp
