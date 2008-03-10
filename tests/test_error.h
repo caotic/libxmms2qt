@@ -12,6 +12,8 @@
 #ifndef __TEST_ERROR_H__
 #define __TEST_ERROR_H__
 
+using namespace XMMSQt;
+
 class TestError : public TestClass
 {
 	Q_OBJECT
