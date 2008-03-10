@@ -29,7 +29,8 @@ HEADERS += bindata.h \
            stats.h \
            xform.h \
            object.h \
-           propdict.h
+           propdict.h \
+		   coll.h
 
 SOURCES += bindata.cpp \
            client.cpp \
@@ -40,4 +41,5 @@ SOURCES += bindata.cpp \
            playlist.cpp \
            result.cpp \
            stats.cpp \
-           xform.cpp
+           xform.cpp \
+		   coll.cpp
