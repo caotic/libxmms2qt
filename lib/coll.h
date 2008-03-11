@@ -23,6 +23,7 @@
 #include <xmmsc/xmmsc_coll.h>
 
 #include "typedefs.h"
+#include "message.h"
 
 namespace XMMSQt 
 {
@@ -54,17 +55,35 @@ namespace XMMSQt
 		class Coll
 		{
 			public:
+				Coll (const Coll& src)
+				{
+					m_type = src.m_type;
+					m_operands = src.m_operands;
+					m_attributes = src.m_attributes;
+					m_idlist = src.m_idlist;
+				};
 
 				/** Destructor.
 				 */
-				virtual ~Coll();
+				virtual ~Coll ();
 
-				Type getType() const;
+				Type getType () const;
 
 				// get/set attributes
 				void setAttribute (const QString &attrname, const QString &value);
 				QString getAttribute (const QString &attrname) const;
 				void removeAttribute (const QString &attrname);
+				QStringList getAttributeList () const;
+				QList<quint32> getIdList () const;
+				QList<Coll *> getOperandList () const;
+				Coll Coll::operator= (const Coll& src)
+				{
+					m_type = src.m_type;
+					m_operands = src.m_operands;
+					m_attributes = src.m_attributes;
+					m_idlist = src.m_idlist;
+					return *this;
+				};
 
 				virtual void addOperand (Coll *operand);
 				virtual void removeOperand (Coll *operand);
@@ -85,12 +104,26 @@ namespace XMMSQt
 			protected:
 				friend class ::XMMSQt::Collection;
 				friend class ::XMMSQt::CollResult;
+				friend class ::XMMSQt::XmmsMessage;
 				friend class Unary;
 				friend class Nary;
-
+				
 				Coll (Type type);
-				Coll (const Coll& src);
-				Coll operator= (const Coll& src);
+				
+				void setOperandList (const QList<Coll *> &lst)
+				{
+					m_operands = lst;
+				};
+				
+				void setAttributeList (const QMap<QString, QString> &attr)
+				{
+					m_attributes = attr;
+				};
+				
+				void setIdList (const QList<quint32> &lst)
+				{
+					m_idlist = lst;
+				};
 
 				void setIndex (quint32 index, quint32 value);
 				unsigned int getIndex (quint32 index) const;
