@@ -75,7 +75,7 @@ namespace XMMSQt
 #endif
 
 	Result
-	Playlist::add (const Coll::Coll &coll, const QString &order,
+	Playlist::add (const Coll::Coll &coll, const QStringList &order,
 	               const QString &playlist)
 	{
 		Message msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_ADD_COLL);
@@ -93,6 +93,54 @@ namespace XMMSQt
 		msg.add (url);
 		return m_client->queueMsg (msg);	
 	}
+
+	Result
+	Playlist::insert (const QString &url, quint32 pos, const QString &playlist)
+	{
+		return insertEncoded (Medialib::encodeUrl (url), pos, playlist);
+	}
+
+	Result
+	Playlist::insert (const QUrl &url, quint32 pos, const QString &playlist)
+	{
+		return insertEncoded (Medialib::encodeUrl (url.toString ()), pos,
+		                      playlist);
+	}
+
+	Result
+	Playlist::insert (quint32 id, quint32 pos, const QString &playlist)
+	{
+		Message msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_INSERT_ID);
+		msg.add (playlist);
+		msg.add (pos);
+		msg.add (id);
+		return m_client->queueMsg (msg);
+	}
+
+	Result
+	Playlist::insert (const Coll::Coll &coll, quint32 pos,
+	                  const QStringList &order,
+	                  const QString &playlist)
+	{
+		 Message msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_INSERT_COLL);
+		 msg.add (playlist);
+		 msg.add (pos);
+		 msg.add (coll);
+		 msg.add (order);
+		 return m_client->queueMsg (msg);
+	}
+
+	Result
+	Playlist::insertEncoded (const QString &url, quint32 pos,
+	                         const QString &playlist)
+	{
+		Message msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_INSERT_URL);
+		msg.add (playlist);
+		msg.add (pos);
+		msg.add (url);
+		return m_client->queueMsg (msg);
+	}
+
 
 	Result
 	Playlist::shuffle (const QString &playlist)

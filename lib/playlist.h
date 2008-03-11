@@ -42,9 +42,21 @@ namespace XMMSQt
 			Result add (const Coll::Idlist &list,
 			            const QString &pl = "_active");
 #endif
-			Result add (const Coll::Coll &coll, const QString &order,
+			Result add (const Coll::Coll &coll, const QStringList &order,
 			            const QString &pl = "_active");
 			Result addEncoded (const QString &url, const QString &pl = "_active");
+
+			Result insert (const QString &url, quint32 pos,
+			               const QString &pl = "_active");
+			Result insert (const QUrl &url, quint32 pos,
+			               const QString &pl = "_active");
+			Result insert (quint32 id, quint32 pos,
+			               const QString &pl = "_active");
+			Result insert (const Coll::Coll &coll, quint32 pos,
+			               const QStringList &order,
+			               const QString &pl = "_active");
+			Result insertEncoded (const QString &url, quint32 pos,
+			                      const QString &pl = "_active");
 
 			Result shuffle (const QString &playlist = "_active");
 			Result remove (quint32 id, const QString &playlist = "_active");
