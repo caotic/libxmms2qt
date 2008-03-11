@@ -9,6 +9,7 @@ TEMPLATE = app
 TARGET = 
 DEPENDPATH += . ../lib
 INCLUDEPATH += . ../lib
+PRE_TARGETDEPS += ../lib/libxmmsclientqt.a
 LIBS += ../lib/libxmmsclientqt.a
 LIBPATH += ../lib
 MOC_DIR     = .moc
