@@ -29,6 +29,7 @@ namespace XMMSQt
 {
 
 	class Collection;
+	class Playlist;
 	class CollResult;
 
 	/** @class Coll coll.h "xmmsclient/xmmsclient++/coll.h"
@@ -103,6 +104,7 @@ namespace XMMSQt
 			/** @cond */
 			protected:
 				friend class ::XMMSQt::Collection;
+				friend class ::XMMSQt::Playlist;
 				friend class ::XMMSQt::CollResult;
 				friend class ::XMMSQt::Message;
 				friend class Unary;

@@ -68,6 +68,11 @@ namespace XMMSQt
 
 			Result activePlaylist () const;
 			Result loadPlaylist (const QString &name) const;
+			Result createPlaylist (const QString &name) const;
+			Result removePlaylist (const QString &name) const;
+			Result renamePlaylist (const QString &oldname,
+			                       const QString &newname) const;
+			Result listPlaylists () const;
 
 			Result broadcastPlaylistChanged ();
 			Result broadcastPlaylistCurrentPos ();

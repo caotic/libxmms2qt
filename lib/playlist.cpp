@@ -18,6 +18,8 @@
 
 #include "client.h"
 #include "medialib.h"
+#include "coll.h"
+#include "collection.h"
 
 #include <QUrl>
 
@@ -218,6 +220,33 @@ namespace XMMSQt
 		msg.add (name);
 		return m_client->queueMsg (msg);
 	}
+
+	Result
+	Playlist::createPlaylist (const QString &name) const
+	{
+		Coll::Coll plcoll (Coll::IDLIST);
+		return m_client->collection.save (plcoll, name, Collection::PLAYLISTS);
+	}
+
+	Result
+	Playlist::removePlaylist (const QString &name) const
+	{
+		return m_client->collection.remove (name, Collection::PLAYLISTS);
+	}
+
+	Result
+	Playlist::renamePlaylist (const QString &oldname, const QString &newname) const
+	{
+		return m_client->collection.rename (oldname, newname,
+		                                    Collection::PLAYLISTS);
+	}
+
+	Result
+	Playlist::listPlaylists () const
+	{
+		return m_client->collection.list (Collection::PLAYLISTS);
+	}
+
 
 	Result
 	Playlist::broadcastPlaylistChanged ()
