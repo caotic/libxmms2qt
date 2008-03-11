@@ -234,9 +234,9 @@ namespace XMMSQt
 
 			/**
 			 * FIXME: Comments
-			 */
+
 			XmmsResult
-			parse (const QString &pattern) const;
+			parse (const QString &pattern) const;*/
 
 			/** Request the collection changed broadcast.
 			 *

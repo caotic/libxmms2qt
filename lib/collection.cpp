@@ -68,6 +68,10 @@ namespace XMMSQt
 	XmmsResult
 	Collection::find (quint32 id, Namespace nsname) const
 	{
+		XmmsMessage msg (XMMS_IPC_OBJECT_COLLECTION, XMMS_IPC_CMD_COLLECTION_FIND);
+		msg.add (id);
+		msg.add (QString (nsname));
+		return m_client->queueMsg (msg);
 	}
 
 	XmmsResult
@@ -75,11 +79,19 @@ namespace XMMSQt
 	                   const QString &to_name,
 	                   Namespace nsname) const
 	{
+		XmmsMessage msg (XMMS_IPC_OBJECT_COLLECTION, XMMS_IPC_CMD_COLLECTION_RENAME);
+		msg.add (from_name);
+		msg.add (to_name);
+		msg.add (QString (nsname));
+		return m_client->queueMsg (msg);
 	}
 
 	XmmsResult
 	Collection::idlistFromPlaylistFile (const QString &path) const
 	{
+		XmmsMessage msg (XMMS_IPC_OBJECT_COLLECTION, XMMS_IPC_CMD_IDLIST_FROM_PLS);
+		msg.add (path);
+		return m_client->queueMsg (msg);
 	}
 
 	XmmsResult
@@ -105,16 +117,30 @@ namespace XMMSQt
 	                        const QStringList &group
 	                      ) const
 	{
+		XmmsMessage msg (XMMS_IPC_OBJECT_COLLECTION, XMMS_IPC_CMD_QUERY_INFOS);
+		msg.add (coll);
+		msg.add (limit_start);
+		msg.add (limit_len);
+		msg.add (order);
+		msg.add (fetch);
+		msg.add (group);
+		return m_client->queueMsg (msg);
+		
 	}
 
-	XmmsResult
+/*	XmmsResult
 	Collection::parse (const QString &pattern) const
 	{
-	}
+		
+	}*/
 
 	XmmsResult
 	Collection::broadcastCollectionChanged () const
 	{
+		XmmsMessage msg (XMMS_IPC_OBJECT_SIGNAL, XMMS_IPC_CMD_BROADCAST);
+		msg.add (XMMS_IPC_SIGNAL_COLLECTION_CHANGED);
+
+		return m_client->queueMsg (msg);
 	}
 
 }
