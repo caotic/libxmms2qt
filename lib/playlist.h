@@ -20,6 +20,8 @@
 #include <QObject>
 #include "object.h"
 #include "result.h"
+#include "coll.h"
+#include <xmmsc/xmmsc_idnumbers.h> // for protocol version test
 
 namespace XMMSQt
 {
@@ -36,7 +38,14 @@ namespace XMMSQt
 			Result add (const QString &url, const QString &pl = "_active");
 			Result add (const QUrl &url, const QString &pl = "_active");
 			Result add (quint32 id, const QString &pl = "_active");
+#if XMMS_IPC_PROTOCOL_VERSION >= 11
+			Result add (const Coll::Idlist &list,
+			            const QString &pl = "_active");
+#endif
+			Result add (const Coll::Coll &coll, const QString &order,
+			            const QString &pl = "_active");
 			Result addEncoded (const QString &url, const QString &pl = "_active");
+
 			Result shuffle (const QString &playlist = "_active");
 			Result remove (quint32 id, const QString &playlist = "_active");
 			Result clear (const QString &playlist = "_active");

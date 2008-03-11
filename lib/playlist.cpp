@@ -62,6 +62,29 @@ namespace XMMSQt
 		return m_client->queueMsg (msg);
 	}
 
+// TODO:Think of something for DrK
+#if XMMS_IPC_PROTOCOL_VERSION >= 11
+	Result
+	Playlist::add (const Coll::Idlist &list, const QString &playlist)
+	{
+		Message msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_ADD_IDLIST);
+		msg.add (playlist);
+		msg.add (list);
+		return m_client->queueMsg (msg);
+	}
+#endif
+
+	Result
+	Playlist::add (const Coll::Coll &coll, const QString &order,
+	               const QString &playlist)
+	{
+		Message msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_ADD_COLL);
+		msg.add (playlist);
+		msg.add (coll);
+		msg.add (order);
+		return m_client->queueMsg (msg);
+	}
+
 	Result
 	Playlist::addEncoded (const QString &url, const QString &playlist)
 	{
