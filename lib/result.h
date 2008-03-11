@@ -35,13 +35,13 @@
 namespace XMMSQt
 {
 
-	class XmmsClient;
+	class Client;
 
-	class XmmsResult : public QObject
+	class Result : public QObject
 	{
 		Q_OBJECT
 		public:
-			XmmsResult (const XmmsResult &src) : QObject (src.parent ())
+			Result (const Result &src) : QObject (src.parent ())
 			{
 				m_cookie = src.cookie ();
 				m_object = src.object ();
@@ -54,12 +54,12 @@ namespace XMMSQt
 				m_broadcast = src.m_broadcast;
 			};
 
-			XmmsResult (XmmsClient *, int cookie);
+			Result (Client *, int cookie);
 
-			XmmsResult () : QObject () {};
+			Result () : QObject () {};
 
-			XmmsResult &
-			operator= (const XmmsResult &src)
+			Result &
+			operator= (const Result &src)
 			{
 				m_cookie = src.cookie ();
 				m_object = src.object ();
@@ -90,11 +90,11 @@ namespace XMMSQt
 				return m_object;
 			};
 
-			XmmsClient *client () const {
+			Client *client () const {
 				return m_client;
 			};
 
-			XmmsMessage message () const {
+			Message message () const {
 				return m_message;
 			};
 
@@ -109,7 +109,7 @@ namespace XMMSQt
 				m_broadcast = b;
 			};
 
-			void exec (const XmmsMessage &);
+			void exec (const Message &);
 
 		private:
 			int m_cookie;
@@ -120,8 +120,8 @@ namespace XMMSQt
 			const char *m_errslot;
 			QPointer<QObject> m_errobject;
 
-			XmmsClient *m_client;
-			XmmsMessage m_message;
+			Client *m_client;
+			Message m_message;
 
 			void setSlots (QObject *object, const char *slot, QObject *errobject, const char *errslot);
 

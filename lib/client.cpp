@@ -25,9 +25,9 @@
 namespace XMMSQt
 {
 
-	XmmsClient::XmmsClient (QObject *parent, const QString &name)
+	Client::Client (QObject *parent, const QString &name)
 		: QObject (parent), playlist (this), medialib (this), playback (this),
-		  bindata (this), config (this)
+		  bindata (this), config (this), collection (this)
 	{
 		m_name = name;
 		m_cookie = 0;
@@ -35,7 +35,7 @@ namespace XMMSQt
 	}
 
 	void
-	XmmsClient::doConnect (const QString &host, quint32 port)
+	Client::doConnect (const QString &host, quint32 port)
 	{
 		m_socket.connectToHost (host, port);
 		connect (&m_socket, SIGNAL (connected ()),
@@ -50,20 +50,21 @@ namespace XMMSQt
 	}
 
 	void
-	XmmsClient::bytesWritten (qint64 b)
+	Client::bytesWritten (qint64 b)
 	{
+		Q_UNUSED (b);
 		DBGIPC ("we wrote %lld bytes", b);
 	}
 
 	void
-	XmmsClient::socketConnected ()
+	Client::socketConnected ()
 	{
 		DBGIPC ("connected");
 		hello ();
 	}
 
 	void
-	XmmsClient::socketError (QAbstractSocket::SocketError error)
+	Client::socketError (QAbstractSocket::SocketError error)
 	{
 		Q_UNUSED (error);
 		emit connected (false);
@@ -71,7 +72,7 @@ namespace XMMSQt
 	}
 
 	void
-	XmmsClient::socketRead ()
+	Client::socketRead ()
 	{
 		DBGIPC ("we have data on the socket!");
 
@@ -88,13 +89,13 @@ namespace XMMSQt
 				parseMessage ();
 
 				/* reset it */
-				m_readmsg = XmmsMessage ();
+				m_readmsg = Message ();
 			}
 		}
 	}
 
 	void
-	XmmsClient::parseMessage ()
+	Client::parseMessage ()
 	{
 
 		DBGIPC ("we have complete message with cookie %d cmd %d and object %d",
@@ -109,22 +110,22 @@ namespace XMMSQt
 
 		if (m_resmap.contains (m_readmsg.cookie ())) {
 			DBGIPC ("found a result");
-			XmmsResult res = m_resmap.take (m_readmsg.cookie ());
+			Result res = m_resmap.take (m_readmsg.cookie ());
 			res.exec (m_readmsg);
 		}
 	}
 
 	void
-	XmmsClient::hello ()
+	Client::hello ()
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_MAIN, XMMS_IPC_CMD_HELLO);
+		Message msg (XMMS_IPC_OBJECT_MAIN, XMMS_IPC_CMD_HELLO);
 		msg.add (XMMS_IPC_PROTOCOL_VERSION);
 		msg.add (m_name);
 		queueMsg (msg);
 	}
 
-	XmmsResult
-	XmmsClient::queueMsg (const XmmsMessage &msg, quint32 restartsignal)
+	Result
+	Client::queueMsg (const Message &msg, quint32 restartsignal)
 	{
 		QByteArray b = msg.finish (m_cookie);
 		qint32 len = m_socket.write (b);
@@ -132,7 +133,7 @@ namespace XMMSQt
 			qWarning ("socket.write didn't accept all our output for message %d!", m_cookie);
 		}
 
-		XmmsResult ret (this, m_cookie ++);
+		Result ret (this, m_cookie ++);
 		if (msg.object () == XMMS_IPC_OBJECT_SIGNAL && msg.cmd () == XMMS_IPC_CMD_SIGNAL && restartsignal) {
 			DBGIPC ("got signal, setting restart bit to %d", restartsignal);
 			ret.setRestartSignal (restartsignal);

@@ -9,7 +9,8 @@ TEMPLATE = app
 TARGET = 
 DEPENDPATH += . ../lib
 INCLUDEPATH += . ../lib
-LIBS += -lxmmsclientqt
+PRE_TARGETDEPS += ../lib/libxmmsclientqt.a
+LIBS += ../lib/libxmmsclientqt.a
 LIBPATH += ../lib
 MOC_DIR     = .moc
 OBJECTS_DIR = .obj
@@ -27,9 +28,11 @@ HEADERS += test_playlist.h \
            test_bindata.h \
 		   test_common.h \
 		   test_class.h \
-		   test_error.h
+		   test_error.h \
+		   test_coll.h
 
 SOURCES += main.cpp \
            test_playlist.cpp \
            test_bindata.cpp \
-		   test_error.cpp
+		   test_error.cpp \
+		   test_coll.cpp

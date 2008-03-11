@@ -26,16 +26,16 @@ namespace XMMSQt
 
 	class Stats : public BaseObject {
 		public:
-			Stats (XmmsClient *client) : BaseObject (client)
+			Stats (Client *client) : BaseObject (client)
 			{
 			}
 
-			XmmsResult mainStats () const;
+			Result mainStats () const;
 
-			XmmsResult listPlugins (const xmms_plugin_type_t &type) const;
+			Result listPlugins (const xmms_plugin_type_t &type) const;
 
-			XmmsResult broadcastMediainfoReaderStatus () const;
-			XmmsResult signalMediainfoReaderUnindexed () const;
+			Result broadcastMediainfoReaderStatus () const;
+			Result signalMediainfoReaderUnindexed () const;
 	};
 
 }

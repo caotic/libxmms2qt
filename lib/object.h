@@ -23,19 +23,19 @@
 namespace XMMSQt
 {
 
-	class XmmsClient;
+	class Client;
 
 	class BaseObject : public QObject
 	{
 		Q_OBJECT
 		public:
-			BaseObject (XmmsClient *client) : QObject ()
+			BaseObject (Client *client) : QObject ()
 			{
 				m_client = client;
 			};
 
 		protected:
-			XmmsClient *m_client;
+			Client *m_client;
 	};
 
 }

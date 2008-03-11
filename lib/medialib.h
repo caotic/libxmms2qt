@@ -30,45 +30,45 @@ namespace XMMSQt
 	class Medialib : public BaseObject
 	{
 		public:
-			Medialib (XmmsClient *client) : BaseObject (client)
+			Medialib (Client *client) : BaseObject (client)
 			{
 			};
 
-			XmmsResult info (const quint32 &id);
+			Result info (const quint32 &id);
 
-			XmmsResult id (const QUrl &) const;
-			XmmsResult id (const QString &) const;
+			Result id (const QUrl &) const;
+			Result id (const QString &) const;
 
-			XmmsResult broadcastEntryAdded ();
-			XmmsResult broadcastEntryChanged ();
+			Result broadcastEntryAdded ();
+			Result broadcastEntryChanged ();
 
 			static QString encodeUrl (const QString &, const QStringList &args = QStringList ());
 
 		public slots:
-			XmmsResult add (const QUrl &, const QStringList &args = QStringList ()) const;
-			XmmsResult add (const QString &, const QStringList &args = QStringList ()) const;
-			XmmsResult addEncoded (const QString &) const;
-			XmmsResult addPath (const QUrl &) const;
-			XmmsResult addPath (const QString &) const;
-			XmmsResult addPathEncoded (const QString &) const;
+			Result add (const QUrl &, const QStringList &args = QStringList ()) const;
+			Result add (const QString &, const QStringList &args = QStringList ()) const;
+			Result addEncoded (const QString &) const;
+			Result addPath (const QUrl &) const;
+			Result addPath (const QString &) const;
+			Result addPathEncoded (const QString &) const;
 
-			XmmsResult rehash (quint32 id = 0) const;
-			XmmsResult remove (quint32) const;
+			Result rehash (quint32 id = 0) const;
+			Result remove (quint32) const;
 
-			XmmsResult move (quint32 id, const QUrl &) const;
-			XmmsResult move (quint32 id, const QString &) const;
+			Result move (quint32 id, const QUrl &) const;
+			Result move (quint32 id, const QString &) const;
 
-			XmmsResult setEntryProperty (quint32 id, const QString &key,
+			Result setEntryProperty (quint32 id, const QString &key,
 										 const QString &value) const;
-			XmmsResult setEntryProperty (quint32 id, const QString &key,
+			Result setEntryProperty (quint32 id, const QString &key,
 										 const QString &value,
 										 const QString &source) const;
-			XmmsResult setEntryProperty (quint32 id, const QString &key,
+			Result setEntryProperty (quint32 id, const QString &key,
 										 qint32 value) const;
-			XmmsResult setEntryProperty (quint32 id, const QString &key,
+			Result setEntryProperty (quint32 id, const QString &key,
 										 qint32 value, const QString &source) const;
-			XmmsResult removeEntryProperty (quint32 id, const QString &key) const;
-			XmmsResult removeEntryProperty (quint32 id, const QString &key,
+			Result removeEntryProperty (quint32 id, const QString &key) const;
+			Result removeEntryProperty (quint32 id, const QString &key,
 											const QString &source) const;
 	};
 

@@ -22,47 +22,47 @@
 namespace XMMSQt
 {
 
-	XmmsResult
+	Result
 	Config::getValue (QString key)
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_CONFIG, XMMS_IPC_CMD_GETVALUE);
+		Message msg (XMMS_IPC_OBJECT_CONFIG, XMMS_IPC_CMD_GETVALUE);
 		msg.add (key);
 
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Config::setValue (QString key, QString value)
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_CONFIG, XMMS_IPC_CMD_SETVALUE);
+		Message msg (XMMS_IPC_OBJECT_CONFIG, XMMS_IPC_CMD_SETVALUE);
 		msg.add (key);
 		msg.add (value);
 
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Config::registerValue (QString key, QString defval)
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_CONFIG, XMMS_IPC_CMD_REGVALUE);
+		Message msg (XMMS_IPC_OBJECT_CONFIG, XMMS_IPC_CMD_REGVALUE);
 		msg.add (key);
 		msg.add (defval);
 
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Config::listValues ()
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_CONFIG, XMMS_IPC_CMD_LISTVALUES);
+		Message msg (XMMS_IPC_OBJECT_CONFIG, XMMS_IPC_CMD_LISTVALUES);
 
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Config::broadcastValueChanged ()
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_SIGNAL, XMMS_IPC_CMD_BROADCAST);
+		Message msg (XMMS_IPC_OBJECT_SIGNAL, XMMS_IPC_CMD_BROADCAST);
 		msg.add (XMMS_IPC_SIGNAL_CONFIGVALUE_CHANGED);
 
 		return m_client->queueMsg (msg);

@@ -20,146 +20,146 @@
 namespace XMMSQt
 {
 
-	XmmsResult
+	Result
 	Playback::getPlaytime ()
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_CPLAYTIME);
+		Message msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_CPLAYTIME);
 
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Playback::signalPlaytime ()
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_SIGNAL, XMMS_IPC_CMD_SIGNAL);
+		Message msg (XMMS_IPC_OBJECT_SIGNAL, XMMS_IPC_CMD_SIGNAL);
 		msg.add (XMMS_IPC_SIGNAL_OUTPUT_PLAYTIME);
 		return m_client->queueMsg (msg, XMMS_IPC_SIGNAL_OUTPUT_PLAYTIME);
 	}
 
-	XmmsResult
+	Result
 	Playback::getCurrentId ()
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_CURRENTID);
+		Message msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_CURRENTID);
 
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Playback::broadcastCurrentId ()
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_SIGNAL, XMMS_IPC_CMD_BROADCAST);
+		Message msg (XMMS_IPC_OBJECT_SIGNAL, XMMS_IPC_CMD_BROADCAST);
 		msg.add (XMMS_IPC_SIGNAL_OUTPUT_CURRENTID);
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Playback::getStatus ()
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_OUTPUT_STATUS);
+		Message msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_OUTPUT_STATUS);
 
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Playback::broadcastStatus ()
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_SIGNAL, XMMS_IPC_CMD_BROADCAST);
+		Message msg (XMMS_IPC_OBJECT_SIGNAL, XMMS_IPC_CMD_BROADCAST);
 		msg.add (XMMS_IPC_SIGNAL_PLAYBACK_STATUS);
 
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Playback::getVolume ()
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_VOLUME_GET);
+		Message msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_VOLUME_GET);
 
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Playback::setVolume (QString channel, quint32 volume)
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_VOLUME_SET);
+		Message msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_VOLUME_SET);
 		msg.add (channel);
 		msg.add (volume);
 
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Playback::broadcastVolume ()
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_SIGNAL, XMMS_IPC_CMD_BROADCAST);
+		Message msg (XMMS_IPC_OBJECT_SIGNAL, XMMS_IPC_CMD_BROADCAST);
 		msg.add (XMMS_IPC_SIGNAL_OUTPUT_VOLUME_CHANGED);
 
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Playback::start ()
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_START);
+		Message msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_START);
 
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Playback::pause ()
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_PAUSE);
+		Message msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_PAUSE);
 
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Playback::stop ()
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_STOP);
+		Message msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_STOP);
 
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Playback::tickle ()
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_DECODER_KILL);
+		Message msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_DECODER_KILL);
 
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Playback::seekMs (quint32 milliseconds)
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_SEEKMS);
+		Message msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_SEEKMS);
 		msg.add (milliseconds);
 
 		return m_client->queueMsg (msg);
 
 	}
 
-	XmmsResult
+	Result
 	Playback::seekMsRel (qint32 milliseconds)
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_SEEKMS_REL);
+		Message msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_SEEKMS_REL);
 		msg.add (milliseconds);
 
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Playback::seekSamples (quint32 samples)
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_SEEKSAMPLES);
+		Message msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_SEEKSAMPLES);
 		msg.add (samples);
 
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Playback::seekSamplesRel (qint32 samples)
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_SEEKSAMPLES_REL);
+		Message msg (XMMS_IPC_OBJECT_OUTPUT, XMMS_IPC_CMD_SEEKSAMPLES_REL);
 		msg.add (samples);
 
 		return m_client->queueMsg (msg);

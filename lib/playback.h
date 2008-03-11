@@ -34,33 +34,33 @@ namespace XMMSQt
 			static const Status PLAYING = XMMS_PLAYBACK_STATUS_PLAY;
 			static const Status PAUSED  = XMMS_PLAYBACK_STATUS_PAUSE;
 
-			Playback (XmmsClient *client) : BaseObject (client)
+			Playback (Client *client) : BaseObject (client)
 			{
 			};
 		
-			XmmsResult getPlaytime ();
-			XmmsResult getCurrentId ();
-			XmmsResult getStatus ();
-			XmmsResult getVolume ();
+			Result getPlaytime ();
+			Result getCurrentId ();
+			Result getStatus ();
+			Result getVolume ();
 
-			XmmsResult signalPlaytime ();
-			XmmsResult broadcastCurrentId ();
-			XmmsResult broadcastStatus ();
-			XmmsResult broadcastVolume ();
+			Result signalPlaytime ();
+			Result broadcastCurrentId ();
+			Result broadcastStatus ();
+			Result broadcastVolume ();
 
 		public slots:
-			XmmsResult start ();
-			XmmsResult pause ();
-			XmmsResult stop ();
-			XmmsResult tickle ();
+			Result start ();
+			Result pause ();
+			Result stop ();
+			Result tickle ();
 
-			XmmsResult seekMs (quint32 milliseconds);
-			XmmsResult seekMsRel (qint32 milliseconds);
+			Result seekMs (quint32 milliseconds);
+			Result seekMsRel (qint32 milliseconds);
 
-			XmmsResult seekSamples (quint32 samples);
-			XmmsResult seekSamplesRel (qint32 samples);
+			Result seekSamples (quint32 samples);
+			Result seekSamplesRel (qint32 samples);
 
-			XmmsResult setVolume (QString channel, quint32 volume);
+			Result setVolume (QString channel, quint32 volume);
 	};
 
 }

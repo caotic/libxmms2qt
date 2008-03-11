@@ -23,13 +23,14 @@
 #include "propdict.h"
 #include "client.h"
 #include "result.h"
+#include "coll.h"
 
 #include <xmmsc/xmmsc_idnumbers.h>
 
 namespace XMMSQt
 {
 
-	XmmsMessage::XmmsMessage (quint32 object, quint32 cmd)
+	Message::Message (quint32 object, quint32 cmd)
 	{
 		m_object = object;
 		m_cmd = cmd;
@@ -38,7 +39,7 @@ namespace XMMSQt
 	}
 
 	bool
-	XmmsMessage::processHeader (const QByteArray &b)
+	Message::processHeader (const QByteArray &b)
 	{
 		
 		if (b.size () != 16) {
@@ -61,7 +62,7 @@ namespace XMMSQt
 
 
 	bool
-	XmmsMessage::process (QIODevice *r)
+	Message::process (QIODevice *r)
 	{	
 		if (m_bytearray.size () < m_length) {
 			int readsize = m_length - m_bytearray.size ();
@@ -84,19 +85,19 @@ namespace XMMSQt
 	}
 
 	void
-	XmmsMessage::add (quint32 value)
+	Message::add (quint32 value)
 	{
 		*m_stream << value;
 	}
 
 	void
-	XmmsMessage::add (qint32 value)
+	Message::add (qint32 value)
 	{
 		*m_stream << value;
 	}
 
 	void
-	XmmsMessage::add (const QString &value)
+	Message::add (const QString &value)
 	{
 		QByteArray b = value.toUtf8 ();
 		/* for some reason our protocol want's us to send the NULL also */
@@ -106,7 +107,7 @@ namespace XMMSQt
 	}
 
 	void
-	XmmsMessage::add (qreal value)
+	Message::add (qreal value)
 	{
 		Q_UNUSED (value);
 		qWarning ("Writing float to message, fixme!");
@@ -114,7 +115,7 @@ namespace XMMSQt
 	}
 
 	void
-	XmmsMessage::add (const QStringList &list)
+	Message::add (const QStringList &list)
 	{
 		add (list.size ());
 		for (int i = 0; i < list.size (); i ++)
@@ -124,14 +125,44 @@ namespace XMMSQt
 	}
 
 	void
-	XmmsMessage::add (const QByteArray &value)
+	Message::add (const QByteArray &value)
 	{
 		add(value.size ());
 		m_stream->writeRawData(value.data (), value.size());
 	}
+	
+	void
+	Message::add (const Coll::Coll &coll)
+	{
+		/* add type */
+		add (coll.getType ());
+		
+		/* add the attribute list */
+		QStringList attrlist = coll.getAttributeList ();
+		add (attrlist.size () / 2); /* hm, it wants the number of key:value pair */
+		for (int i = 0; i < attrlist.size (); i++)
+		{
+			add (attrlist.at (i));
+		}
+		
+		QList<quint32> idlist = coll.getIdList ();
+		add (idlist.size ());
+		for (int i = 0; i < idlist.size (); i ++)
+		{
+			add (idlist.at (i));
+		}
+		
+		QList<Coll::Coll *> operlist = coll.getOperandList ();
+		add (operlist.size ());
+		qDebug ("operlist = %d", operlist.size ());
+		for (int i = 0; i < operlist.size (); i ++)
+		{
+			add (*operlist.at (i));
+		}
+	}
 
 	QByteArray
-	XmmsMessage::finish (quint32 cookie) const
+	Message::finish (quint32 cookie) const
 	{
 		QByteArray retarray;
 		QDataStream ret (&retarray, QIODevice::WriteOnly);
@@ -145,9 +176,62 @@ namespace XMMSQt
 
 		return retarray;
 	}
+	
+	Coll::Coll *
+	Message::getColl ()
+	{
+		qint32 type;
+		*m_stream >> type;
+		if (type != XMMS_OBJECT_CMD_ARG_COLL) {
+			qWarning ("wanted type %d but got %d", XMMS_OBJECT_CMD_ARG_COLL, type);
+			return 0;
+		}
+		
+		quint32 t;
+		*m_stream >> t;
+		Coll::Coll *ret = new Coll::Coll ((Coll::Type) t);
+		
+		/* attr list */
+		quint32 len;
+		*m_stream >> len;
+		qDebug ("num of attrs: %d", len);
+		QMap<QString, QString> attr;
+		for (quint32 i = 0; i < len; i += 2)
+		{
+			QString key = getString (false);
+			QString val = getString (false);
+			qDebug ("got attribute %s=%s", qPrintable (key), qPrintable (val));
+			attr[key] = val;
+		}
+		ret->setAttributeList (attr);
+		
+		/* idlist */
+		len = 0;
+		*m_stream >> len;
+		QList<quint32> idlist;
+		for (quint32 i = 0; i < len; i++)
+		{
+			quint32 val;
+			*m_stream >> val;
+			idlist.append (val);
+		}
+		ret->setIdList (idlist);
+		 
+		/* operand list */
+		len = 0;
+		*m_stream >> len;
+		QList<Coll::Coll *> oplst;
+		for (quint32 i = 0; i < len; i ++)
+		{
+			oplst.append (getColl ());
+		}
+		ret->setOperandList (oplst);
+		
+		return ret;
+	}
 
 	QVariant
-	XmmsMessage::getValue ()
+	Message::getValue ()
 	{
 		qint32 type;
 		*m_stream >> type;
@@ -166,14 +250,14 @@ namespace XMMSQt
 					return QVariant (s);
 				}
 			default:
-				qWarning ("XmmsMessage::getValue(): Type not handled: %u", type);
+				qWarning ("Message::getValue(): Type not handled: %u", type);
 				return QVariant ();
 		}
 		return QVariant ();
 	}
 
 	quint32
-	XmmsMessage::getUInt32 ()
+	Message::getUInt32 ()
 	{
 		qint32 type;
 		*m_stream >> type;
@@ -187,7 +271,7 @@ namespace XMMSQt
 	}
 
 	PropDict
-	XmmsMessage::getDict ()
+	Message::getDict ()
 	{
 		PropDict ret;
 		
@@ -233,7 +317,7 @@ namespace XMMSQt
 	}
 
 	QVariantList
-	XmmsMessage::getList (const bool &checktype)
+	Message::getList (const bool &checktype)
 	{
 		if (checktype) {
 			qint32 type;
@@ -257,7 +341,7 @@ namespace XMMSQt
 	}
 
 	qint32
-	XmmsMessage::getInt32 ()
+	Message::getInt32 ()
 	{
 		qint32 type;
 		*m_stream >> type;
@@ -271,14 +355,14 @@ namespace XMMSQt
 	}
 
 	qreal
-	XmmsMessage::getReal ()
+	Message::getReal ()
 	{
 		qWarning ("getting qReal, not supported");
 		return 0;
 	}
 
 	QString
-	XmmsMessage::getString (const bool &checktype)
+	Message::getString (const bool &checktype)
 	{
 		if (checktype) {
 			qint32 type;
@@ -292,7 +376,7 @@ namespace XMMSQt
 		*m_stream >> len;
 		if (len > fullLength ()) {
 			qWarning ("broken lenght, wanted %d but we only have %d", len, fullLength ());
-			return QByteArray ();
+			return QString ();
 		}
 		char *str = (char *) malloc (len + 1);
 		m_stream->readRawData (str, len);
@@ -303,7 +387,7 @@ namespace XMMSQt
 	}
 
 	QByteArray
-	XmmsMessage::getBindata ()
+	Message::getBindata ()
 	{
 		qint32 type;
 		*m_stream >> type;

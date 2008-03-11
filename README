@@ -1,0 +1,36 @@
+This is native Qt4 bindings for XMMS2.
+
+************************************************************
+
+DISCLAIMER! These bindings are not a official part of the
+XMMS2 project and doesn't use the underlying libxmmsclient
+library that all other bindings use. This means that this
+code might lag a couple of versions after the official
+project.
+
+We have chosen to do this natively because of portability
+and the fact that the official C++ bindings depend on boost.
+
+If you are writing a Qt4 client, think hard and good about
+using the official C++ bindings before going for these ones.
+
+IF YOU HAVE ANY PROBLEM WITH THESE BINDINGS, PLEASE CONTACT
+THE PEOPLE IN THE AUTHORS FILE, NOT XMMS2 DIRECTLY.
+
+************************************************************
+
+Requirements:
+
+These bindings has only been tested with HEAD of xmms2-devel
+as of 2008-03-11. It might work with other version of XMMS2,
+please report if you try it out.
+
+You'll need a new version of Qt 4, we have tried it with Qt4.4
+snapshots and Qt4.3.
+
+These bindings doesn't depend on libxmmsclient to be compiled
+but they will need the xmmsc/xmmsc_idnumbers.h header file to
+get the IPC definitions. If you have libxmmsclient installed
+qmake will try to use pkg-config to find the header, otherwise
+you could copy it somewhere where it will find it.
+

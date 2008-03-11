@@ -20,7 +20,7 @@
 #include "message.h"
 #include "result.h"
 
-class XMMSQt::XmmsClient;
+class XMMSQt::Client;
 
 #ifndef __XMMS_CLIENT_H__
 #define __XMMS_CLIENT_H__
@@ -30,6 +30,7 @@ class XMMSQt::XmmsClient;
 #include "playback.h"
 #include "bindata.h"
 #include "config.h"
+#include "collection.h"
 
 #undef __DEBUG_IPC__
 
@@ -42,19 +43,19 @@ class XMMSQt::XmmsClient;
 namespace XMMSQt
 {
 
-	class XmmsClient : public QObject
+	class Client : public QObject
 	{
 		Q_OBJECT
 		public:
-			XmmsClient (QObject *parent, const QString &name);
+			Client (QObject *parent, const QString &name);
 			void doConnect (const QString &, quint32);
 					
-			void setResult (const XmmsResult &res) {
+			void setResult (const Result &res) {
 				DBGIPC ("adding %d", res.cookie ());
 				m_resmap[res.cookie()] = res;
 			};
 
-			XmmsResult queueMsg (const XmmsMessage &msg, quint32 restartsignal = 0);
+			Result queueMsg (const Message &msg, quint32 restartsignal = 0);
 
 			QString name () const { return m_name; }
 
@@ -64,17 +65,18 @@ namespace XMMSQt
 			Playback playback;
 			Bindata bindata;
 			Config config;
+			Collection collection;
 			
 		private:
 			QString m_name;
 			quint32 m_cookie;
-			XmmsMessage m_readmsg;
+			Message m_readmsg;
 			
 			void hello ();
 			void parseMessage ();
 			QTcpSocket m_socket;
 			
-			QMap<quint32, XmmsResult> m_resmap;
+			QMap<quint32, Result> m_resmap;
 		signals:
 			void connected (bool);
 			

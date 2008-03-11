@@ -23,7 +23,7 @@
 namespace XMMSQt
 {
 
-	XmmsResult::XmmsResult (XmmsClient *client, int cookie) : QObject ()
+	Result::Result (Client *client, int cookie) : QObject ()
 	{
 		m_cookie = cookie;
 		m_object = NULL;
@@ -34,7 +34,7 @@ namespace XMMSQt
 	}
 
 	void
-	XmmsResult::exec (const XmmsMessage &msg)
+	Result::exec (const Message &msg)
 	{
 		m_message = msg;
 		
@@ -106,6 +106,10 @@ namespace XMMSQt
 					QMetaObject::invokeMethod (m_object, sig,
 					                           Q_RETURN_ARG (bool, ret),
 					                           Q_ARG (Playback::Status, (Playback::Status) m_message.getUInt32 ()));
+				} else if (param == "Coll::Coll*" || param == "Coll*") {
+					QMetaObject::invokeMethod (m_object, sig,
+					                           Q_RETURN_ARG (bool, ret),
+					                           Q_ARG (Coll::Coll*, m_message.getColl ()));
 				} else {
 					// TODO: Add some better errorhandling here
 					qDebug () << "Result: Couldn't handle resulttype" << param << "in callback" <<sig.constData ();
@@ -120,9 +124,9 @@ namespace XMMSQt
 			if (m_restartsignal && ret) {
 				/* return value is true from the code, lets restart this signal */
 				DBGRES ("going to restart signal %d", m_restartsignal);
-				XmmsMessage msg (XMMS_IPC_OBJECT_SIGNAL, XMMS_IPC_CMD_SIGNAL);
+				Message msg (XMMS_IPC_OBJECT_SIGNAL, XMMS_IPC_CMD_SIGNAL);
 				msg.add (m_restartsignal);
-				XmmsResult r = m_client->queueMsg (msg, m_restartsignal);
+				Result r = m_client->queueMsg (msg, m_restartsignal);
 				r (m_object, m_slot); /* set the same callback shit */
 			}
 			
@@ -132,25 +136,25 @@ namespace XMMSQt
 	}
 
 	void
-	XmmsResult::operator() (QObject *object, const char *slot)
+	Result::operator() (QObject *object, const char *slot)
 	{
 		setSlots (object, slot, NULL, NULL);
 	}
 
 	void
-	XmmsResult::operator() (QObject *object, const char *slot, const char *errslot)
+	Result::operator() (QObject *object, const char *slot, const char *errslot)
 	{
 		setSlots (object, slot, NULL, errslot);
 	}
 
 	void
-	XmmsResult::operator() (QObject *object, const char *slot, QObject *errobject, const char *errslot)
+	Result::operator() (QObject *object, const char *slot, QObject *errobject, const char *errslot)
 	{
 		setSlots (object, slot, errobject, errslot);
 	}
 
 	void
-	XmmsResult::setSlots (QObject *object, const char *slot, QObject *errobject, const char *errslot)
+	Result::setSlots (QObject *object, const char *slot, QObject *errobject, const char *errslot)
 	{
 		m_object = object;
 		m_slot = slot;
@@ -158,5 +162,5 @@ namespace XMMSQt
 		m_errslot = errslot;
 		m_client->setResult (*this);
 	}
-
+	
 }

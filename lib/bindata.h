@@ -29,18 +29,18 @@ namespace XMMSQt
 	class Bindata : public BaseObject
 	{
 		public:
-			Bindata (XmmsClient *client) : BaseObject (client)
+			Bindata (Client *client) : BaseObject (client)
 			{
 			};
 
-			XmmsResult add (const QByteArray &);
+			Result add (const QByteArray &);
 
-			XmmsResult retrieve (const QString &);
+			Result retrieve (const QString &);
 
-			XmmsResult list ();
+			Result list ();
 
 		public slots:
-			XmmsResult remove (const QString &);
+			Result remove (const QString &);
 	};
 
 }

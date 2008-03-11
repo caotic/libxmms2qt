@@ -22,26 +22,27 @@
 #define __XMMS_MESSAGE_H__
 
 #include "propdict.h"
+#include "coll.h"
 
 namespace XMMSQt
 {
 
-	class XmmsMessage {
+	class Message {
 	public:
-		XmmsMessage (quint32 object = 0, quint32 cmd = 0);
-		~XmmsMessage ()
+		Message (quint32 object = 0, quint32 cmd = 0);
+		~Message ()
 		{
 			delete m_stream;
 		};
 			
-		XmmsMessage (const XmmsMessage &src) : m_bytearray (src.m_bytearray) {
+		Message (const Message &src) : m_bytearray (src.m_bytearray) {
 			m_cookie = src.cookie ();
 			m_length = src.m_length;
 			m_headercomplete = src.m_headercomplete;
 			m_stream = new QDataStream (m_bytearray);
 		};
 		
-		XmmsMessage & operator= (const XmmsMessage &src)
+		Message & operator= (const Message &src)
 		{
 			m_cookie = src.cookie ();
 			m_length = src.m_length;
@@ -60,6 +61,7 @@ namespace XMMSQt
 		void add (const QString &);
 		void add (const QStringList &);
 		void add (const QByteArray &);
+		void add (const Coll::Coll &);
 
 		void addData (const QByteArray &);
 		
@@ -71,6 +73,7 @@ namespace XMMSQt
 		QVariantList getList (const bool &checktype = true);
 		PropDict getDict ();
 		QByteArray getBindata ();
+		Coll::Coll *getColl ();
 		
 		QByteArray finish (quint32 cookie) const;
 		bool process (QIODevice *);

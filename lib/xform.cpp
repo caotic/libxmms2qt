@@ -24,28 +24,28 @@
 namespace XMMSQt
 {
 
-	XmmsResult
+	Result
 	Xform::browse (const QUrl &url) const
 	{
 		return browseEncoded (Medialib::encodeUrl (url.toString ()));
 	}
 
-	XmmsResult
+	Result
 	Xform::browse (const QString &url) const
 	{
 		return browseEncoded (Medialib::encodeUrl (url));
 	}
 
-	XmmsResult
+	Result
 	Xform::browseEncoded (const QString &url) const
 	{
 		if (url.isEmpty ()) {
 			// TODO better errorhandling
 			qWarning ("Xform::browseEncoded called with empty argument");
-			return XmmsResult ();
+			return Result ();
 		}
 
-		XmmsMessage msg (XMMS_IPC_OBJECT_XFORM, XMMS_IPC_CMD_BROWSE);
+		Message msg (XMMS_IPC_OBJECT_XFORM, XMMS_IPC_CMD_BROWSE);
 		msg.add (url);
 
 		return m_client->queueMsg (msg);
