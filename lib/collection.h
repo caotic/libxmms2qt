@@ -43,7 +43,7 @@ namespace XMMSQt
 			static const Namespace COLLECTIONS;
 			static const Namespace PLAYLISTS;
 
-			Collection (XmmsClient *client) : BaseObject (client) {};
+			Collection (Client *client) : BaseObject (client) {};
 
 			/** Destructor.
 			 */
@@ -64,7 +64,7 @@ namespace XMMSQt
 			 *  @return a pointer to a Coll::Coll object representing
 			 *  the collection structure.
 			 */
-			XmmsResult
+			Result
 			get (const QString &name, Namespace nsname) const;
 
 			/** List the names of collections saved in the given namespace.
@@ -80,7 +80,7 @@ namespace XMMSQt
 			 *
 			 *  @return a list of collection names in the given namespace.
 			 */
-			XmmsResult
+			Result
 			list (Namespace nsname) const;
 
 			/** Save a collection structure under a given name in a
@@ -97,7 +97,7 @@ namespace XMMSQt
 			 *  what he/she's doing. (logic_error)
 			 *  @throw result_error If the operation failed.
 			 */
-			XmmsResult
+			Result
 			save (const Coll::Coll& coll,
 			      const QString &name,
 			      Namespace nsname) const;
@@ -114,7 +114,7 @@ namespace XMMSQt
 			 *  what he/she's doing. (logic_error)
 			 *  @throw result_error If the operation failed.
 			 */
-			XmmsResult
+			Result
 			remove (const QString &name, Namespace nsname) const;
 
 			/** List the names of collections that contain a given media.
@@ -131,7 +131,7 @@ namespace XMMSQt
 			 *
 			 *  @return a list of collection names.
 			 */
-			XmmsResult
+			Result
 			find (quint32 id, Namespace nsname) const;
 
 			/** Rename the collection given its name and its namespace.
@@ -148,7 +148,7 @@ namespace XMMSQt
 			 *  what he/she's doing. (logic_error)
 			 *  @throw result_error If the operation failed.
 			 */
-			XmmsResult
+			Result
 			rename (const QString &from_name,
 			        const QString &to_name,
 			        Namespace nsname) const;
@@ -169,7 +169,7 @@ namespace XMMSQt
 			 *  @return a pointer to a #Coll::Idlist object containing
 			 *  the ids of media imported from the playlist file.
 			 */
-			XmmsResult
+			Result
 			idlistFromPlaylistFile (const QString &path) const;
 
 			/** Retrieve the ids of media matched by a collection.
@@ -193,7 +193,7 @@ namespace XMMSQt
 			 *
 			 *  @return a list of media ids matched by the collection.
 			 */
-			XmmsResult
+			Result
 			queryIds (const Coll::Coll& coll,
 			          const QStringList &order = QStringList (),
 			          quint32 limit_len = 0,
@@ -223,7 +223,7 @@ namespace XMMSQt
 			 *  @return a list of property dicts for each media
 			 *  matched by the collection.
 			 */
-			XmmsResult
+			Result
 			queryInfos (const Coll::Coll& coll,
 			            const QStringList &fetch,
 			            const QStringList &order = QStringList (),
@@ -235,7 +235,7 @@ namespace XMMSQt
 			/**
 			 * FIXME: Comments
 
-			XmmsResult
+			Result
 			parse (const QString &pattern) const;*/
 
 			/** Request the collection changed broadcast.
@@ -253,7 +253,7 @@ namespace XMMSQt
 			 *
 			 *  @throw connection_error If the client isn't connected.
 			 */
-			XmmsResult broadcastCollectionChanged () const;
+			Result broadcastCollectionChanged () const;
 
 		/** @cond */
 		private:

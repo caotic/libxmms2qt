@@ -30,20 +30,20 @@ namespace XMMSQt
 	{
 		Q_OBJECT
 		public:
-			Config (XmmsClient *client) : BaseObject (client)
+			Config (Client *client) : BaseObject (client)
 			{
 			}
 
-			XmmsResult getValue (QString key);
+			Result getValue (QString key);
 
-			XmmsResult listValues ();
+			Result listValues ();
 
-			XmmsResult broadcastValueChanged();
+			Result broadcastValueChanged();
 
 		public slots:
-			XmmsResult registerValue (QString name, QString defval);
+			Result registerValue (QString name, QString defval);
 
-			XmmsResult setValue (QString name, QString value);
+			Result setValue (QString name, QString value);
 	};
 
 }

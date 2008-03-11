@@ -24,150 +24,150 @@
 namespace XMMSQt
 {
 
-	XmmsResult
+	Result
 	Playlist::currentPos (const QString &playlist)
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_CURRENT_POS);
+		Message msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_CURRENT_POS);
 		msg.add (playlist);
 
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Playlist::listEntries (const QString &playlist)
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_LIST);
+		Message msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_LIST);
 		msg.add (playlist);
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Playlist::add (const QString &url, const QString &playlist)
 	{
 		return addEncoded (Medialib::encodeUrl (url), playlist);
 	}
 
-	XmmsResult
+	Result
 	Playlist::add (const QUrl &url, const QString &playlist)
 	{
 		return addEncoded (Medialib::encodeUrl (url.toString ()), playlist);
 	}
 
-	XmmsResult
+	Result
 	Playlist::add (quint32 id, const QString &playlist)
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_ADD_ID);
+		Message msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_ADD_ID);
 		msg.add (playlist);
 		msg.add (id);
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Playlist::addEncoded (const QString &url, const QString &playlist)
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_ADD_URL);
+		Message msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_ADD_URL);
 		msg.add (playlist);
 		msg.add (url);
 		return m_client->queueMsg (msg);	
 	}
 
-	XmmsResult
+	Result
 	Playlist::shuffle (const QString &playlist)
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_SHUFFLE);
+		Message msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_SHUFFLE);
 		msg.add (playlist);
 		return m_client->queueMsg (msg);	
 	}
 
-	XmmsResult
+	Result
 	Playlist::remove (quint32 id, const QString &playlist)
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_REMOVE_ENTRY);
+		Message msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_REMOVE_ENTRY);
 		msg.add (playlist);
 		msg.add (id);
 		return m_client->queueMsg (msg);
 	}
 
 
-	XmmsResult
+	Result
 	Playlist::clear (const QString &playlist)
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_CLEAR);
+		Message msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_CLEAR);
 		msg.add (playlist);
 		return m_client->queueMsg (msg);
 	}
 
 
-	XmmsResult
+	Result
 	Playlist::setNext (quint32 pos)
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_SET_POS);
+		Message msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_SET_POS);
 		msg.add (pos);
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Playlist::setNextRel (quint32 pos)
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_SET_POS_REL);
+		Message msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_SET_POS_REL);
 		msg.add (pos);
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Playlist::move (quint32 opos, quint32 npos, const QString &playlist)
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_MOVE_ENTRY);
+		Message msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_MOVE_ENTRY);
 		msg.add (playlist);
 		msg.add (opos);
 		msg.add (npos);
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Playlist::recursiveAdd (const QString &url, const QString &playlist)
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_RADD);
+		Message msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_RADD);
 		msg.add (playlist);
 		msg.add (Medialib::encodeUrl (url));
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Playlist::activePlaylist () const
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_CURRENT_ACTIVE);
+		Message msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_CURRENT_ACTIVE);
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Playlist::loadPlaylist (const QString &name) const
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_LOAD);
+		Message msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_LOAD);
 		msg.add (name);
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Playlist::broadcastPlaylistChanged ()
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_SIGNAL, XMMS_IPC_CMD_BROADCAST);
+		Message msg (XMMS_IPC_OBJECT_SIGNAL, XMMS_IPC_CMD_BROADCAST);
 		msg.add (XMMS_IPC_SIGNAL_PLAYLIST_CHANGED);
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Playlist::broadcastPlaylistCurrentPos ()
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_SIGNAL, XMMS_IPC_CMD_BROADCAST);
+		Message msg (XMMS_IPC_OBJECT_SIGNAL, XMMS_IPC_CMD_BROADCAST);
 		msg.add (XMMS_IPC_SIGNAL_PLAYLIST_CURRENT_POS);
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Playlist::broadcastPlaylistLoaded ()
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_SIGNAL, XMMS_IPC_CMD_BROADCAST);
+		Message msg (XMMS_IPC_OBJECT_SIGNAL, XMMS_IPC_CMD_BROADCAST);
 		msg.add (XMMS_IPC_SIGNAL_PLAYLIST_LOADED);
 		return m_client->queueMsg (msg);
 	}

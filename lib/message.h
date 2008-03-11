@@ -27,22 +27,22 @@
 namespace XMMSQt
 {
 
-	class XmmsMessage {
+	class Message {
 	public:
-		XmmsMessage (quint32 object = 0, quint32 cmd = 0);
-		~XmmsMessage ()
+		Message (quint32 object = 0, quint32 cmd = 0);
+		~Message ()
 		{
 			delete m_stream;
 		};
 			
-		XmmsMessage (const XmmsMessage &src) : m_bytearray (src.m_bytearray) {
+		Message (const Message &src) : m_bytearray (src.m_bytearray) {
 			m_cookie = src.cookie ();
 			m_length = src.m_length;
 			m_headercomplete = src.m_headercomplete;
 			m_stream = new QDataStream (m_bytearray);
 		};
 		
-		XmmsMessage & operator= (const XmmsMessage &src)
+		Message & operator= (const Message &src)
 		{
 			m_cookie = src.cookie ();
 			m_length = src.m_length;

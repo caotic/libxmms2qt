@@ -29,13 +29,13 @@ namespace XMMSQt
 	class Xform : public BaseObject
 	{
 		public:
-			Xform (XmmsClient *client) : BaseObject (client)
+			Xform (Client *client) : BaseObject (client)
 			{
 			}
 
-			XmmsResult browse (const QUrl &url) const;
-			XmmsResult browse (const QString &url) const;
-			XmmsResult browseEncoded (const QString &url) const;
+			Result browse (const QUrl &url) const;
+			Result browse (const QString &url) const;
+			Result browseEncoded (const QString &url) const;
 	};
 
 }

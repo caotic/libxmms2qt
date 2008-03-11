@@ -6,7 +6,7 @@ namespace XMMSQt
         namespace Coll {
                 class Coll;
         }
-		class XmmsMessage;
+		class Message;
 }
 
 #endif // XMMSCLIENTPP_TYPEDEFS_H

@@ -29,7 +29,7 @@ class TestClass : public QObject
 		};
 		
 	protected:
-		XmmsClient m_client;
+		Client m_client;
 		QEventLoop m_loop;
 		
 };

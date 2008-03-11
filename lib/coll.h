@@ -104,7 +104,7 @@ namespace XMMSQt
 			protected:
 				friend class ::XMMSQt::Collection;
 				friend class ::XMMSQt::CollResult;
-				friend class ::XMMSQt::XmmsMessage;
+				friend class ::XMMSQt::Message;
 				friend class Unary;
 				friend class Nary;
 				

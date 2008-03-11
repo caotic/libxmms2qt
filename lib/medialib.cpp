@@ -24,109 +24,109 @@
 namespace XMMSQt
 {
 
-	XmmsResult
+	Result
 	Medialib::add (const QUrl &url, const QStringList &args) const
 	{
 		return addEncoded (encodeUrl (url.toString (), args));
 	}
 
-	XmmsResult
+	Result
 	Medialib::add (const QString &url, const QStringList &args) const
 	{
 		return addEncoded (encodeUrl (url, args));
 	}
 
-	XmmsResult
+	Result
 	Medialib::addEncoded (const QString &url) const
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_ADD_URL);
+		Message msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_ADD_URL);
 		msg.add (url);
 
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Medialib::addPath (const QUrl &path) const
 	{
 		return addPathEncoded (encodeUrl (path.toString ()));
 	}
 
-	XmmsResult
+	Result
 	Medialib::addPath (const QString &path) const
 	{
 		return addPathEncoded (encodeUrl (path));
 	}
 
-	XmmsResult
+	Result
 	Medialib::addPathEncoded (const QString &path) const
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_PATH_IMPORT);
+		Message msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_PATH_IMPORT);
 		msg.add (path);
 
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Medialib::info (const quint32 &id)
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_INFO);
+		Message msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_INFO);
 		msg.add (id);
 
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Medialib::id (const QUrl &url) const
 	{
 		return id (url.toString ());
 	}
 
-	XmmsResult
+	Result
 	Medialib::id (const QString &url) const
 	{
 		// TODO: Check if the server really wants an unencoded url
 		// looking at the c lib it seems so
-		XmmsMessage msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_GET_ID);
+		Message msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_GET_ID);
 		msg.add (url);
 
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Medialib::rehash (quint32 id) const
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_REHASH);
+		Message msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_REHASH);
 		msg.add (id);
 
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Medialib::remove (quint32 id) const
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_REMOVE_ID);
+		Message msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_REMOVE_ID);
 		msg.add (id);
 
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Medialib::move (quint32 id, const QUrl &url) const
 	{
 		return move (id, url.toString ());
 	}
 
-	XmmsResult
+	Result
 	Medialib::move (quint32 id, const QString &url) const
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_MOVE_URL);
+		Message msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_MOVE_URL);
 		msg.add (id);
 		msg.add (url);
 
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Medialib::setEntryProperty (quint32 id, const QString &key,
 								const QString &value) const
 	{
@@ -134,11 +134,11 @@ namespace XMMSQt
 		return setEntryProperty (id, key, value, source);
 	}
 
-	XmmsResult
+	Result
 	Medialib::setEntryProperty (quint32 id, const QString &key,
 								const QString &value, const QString &source) const
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_PROPERTY_SET_STR);
+		Message msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_PROPERTY_SET_STR);
 		msg.add (id);
 		msg.add (source);
 		msg.add (key);
@@ -147,18 +147,18 @@ namespace XMMSQt
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Medialib::setEntryProperty (quint32 id, const QString &key, qint32 value) const
 	{
 		QString source = "client/" + m_client->name ();
 		return setEntryProperty (id, key, value, source);
 	}
 
-	XmmsResult
+	Result
 	Medialib::setEntryProperty (quint32 id, const QString &key, qint32 value,
 								 const QString &source) const
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_PROPERTY_SET_INT);
+		Message msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_PROPERTY_SET_INT);
 		msg.add (id);
 		msg.add (source);
 		msg.add (key);
@@ -167,18 +167,18 @@ namespace XMMSQt
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Medialib::removeEntryProperty (quint32 id, const QString &key) const
 	{
 		QString source = "client/" + m_client->name ();
 		return removeEntryProperty (id, key, source);
 	}
 
-	XmmsResult
+	Result
 	Medialib::removeEntryProperty (quint32 id, const QString &key,
 								   const QString &source) const
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_PROPERTY_REMOVE);
+		Message msg (XMMS_IPC_OBJECT_MEDIALIB, XMMS_IPC_CMD_PROPERTY_REMOVE);
 		msg.add (id);
 		msg.add (source);
 		msg.add (key);
@@ -186,19 +186,19 @@ namespace XMMSQt
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Medialib::broadcastEntryAdded ()
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_SIGNAL, XMMS_IPC_CMD_BROADCAST);
+		Message msg (XMMS_IPC_OBJECT_SIGNAL, XMMS_IPC_CMD_BROADCAST);
 		msg.add (XMMS_IPC_SIGNAL_MEDIALIB_ENTRY_ADDED);
 
 		return m_client->queueMsg (msg);
 	}
 
-	XmmsResult
+	Result
 	Medialib::broadcastEntryChanged ()
 	{
-		XmmsMessage msg (XMMS_IPC_OBJECT_SIGNAL, XMMS_IPC_CMD_BROADCAST);
+		Message msg (XMMS_IPC_OBJECT_SIGNAL, XMMS_IPC_CMD_BROADCAST);
 		msg.add (XMMS_IPC_SIGNAL_MEDIALIB_ENTRY_UPDATE);
 
 		return m_client->queueMsg (msg);
