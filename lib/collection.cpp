@@ -88,6 +88,12 @@ namespace XMMSQt
 	                      quint32 limit_len,
 	                      quint32 limit_start) const
 	{
+		XmmsMessage msg (XMMS_IPC_OBJECT_COLLECTION, XMMS_IPC_CMD_QUERY_IDS);
+		msg.add (coll);
+		msg.add (limit_len);
+		msg.add (limit_start);
+		msg.add (order);
+		return m_client->queueMsg (msg);
 	}
 
 	XmmsResult

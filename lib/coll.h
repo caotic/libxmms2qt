@@ -23,6 +23,7 @@
 #include <xmmsc/xmmsc_coll.h>
 
 #include "typedefs.h"
+#include "message.h"
 
 namespace XMMSQt 
 {
@@ -61,13 +62,12 @@ namespace XMMSQt
 					m_attributes = src.m_attributes;
 					m_idlist = src.m_idlist;
 				};
-				Coll (Type type);
 
 				/** Destructor.
 				 */
-				virtual ~Coll();
+				virtual ~Coll ();
 
-				Type getType() const;
+				Type getType () const;
 
 				// get/set attributes
 				void setAttribute (const QString &attrname, const QString &value);
@@ -104,8 +104,26 @@ namespace XMMSQt
 			protected:
 				friend class ::XMMSQt::Collection;
 				friend class ::XMMSQt::CollResult;
+				friend class ::XMMSQt::XmmsMessage;
 				friend class Unary;
 				friend class Nary;
+				
+				Coll (Type type);
+				
+				void setOperandList (const QList<Coll *> &lst)
+				{
+					m_operands = lst;
+				};
+				
+				void setAttributeList (const QMap<QString, QString> &attr)
+				{
+					m_attributes = attr;
+				};
+				
+				void setIdList (const QList<quint32> &lst)
+				{
+					m_idlist = lst;
+				};
 
 				void setIndex (quint32 index, quint32 value);
 				unsigned int getIndex (quint32 index) const;

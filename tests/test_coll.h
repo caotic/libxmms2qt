@@ -18,9 +18,11 @@ class TestColl : public TestClass
 		
 	public slots:
 		bool cbList (const QVariantList &);
+		bool cbQueryIds (const QVariantList &);
 		
 	private slots:
 		void list ();
+		void queryIds ();
 };
 
 #endif

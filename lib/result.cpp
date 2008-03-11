@@ -111,6 +111,10 @@ namespace XMMSQt
 				QMetaObject::invokeMethod (m_object, sig,
 										   Q_RETURN_ARG (bool, ret),
 										   Q_ARG (Playback::Status, (Playback::Status) m_message.getUInt32 ()));
+			} else if (param == "Coll::Coll*" || param == "Coll*") {
+				QMetaObject::invokeMethod (m_object, sig,
+										   Q_RETURN_ARG (bool, ret),
+										   Q_ARG (Coll::Coll*, m_message.getColl ()));
 			} else {
 				// TODO: Add some better errorhandling here
 				qDebug () << "Result: Couldn't handle resulttype" << param << "in callback" <<sig.constData ();

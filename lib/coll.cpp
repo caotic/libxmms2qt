@@ -30,6 +30,11 @@ namespace XMMSQt
 
 	Coll::~Coll()
 	{
+		for (int i = 0; i < m_operands.size (); i++)
+		{
+			Coll *c = m_operands.takeFirst ();
+			delete c;
+		}
 	}
 
 	Type

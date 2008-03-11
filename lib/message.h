@@ -73,7 +73,7 @@ namespace XMMSQt
 		QVariantList getList (const bool &checktype = true);
 		PropDict getDict ();
 		QByteArray getBindata ();
-		Coll::Coll getColl ();
+		Coll::Coll *getColl ();
 		
 		QByteArray finish (quint32 cookie) const;
 		bool process (QIODevice *);

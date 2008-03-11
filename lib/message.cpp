@@ -139,7 +139,11 @@ namespace XMMSQt
 		
 		/* add the attribute list */
 		QStringList attrlist = coll.getAttributeList ();
-		add (attrlist);
+		add (attrlist.size () / 2); /* hm, it wants the number of key:value pair */
+		for (int i = 0; i < attrlist.size (); i++)
+		{
+			add (attrlist.at (i));
+		}
 		
 		QList<quint32> idlist = coll.getIdList ();
 		add (idlist.size ());
@@ -150,6 +154,7 @@ namespace XMMSQt
 		
 		QList<Coll::Coll *> operlist = coll.getOperandList ();
 		add (operlist.size ());
+		qDebug ("operlist = %d", operlist.size ());
 		for (int i = 0; i < operlist.size (); i ++)
 		{
 			add (*operlist.at (i));
@@ -172,12 +177,55 @@ namespace XMMSQt
 		return retarray;
 	}
 	
-	Coll::Coll
+	Coll::Coll *
 	XmmsMessage::getColl ()
 	{
+		qint32 type;
+		*m_stream >> type;
+		if (type != XMMS_OBJECT_CMD_ARG_COLL) {
+			qWarning ("wanted type %d but got %d", XMMS_OBJECT_CMD_ARG_COLL, type);
+			return 0;
+		}
+		
 		quint32 t;
 		*m_stream >> t;
-		Coll::Coll ret ((Coll::Type) t);
+		Coll::Coll *ret = new Coll::Coll ((Coll::Type) t);
+		
+		/* attr list */
+		quint32 len;
+		*m_stream >> len;
+		qDebug ("num of attrs: %d", len);
+		QMap<QString, QString> attr;
+		for (quint32 i = 0; i < len; i += 2)
+		{
+			QString key = getString (false);
+			QString val = getString (false);
+			qDebug ("got attribute %s=%s", qPrintable (key), qPrintable (val));
+			attr[key] = val;
+		}
+		ret->setAttributeList (attr);
+		
+		/* idlist */
+		len = 0;
+		*m_stream >> len;
+		QList<quint32> idlist;
+		for (quint32 i = 0; i < len; i++)
+		{
+			quint32 val;
+			*m_stream >> val;
+			idlist.append (val);
+		}
+		ret->setIdList (idlist);
+		 
+		/* operand list */
+		len = 0;
+		*m_stream >> len;
+		QList<Coll::Coll *> oplst;
+		for (quint32 i = 0; i < len; i ++)
+		{
+			oplst.append (getColl ());
+		}
+		ret->setOperandList (oplst);
 		
 		return ret;
 	}
@@ -328,7 +376,7 @@ namespace XMMSQt
 		*m_stream >> len;
 		if (len > fullLength ()) {
 			qWarning ("broken lenght, wanted %d but we only have %d", len, fullLength ());
-			return QByteArray ();
+			return QString ();
 		}
 		char *str = (char *) malloc (len + 1);
 		m_stream->readRawData (str, len);
