@@ -9,21 +9,21 @@ main (int argc, char **argv)
 	QCoreApplication app (argc, argv);
 
 	{
-		TestPlaylist basics;
-		QTest::qExec (&basics, argc, argv);
-	}
-
-	{
-		TestBindata bindata;
-		QTest::qExec (&bindata, argc, argv);
-	}
-	{
 		TestError error;
 		QTest::qExec (&error, argc, argv);
 	}
 	{
 		TestColl coll;
 		QTest::qExec (&coll, argc, argv);
+	}
+	{
+		TestPlaylist playlist;
+		QTest::qExec (&playlist, argc, argv);
+	}
+
+	{
+		TestBindata bindata;
+		QTest::qExec (&bindata, argc, argv);
 	}
 }
 
