@@ -38,10 +38,9 @@ namespace XMMSQt
 			Result add (const QString &url, const QString &pl = "_active");
 			Result add (const QUrl &url, const QString &pl = "_active");
 			Result add (quint32 id, const QString &pl = "_active");
-#if XMMS_IPC_PROTOCOL_VERSION >= 11
+			// This method is not supported on DrK
 			Result add (const Coll::Idlist &list,
 			            const QString &pl = "_active");
-#endif
 			Result add (const Coll::Coll &coll, const QStringList &order,
 			            const QString &pl = "_active");
 			Result addEncoded (const QString &url, const QString &pl = "_active");

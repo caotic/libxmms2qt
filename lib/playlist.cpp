@@ -64,17 +64,22 @@ namespace XMMSQt
 		return m_client->queueMsg (msg);
 	}
 
-// TODO:Think of something for DrK
-#if XMMS_IPC_PROTOCOL_VERSION >= 11
 	Result
 	Playlist::add (const Coll::Idlist &list, const QString &playlist)
 	{
+#if XMMS_IPC_PROTOCOL_VERSION >= 11
 		Message msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_ADD_IDLIST);
 		msg.add (playlist);
 		msg.add (list);
 		return m_client->queueMsg (msg);
-	}
+#else
+		// TODO:Think of something for DrK
+		qWarning ("Playlist::add (Coll::Idlist, QString) not supported on DrK");
+		// return empty result to avoid build warnings,
+		// this might break clients that use this method
+		return Result ();
 #endif
+	}
 
 	Result
 	Playlist::add (const Coll::Coll &coll, const QStringList &order,
