@@ -20,6 +20,20 @@ class TestClass : public QObject
 			Q_ASSERT_X (b, "connected", "failed to connect to server");
 			m_loop.exit ();
 		};
+
+		void cbFail (QString errMsg)
+		{
+			m_loop.exit ();
+			QFAIL (errMsg.toAscii ());
+		};
+
+		// Callback, if we expect a test to execute the error callback
+		void cbPass (QString errMsg)
+		{
+			Q_UNUSED (errMsg);
+			m_loop.exit ();
+		}
+
 	private slots:
 		void initTestCase ()
 		{
