@@ -33,6 +33,17 @@ namespace XMMSQt
 		m_broadcast = false;
 	}
 
+	Result::Result (QString apierr) : QObject  ()
+	{
+		m_cookie = -1; //Perhaps other errorcode
+		m_object = NULL;
+		m_slot = NULL;
+		m_client = NULL;
+		m_restartsignal = 0;
+		m_broadcast = false;
+		m_apierr = apierr;
+	}
+
 	void
 	Result::exec (const Message &msg)
 	{
@@ -160,7 +171,19 @@ namespace XMMSQt
 		m_slot = slot;
 		m_errobject = errobject;
 		m_errslot = errslot;
-		m_client->setResult (*this);
+		if (m_client) {
+			m_client->setResult (*this);
+		} else {
+			if (object && errslot) {
+				QObject *obj = errobject ? errobject : object;
+				QByteArray sig (object->metaObject ()->normalizedSignature (errslot).mid (1));
+				sig = sig.left(sig.indexOf('('));
+				// Use a QueuedConnection here, or tests will hang
+				QMetaObject::invokeMethod (obj, sig, Qt::QueuedConnection, Q_ARG(QString, m_apierr));
+
+			}
+//			qWarning () << m_apierr;
+		}
 	}
 	
 }

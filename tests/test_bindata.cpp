@@ -1,4 +1,6 @@
 
+#include <xmmsc/xmmsc_idnumbers.h>
+
 #include "test_bindata.h"
 #include <QtTest/QtTest>
 
@@ -33,7 +35,10 @@ TestBindata::cbAdd (QString hash)
 void
 TestBindata::list ()
 {
-	m_client.bindata.list ()(this, SLOT (cbList (QVariantList)));
+	if (XMMS_IPC_PROTOCOL_VERSION < 11) {
+		QSKIP("Bindata list not supported on DrK", SkipSingle);
+	}
+	m_client.bindata.list ()(this, SLOT (cbList (QVariantList)), SLOT(cbFail (QString)));
 
 	m_loop.exec ();
 }
@@ -80,8 +85,11 @@ TestBindata::remove ()
 bool
 TestBindata::cbRemove ()
 {
+#if XMMS_IPC_VERSION >=11
 	m_client.bindata.list ()(this, SLOT (cbRemove2 (QVariantList)));
-
+#else
+	m_loop.exit ();
+#endif
 	return true;
 }
 

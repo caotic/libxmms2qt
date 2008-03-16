@@ -52,11 +52,14 @@ namespace XMMSQt
 				m_message = src.message ();
 				m_restartsignal = src.m_restartsignal;
 				m_broadcast = src.m_broadcast;
+				m_apierr = src.m_apierr;
 			};
 
 			Result (Client *, int cookie);
 
-			Result () : QObject () {};
+//			Result () : QObject () {};
+
+			Result (QString apierr = "Wrong use of class Result");
 
 			Result &
 			operator= (const Result &src)
@@ -70,6 +73,7 @@ namespace XMMSQt
 				m_message = src.message ();
 				m_restartsignal = src.m_restartsignal;
 				m_broadcast = src.m_broadcast;
+				m_apierr = src.m_apierr;
 				return *this;
 			};
 
@@ -122,6 +126,8 @@ namespace XMMSQt
 
 			Client *m_client;
 			Message m_message;
+
+			QString m_apierr;
 
 			void setSlots (QObject *object, const char *slot, QObject *errobject, const char *errslot);
 
