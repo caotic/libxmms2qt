@@ -61,7 +61,7 @@ namespace XMMSQt
 			Result remove (quint32 id, const QString &playlist = "_active");
 			Result clear (const QString &playlist = "_active");
 			Result setNext (quint32 pos);
-			Result setNextRel (quint32 pos);
+			Result setNextRel (qint32 pos);
 			Result move (quint32 opos, quint32 npos, const QString &playlist = "_active");
 			Result recursiveAdd (const QString &url, const QString &playlist = "_active");
 
