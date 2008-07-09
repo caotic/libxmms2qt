@@ -8,6 +8,7 @@ VERSION = 0.0.0
 DEPENDPATH += .
 INCLUDEPATH += .
 CONFIG -= app_bundle
+QT -= gui
 QT += network
 
 CONFIG += link_pkgconfig
