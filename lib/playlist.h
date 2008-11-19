@@ -32,7 +32,7 @@ namespace XMMSQt
 			Playlist (Client *client) : BaseObject (client)
 			{
 			};
-			
+
 			Result currentPos (const QString &pl = "_active");
 			Result listEntries (const QString &pl = "_active");
 			Result add (const QString &url, const QString &pl = "_active");
@@ -43,7 +43,8 @@ namespace XMMSQt
 			            const QString &pl = "_active");
 			Result add (const Coll::Coll &coll, const QStringList &order,
 			            const QString &pl = "_active");
-			Result addEncoded (const QString &url, const QString &pl = "_active");
+			Result addEncoded (const QString &url,
+			                   const QString &pl = "_active");
 
 			Result insert (const QString &url, quint32 pos,
 			               const QString &pl = "_active");
@@ -62,8 +63,10 @@ namespace XMMSQt
 			Result clear (const QString &playlist = "_active");
 			Result setNext (quint32 pos);
 			Result setNextRel (qint32 pos);
-			Result move (quint32 opos, quint32 npos, const QString &playlist = "_active");
-			Result recursiveAdd (const QString &url, const QString &playlist = "_active");
+			Result move (quint32 opos, quint32 npos,
+			             const QString &playlist = "_active");
+			Result recursiveAdd (const QString &url,
+			                     const QString &playlist = "_active");
 
 			Result activePlaylist () const;
 			Result loadPlaylist (const QString &name) const;

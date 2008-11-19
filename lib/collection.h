@@ -24,7 +24,7 @@
 #include "result.h"
 #include "typedefs.h"
 
-namespace XMMSQt 
+namespace XMMSQt
 {
 
 	class Client;

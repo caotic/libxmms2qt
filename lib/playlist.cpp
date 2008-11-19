@@ -95,7 +95,7 @@ namespace XMMSQt
 		Message msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_ADD_URL);
 		msg.add (playlist);
 		msg.add (url);
-		return m_client->queueMsg (msg);	
+		return m_client->queueMsg (msg);
 	}
 
 	Result
@@ -151,7 +151,7 @@ namespace XMMSQt
 	{
 		Message msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_SHUFFLE);
 		msg.add (playlist);
-		return m_client->queueMsg (msg);	
+		return m_client->queueMsg (msg);
 	}
 
 	Result

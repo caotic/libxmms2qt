@@ -51,7 +51,7 @@ namespace XMMSQt
 	{
 #if XMMS_IPC_PROTOCOL_VERSION >= 11
 		Message msg (XMMS_IPC_OBJECT_BINDATA, XMMS_IPC_CMD_LIST_DATA);
-		
+
 		return m_client->queueMsg (msg);
 #else
 		return Result ("Listing Bindata is not supported on DrK");

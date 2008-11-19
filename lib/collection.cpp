@@ -62,7 +62,7 @@ namespace XMMSQt
 		Message msg (XMMS_IPC_OBJECT_COLLECTION, XMMS_IPC_CMD_COLLECTION_REMOVE);
 		msg.add (name);
 		msg.add (QString (nsname));
-		return m_client->queueMsg (msg);		
+		return m_client->queueMsg (msg);
 	}
 
 	Result
@@ -75,11 +75,12 @@ namespace XMMSQt
 	}
 
 	Result
-	Collection::rename(const QString &from_name,
-	                   const QString &to_name,
-	                   Namespace nsname) const
+	Collection::rename (const QString &from_name,
+	                    const QString &to_name,
+	                    Namespace nsname) const
 	{
-		Message msg (XMMS_IPC_OBJECT_COLLECTION, XMMS_IPC_CMD_COLLECTION_RENAME);
+		Message msg (XMMS_IPC_OBJECT_COLLECTION,
+		             XMMS_IPC_CMD_COLLECTION_RENAME);
 		msg.add (from_name);
 		msg.add (to_name);
 		msg.add (QString (nsname));
@@ -125,13 +126,12 @@ namespace XMMSQt
 		msg.add (fetch);
 		msg.add (group);
 		return m_client->queueMsg (msg);
-		
 	}
 
 /*	Result
 	Collection::parse (const QString &pattern) const
 	{
-		
+
 	}*/
 
 	Result

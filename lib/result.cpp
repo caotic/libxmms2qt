@@ -48,7 +48,7 @@ namespace XMMSQt
 	Result::exec (const Message &msg)
 	{
 		m_message = msg;
-		
+
 		if (msg.cmd () == XMMS_IPC_CMD_ERROR) {
 			/* oops something went wrong ... */
 			if (m_object && m_errslot) {
@@ -61,7 +61,7 @@ namespace XMMSQt
 			}
 			return;
 		}
-			
+
 		if (m_object && m_slot) {
 			QByteArray sig (m_object->metaObject ()->normalizedSignature (m_slot).mid (1));
 			DBGRES ("we have object and slot: %s, woot!", sig.constData ());
@@ -73,7 +73,7 @@ namespace XMMSQt
 						   sig.constData ());
 				return;
 			}
-			
+
 			QMetaMethod meth = m_object->metaObject ()->method (methidx);
 
 			const char *rettype = meth.typeName ();
@@ -92,27 +92,32 @@ namespace XMMSQt
 				QByteArray param = meth.parameterTypes ()[0];
 
 				if (param == "quint32") {
-					QMetaObject::invokeMethod (m_object, sig, 
+					QMetaObject::invokeMethod (m_object, sig,
 					                           Q_RETURN_ARG (bool, ret),
-					                           Q_ARG (quint32, m_message.getUInt32 ()));
+					                           Q_ARG (quint32,
+				                                      m_message.getUInt32 ()));
 				} else if (param == "QVariantList") {
-					QMetaObject::invokeMethod (m_object, sig, 
+					QMetaObject::invokeMethod (m_object, sig,
 					                           Q_RETURN_ARG (bool, ret),
-					                           Q_ARG (QVariantList, m_message.getList ()));
+					                           Q_ARG (QVariantList,
+				                                      m_message.getList ()));
 				} else if (param == "PropDict") {
 					QMetaObject::invokeMethod (m_object, sig,
 					                           Q_RETURN_ARG (bool, ret),
-					                           Q_ARG (PropDict, m_message.getDict ()));
+					                           Q_ARG (PropDict,
+				                                      m_message.getDict ()));
 				} else if (param == "QByteArray") {
 					QMetaObject::invokeMethod (m_object, sig,
 					                           Q_RETURN_ARG (bool, ret),
-					                           Q_ARG (QByteArray, m_message.getBindata ()));
+					                           Q_ARG (QByteArray,
+				                                      m_message.getBindata ()));
 		/*		} else if (param == "qint32") {
 					arg = Q_ARG (qint32, ) */
 				} else if (param == "QString") {
 					QMetaObject::invokeMethod (m_object, sig,
 					                           Q_RETURN_ARG (bool, ret),
-					                           Q_ARG (QString, m_message.getString ()));
+					                           Q_ARG (QString,
+				                                      m_message.getString ()));
 				} else if (param == "Playback::Status") {
 					QMetaObject::invokeMethod (m_object, sig,
 					                           Q_RETURN_ARG (bool, ret),
@@ -120,18 +125,19 @@ namespace XMMSQt
 				} else if (param == "Coll::Coll*" || param == "Coll*") {
 					QMetaObject::invokeMethod (m_object, sig,
 					                           Q_RETURN_ARG (bool, ret),
-					                           Q_ARG (Coll::Coll*, m_message.getColl ()));
+					                           Q_ARG (Coll::Coll*,
+				                                      m_message.getColl ()));
 				} else {
 					// TODO: Add some better errorhandling here
 					qDebug () << "Result: Couldn't handle resulttype" << param << "in callback" <<sig.constData ();
 				}
 			}
-			
+
 			if (m_broadcast && ret) {
 				DBGRES ("restarting the broadcast");
 				m_client->setResult (*this);
 			}
-			
+
 			if (m_restartsignal && ret) {
 				/* return value is true from the code, lets restart this signal */
 				DBGRES ("going to restart signal %d", m_restartsignal);
@@ -140,9 +146,9 @@ namespace XMMSQt
 				Result r = m_client->queueMsg (msg, m_restartsignal);
 				r (m_object, m_slot); /* set the same callback shit */
 			}
-			
+
 		}
-		
+
 		DBGRES ("done with exec of result %d", m_cookie);
 	}
 
@@ -159,13 +165,15 @@ namespace XMMSQt
 	}
 
 	void
-	Result::operator() (QObject *object, const char *slot, QObject *errobject, const char *errslot)
+	Result::operator() (QObject *object, const char *slot, QObject *errobject,
+	                    const char *errslot)
 	{
 		setSlots (object, slot, errobject, errslot);
 	}
 
 	void
-	Result::setSlots (QObject *object, const char *slot, QObject *errobject, const char *errslot)
+	Result::setSlots (QObject *object, const char *slot, QObject *errobject,
+	                  const char *errslot)
 	{
 		m_object = object;
 		m_slot = slot;
@@ -179,11 +187,10 @@ namespace XMMSQt
 				QByteArray sig (object->metaObject ()->normalizedSignature (errslot).mid (1));
 				sig = sig.left(sig.indexOf('('));
 				// Use a QueuedConnection here, or tests will hang
-				QMetaObject::invokeMethod (obj, sig, Qt::QueuedConnection, Q_ARG(QString, m_apierr));
-
+				QMetaObject::invokeMethod (obj, sig, Qt::QueuedConnection,
+				                           Q_ARG(QString, m_apierr));
 			}
 //			qWarning () << m_apierr;
 		}
 	}
-	
 }

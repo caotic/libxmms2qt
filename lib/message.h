@@ -34,14 +34,14 @@ namespace XMMSQt
 		{
 			delete m_stream;
 		};
-			
+
 		Message (const Message &src) : m_bytearray (src.m_bytearray) {
 			m_cookie = src.cookie ();
 			m_length = src.m_length;
 			m_headercomplete = src.m_headercomplete;
 			m_stream = new QDataStream (m_bytearray);
 		};
-		
+
 		Message & operator= (const Message &src)
 		{
 			m_cookie = src.cookie ();
@@ -54,7 +54,7 @@ namespace XMMSQt
 			m_stream = new QDataStream (m_bytearray);
 			return *this;
 		};
-		
+
 		void add (qint32);
 		void add (quint32);
 		void add (qreal);
@@ -64,7 +64,7 @@ namespace XMMSQt
 		void add (const Coll::Coll &);
 
 		void addData (const QByteArray &);
-		
+
 		quint32 getUInt32 ();
 		qint32 getInt32 ();
 		qreal getReal ();
@@ -74,34 +74,34 @@ namespace XMMSQt
 		PropDict getDict ();
 		QByteArray getBindata ();
 		Coll::Coll *getColl ();
-		
+
 		QByteArray finish (quint32 cookie) const;
 		bool process (QIODevice *);
 		bool processHeader (const QByteArray &);
 		bool headerComplete () {
 			return m_headercomplete;
 		};
-		
+
 		quint32 cookie () const {
 			return m_cookie;
 		};
-		
+
 		quint32 fullLength () const {
 			return m_length + 16; /* header is 16 */
 		};
-		
+
 		QByteArray buf () const {
 			return m_bytearray;
 		};
-		
+
 		quint32 cmd () const {
 			return m_cmd;
 		};
-		
+
 		quint32 object () const {
 			return m_object;
 		};
-		
+
 	private:
 		quint32 m_object;
 		quint32 m_cmd;
@@ -110,9 +110,9 @@ namespace XMMSQt
 		bool m_headercomplete;
 		QByteArray m_bytearray;
 		QByteArray m_readbuffer;
-		
+
 		QDataStream *m_stream;
-		
+
 	};
 
 }

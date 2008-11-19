@@ -28,7 +28,7 @@ namespace XMMSQt
 		m_type = type;
 	}
 
-	Coll::~Coll()
+	Coll::~Coll ()
 	{
 		for (int i = 0; i < m_operands.size (); i++)
 		{
@@ -65,7 +65,7 @@ namespace XMMSQt
 	{
 		return m_attributes[attrname];
 	}
-	
+
 	QStringList
 	Coll::getAttributeList () const
 	{
@@ -78,13 +78,13 @@ namespace XMMSQt
 		}
 		return ret;
 	}
-	
+
 	QList<quint32>
 	Coll::getIdList () const
 	{
 		return m_idlist;
 	}
-	
+
 	QList<Coll *>
 	Coll::getOperandList () const
 	{
@@ -302,7 +302,7 @@ namespace XMMSQt
 
 	Greater::Greater () : Filter (GREATER) {}
 	Greater::Greater (Coll& operand) : Filter(GREATER, operand) {}
-	Greater::Greater (Coll& operand, const QString &field) 
+	Greater::Greater (Coll& operand, const QString &field)
 		: Filter (GREATER, operand, field) {}
 	Greater::Greater (Coll& operand,
 	                  const QString &field,
@@ -312,7 +312,7 @@ namespace XMMSQt
 
 	Equals::Equals () : Filter (EQUALS) {}
 	Equals::Equals (Coll& operand) : Filter (EQUALS, operand) {}
-	Equals::Equals (Coll& operand, const QString &field) 
+	Equals::Equals (Coll& operand, const QString &field)
 		: Filter (EQUALS, operand, field) {}
 	Equals::Equals (Coll& operand,
 	               const QString &field,
@@ -335,7 +335,7 @@ namespace XMMSQt
 	Idlist::Idlist (Type type) : Coll (type) {}
 	Idlist::Idlist () : Coll (IDLIST) {}
 	Idlist::~Idlist () {}
-	
+
 	Queue::Queue (Type type) : Idlist (type) {}
 	Queue::Queue (Type type, quint32 history) : Idlist (type)
 	{
@@ -382,7 +382,7 @@ namespace XMMSQt
 	}
 
 	void
-	Idlist::clear()
+	Idlist::clear ()
 	{
 		m_idlist.clear ();
 	}
@@ -392,7 +392,7 @@ namespace XMMSQt
 	{
 		return m_idlist.size ();
 	}
-	
+
 	void
 	PartyShuffle::setOperand (Coll *operand)
 	{

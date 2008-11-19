@@ -37,7 +37,7 @@ namespace XMMSQt
 			Playback (Client *client) : BaseObject (client)
 			{
 			};
-		
+
 			Result getPlaytime ();
 			Result getCurrentId ();
 			Result getStatus ();

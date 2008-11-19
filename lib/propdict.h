@@ -74,14 +74,12 @@ namespace XMMSQt
 					QVariantList l = m_prop[key];
 					QVariant ret;
 					qint32 lsrc = 0;
-					for (int i = 0; i < l.size (); i ++)
-					{
-						QString source = l.at (i ++).toString ();
+					for (int i = 0; i < l.size (); i++) {
+						QString source = l.at (i++).toString ();
 						QVariant value = l.at (i);
 
 						if (lsrc != 0) {
-							for (int l = 0; l < m_source.size (); l ++)
-							{
+							for (int l = 0; l < m_source.size (); l++) {
 								if (m_source.at (l).indexIn (source)) {
 									lsrc = l;
 									ret = value;

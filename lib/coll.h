@@ -25,7 +25,7 @@
 #include "typedefs.h"
 #include "message.h"
 
-namespace XMMSQt 
+namespace XMMSQt
 {
 
 	class Collection;
@@ -71,7 +71,8 @@ namespace XMMSQt
 				Type getType () const;
 
 				// get/set attributes
-				void setAttribute (const QString &attrname, const QString &value);
+				void setAttribute (const QString &attrname,
+				                   const QString &value);
 				QString getAttribute (const QString &attrname) const;
 				void removeAttribute (const QString &attrname);
 				QStringList getAttributeList () const;
@@ -109,19 +110,19 @@ namespace XMMSQt
 				friend class ::XMMSQt::Message;
 				friend class Unary;
 				friend class Nary;
-				
+
 				Coll (Type type);
-				
+
 				void setOperandList (const QList<Coll *> &lst)
 				{
 					m_operands = lst;
 				};
-				
+
 				void setAttributeList (const QMap<QString, QString> &attr)
 				{
 					m_attributes = attr;
 				};
-				
+
 				void setIdList (const QList<quint32> &lst)
 				{
 					m_idlist = lst;
@@ -129,7 +130,7 @@ namespace XMMSQt
 
 				void setIndex (quint32 index, quint32 value);
 				unsigned int getIndex (quint32 index) const;
-				
+
 				QList<Coll *> m_operands;
 				QMap<QString, QString> m_attributes;
 				QList<quint32> m_idlist;
@@ -148,7 +149,7 @@ namespace XMMSQt
 
 			protected:
 				Nary (Type type);
-				~Nary();
+				~Nary ();
 		};
 
 		class Unary : public Coll
@@ -254,7 +255,7 @@ namespace XMMSQt
 		{
 			friend class ::XMMSQt::Collection;
 			friend class ::XMMSQt::CollResult;
-			
+
 			public:
 				Intersection ();
 				~Intersection ();
@@ -287,7 +288,7 @@ namespace XMMSQt
 		{
 			friend class ::XMMSQt::Collection;
 			friend class ::XMMSQt::CollResult;
-			
+
 			public:
 				Has ();
 				Has (Coll& operand);

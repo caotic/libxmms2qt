@@ -78,8 +78,10 @@ namespace XMMSQt
 			};
 
 			void operator() (QObject *object, const char *slot);
-			void operator() (QObject *object, const char *slot, const char *errslot);
-			void operator() (QObject *object, const char *slot, QObject *errobject, const char *errslot);
+			void operator() (QObject *object, const char *slot,
+			                 const char *errslot);
+			void operator() (QObject *object, const char *slot,
+			                 QObject *errobject, const char *errslot);
 
 			int cookie () const { return m_cookie; };
 			void setCookie (int c) {
@@ -129,7 +131,8 @@ namespace XMMSQt
 
 			QString m_apierr;
 
-			void setSlots (QObject *object, const char *slot, QObject *errobject, const char *errslot);
+			void setSlots (QObject *object, const char *slot,
+			               QObject *errobject, const char *errslot);
 
 		protected:
 			quint32 m_restartsignal;

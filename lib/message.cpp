@@ -41,12 +41,11 @@ namespace XMMSQt
 	bool
 	Message::processHeader (const QByteArray &b)
 	{
-		
 		if (b.size () != 16) {
 			qWarning ("Didn't get 16 bytes from parent!");
 			return false;
 		}
-			
+
 		QDataStream r (b);
 		if (!headerComplete ()) {
 			r >> m_object;
@@ -63,14 +62,14 @@ namespace XMMSQt
 
 	bool
 	Message::process (QIODevice *r)
-	{	
+	{
 		if (m_bytearray.size () < m_length) {
 			int readsize = m_length - m_bytearray.size ();
 			QByteArray b = r->read (readsize);
 			DBGIPC ("read %d wanted %d", b.size (), readsize);
 			m_bytearray += b;
 		}
-		
+
 		if (m_bytearray.size () == m_length) {
 	#ifdef __DEBUG_IPC_TO_FILE__
 			QFile fp("/tmp/dbg");
@@ -130,13 +129,13 @@ namespace XMMSQt
 		add(value.size ());
 		m_stream->writeRawData(value.data (), value.size());
 	}
-	
+
 	void
 	Message::add (const Coll::Coll &coll)
 	{
 		/* add type */
 		add (coll.getType ());
-		
+
 		/* add the attribute list */
 		QStringList attrlist = coll.getAttributeList ();
 		add (attrlist.size () / 2); /* hm, it wants the number of key:value pair */
@@ -144,14 +143,14 @@ namespace XMMSQt
 		{
 			add (attrlist.at (i));
 		}
-		
+
 		QList<quint32> idlist = coll.getIdList ();
 		add (idlist.size ());
 		for (int i = 0; i < idlist.size (); i ++)
 		{
 			add (idlist.at (i));
 		}
-		
+
 		QList<Coll::Coll *> operlist = coll.getOperandList ();
 		add (operlist.size ());
 		qDebug ("operlist = %d", operlist.size ());
@@ -176,7 +175,7 @@ namespace XMMSQt
 
 		return retarray;
 	}
-	
+
 	Coll::Coll *
 	Message::getColl ()
 	{
@@ -186,11 +185,11 @@ namespace XMMSQt
 			qWarning ("wanted type %d but got %d", XMMS_OBJECT_CMD_ARG_COLL, type);
 			return 0;
 		}
-		
+
 		quint32 t;
 		*m_stream >> t;
 		Coll::Coll *ret = new Coll::Coll ((Coll::Type) t);
-		
+
 		/* attr list */
 		quint32 len;
 		*m_stream >> len;
@@ -204,7 +203,7 @@ namespace XMMSQt
 			attr[key] = val;
 		}
 		ret->setAttributeList (attr);
-		
+
 		/* idlist */
 		len = 0;
 		*m_stream >> len;
@@ -216,7 +215,7 @@ namespace XMMSQt
 			idlist.append (val);
 		}
 		ret->setIdList (idlist);
-		 
+
 		/* operand list */
 		len = 0;
 		*m_stream >> len;
@@ -226,7 +225,7 @@ namespace XMMSQt
 			oplst.append (getColl ());
 		}
 		ret->setOperandList (oplst);
-		
+
 		return ret;
 	}
 
@@ -262,7 +261,8 @@ namespace XMMSQt
 		qint32 type;
 		*m_stream >> type;
 		if (type != XMMS_OBJECT_CMD_ARG_UINT32) {
-			qWarning ("wanted type %d but got %d", XMMS_OBJECT_CMD_ARG_UINT32, type);
+			qWarning ("wanted type %d but got %d", XMMS_OBJECT_CMD_ARG_UINT32,
+			          type);
 			return 0;
 		}
 		quint32 r;
@@ -274,10 +274,10 @@ namespace XMMSQt
 	Message::getDict ()
 	{
 		PropDict ret;
-		
+
 		qint32 type;
 		*m_stream >> type;
-		
+
 		if (type == XMMS_OBJECT_CMD_ARG_DICT) {
 			DBGRES ("'normal' dict found");
 			// Dict and PropDict have different serialization forms
@@ -302,7 +302,7 @@ namespace XMMSQt
 		} else if (type == XMMS_OBJECT_CMD_ARG_PROPDICT) {
 			DBGRES ("'prop' dict found");
 			QVariantList l = getList (false);
-			
+
 			DBGRES ("list is %d", l.size ());
 			for (int i = 0; i < l.size (); i ++)
 			{
@@ -312,7 +312,7 @@ namespace XMMSQt
 				ret.add (key, value, source);
 			}
 		}
-		
+
 		return ret;
 	}
 
@@ -323,20 +323,21 @@ namespace XMMSQt
 			qint32 type;
 			*m_stream >> type;
 			if (type != XMMS_OBJECT_CMD_ARG_LIST) {
-				qWarning ("wanted type %d but got %d", XMMS_OBJECT_CMD_ARG_LIST, type);
+				qWarning ("wanted type %d but got %d", XMMS_OBJECT_CMD_ARG_LIST,
+				          type);
 				return QList<QVariant> ();
 			}
 		}
-		
+
 		qint32 size;
 		*m_stream >> size;
-		
+
 		QVariantList ret;
 		for (int i = 0; i < size; i ++)
 		{
 			ret.append (getValue ());
 		}
-		
+
 		return ret;
 	}
 
@@ -346,7 +347,8 @@ namespace XMMSQt
 		qint32 type;
 		*m_stream >> type;
 		if (type != XMMS_OBJECT_CMD_ARG_INT32) {
-			qWarning ("wanted type %d but got %d", XMMS_OBJECT_CMD_ARG_INT32, type);
+			qWarning ("wanted type %d but got %d", XMMS_OBJECT_CMD_ARG_INT32,
+			          type);
 			return 0;
 		}
 		qint32 r;
@@ -368,21 +370,23 @@ namespace XMMSQt
 			qint32 type;
 			*m_stream >> type;
 			if (type != XMMS_OBJECT_CMD_ARG_STRING) {
-				qWarning ("wanted type %d but got %d", XMMS_OBJECT_CMD_ARG_STRING, type);
+				qWarning ("wanted type %d but got %d",
+				          XMMS_OBJECT_CMD_ARG_STRING, type);
 				return QString ();
 			}
 		}
 		quint32 len;
 		*m_stream >> len;
 		if (len > fullLength ()) {
-			qWarning ("broken lenght, wanted %d but we only have %d", len, fullLength ());
+			qWarning ("broken lenght, wanted %d but we only have %d", len,
+			          fullLength ());
 			return QString ();
 		}
 		char *str = (char *) malloc (len + 1);
 		m_stream->readRawData (str, len);
 		QString r = QString::fromUtf8 (str);
 		delete str;
-		
+
 		return r;
 	}
 
@@ -392,14 +396,16 @@ namespace XMMSQt
 		qint32 type;
 		*m_stream >> type;
 		if (type != XMMS_OBJECT_CMD_ARG_BIN) {
-			qWarning ("wanted type %d but got %d", XMMS_OBJECT_CMD_ARG_BIN, type);
+			qWarning ("wanted type %d but got %d", XMMS_OBJECT_CMD_ARG_BIN,
+			          type);
 			return QByteArray ();
 		}
-		
+
 		quint32 len;
 		*m_stream >> len;
 		if (len > fullLength ()) {
-			qWarning ("broken lenght, wanted %d but we only have %d", len, fullLength ());
+			qWarning ("broken lenght, wanted %d but we only have %d", len,
+			          fullLength ());
 			return QByteArray ();
 		}
 		char *buf = (char *) malloc (len);

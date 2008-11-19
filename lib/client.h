@@ -14,16 +14,19 @@
  *  Lesser General Public License for more details.
  */
 
+#ifndef __XMMS_CLIENT_H__
+#define __XMMS_CLIENT_H__
+
 #include <QObject>
 #include <QTcpSocket>
 
+namespace XMMSQt
+{
+	class Client;
+}
+
 #include "message.h"
 #include "result.h"
-
-class XMMSQt::Client;
-
-#ifndef __XMMS_CLIENT_H__
-#define __XMMS_CLIENT_H__
 
 #include "playlist.h"
 #include "medialib.h"
@@ -49,7 +52,7 @@ namespace XMMSQt
 		public:
 			Client (QObject *parent, const QString &name);
 			void doConnect (const QString &, quint32);
-					
+
 			void setResult (const Result &res) {
 				DBGIPC ("adding %d", res.cookie ());
 				m_resmap[res.cookie()] = res;
@@ -66,20 +69,20 @@ namespace XMMSQt
 			Bindata bindata;
 			Config config;
 			Collection collection;
-			
+
 		private:
 			QString m_name;
 			quint32 m_cookie;
 			Message m_readmsg;
-			
+
 			void hello ();
 			void parseMessage ();
 			QTcpSocket m_socket;
-			
+
 			QMap<quint32, Result> m_resmap;
 		signals:
 			void connected (bool);
-			
+
 		private slots:
 			void socketError (QAbstractSocket::SocketError);
 			void socketRead ();

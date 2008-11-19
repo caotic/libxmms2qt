@@ -42,11 +42,13 @@ namespace XMMSQt
 			Result broadcastEntryAdded ();
 			Result broadcastEntryChanged ();
 
-			static QString encodeUrl (const QString &, const QStringList &args = QStringList ());
+			static QString encodeUrl (const QString &,
+			                          const QStringList &args = QStringList ());
 
 		public slots:
 			Result add (const QUrl &, const QStringList &args = QStringList ()) const;
-			Result add (const QString &, const QStringList &args = QStringList ()) const;
+			Result add (const QString &,
+			            const QStringList &args = QStringList ()) const;
 			Result addEncoded (const QString &) const;
 			Result addPath (const QUrl &) const;
 			Result addPath (const QString &) const;
@@ -59,17 +61,17 @@ namespace XMMSQt
 			Result move (quint32 id, const QString &) const;
 
 			Result setEntryProperty (quint32 id, const QString &key,
-										 const QString &value) const;
+			                         const QString &value) const;
 			Result setEntryProperty (quint32 id, const QString &key,
-										 const QString &value,
-										 const QString &source) const;
+			                         const QString &value,
+			                         const QString &source) const;
 			Result setEntryProperty (quint32 id, const QString &key,
-										 qint32 value) const;
+			                         qint32 value) const;
 			Result setEntryProperty (quint32 id, const QString &key,
-										 qint32 value, const QString &source) const;
+			                         qint32 value, const QString &source) const;
 			Result removeEntryProperty (quint32 id, const QString &key) const;
 			Result removeEntryProperty (quint32 id, const QString &key,
-											const QString &source) const;
+			                            const QString &source) const;
 	};
 
 }

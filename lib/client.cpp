@@ -134,10 +134,12 @@ namespace XMMSQt
 		}
 
 		Result ret (this, m_cookie ++);
-		if (msg.object () == XMMS_IPC_OBJECT_SIGNAL && msg.cmd () == XMMS_IPC_CMD_SIGNAL && restartsignal) {
+		if (msg.object () == XMMS_IPC_OBJECT_SIGNAL &&
+		    msg.cmd () == XMMS_IPC_CMD_SIGNAL && restartsignal) {
 			DBGIPC ("got signal, setting restart bit to %d", restartsignal);
 			ret.setRestartSignal (restartsignal);
-		} else if (msg.object () == XMMS_IPC_OBJECT_SIGNAL && msg.cmd () == XMMS_IPC_CMD_BROADCAST) {
+		} else if (msg.object () == XMMS_IPC_OBJECT_SIGNAL &&
+		           msg.cmd () == XMMS_IPC_CMD_BROADCAST) {
 			ret.setBroadcast (true);
 		}
 

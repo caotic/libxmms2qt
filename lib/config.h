@@ -38,7 +38,7 @@ namespace XMMSQt
 
 			Result listValues ();
 
-			Result broadcastValueChanged();
+			Result broadcastValueChanged ();
 
 		public slots:
 			Result registerValue (QString name, QString defval);
