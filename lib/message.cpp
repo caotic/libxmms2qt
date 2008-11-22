@@ -27,6 +27,8 @@
 
 #include <xmmsc/xmmsc_idnumbers.h>
 
+#include "compat_p.h"
+
 namespace XMMSQt
 {
 
@@ -181,8 +183,8 @@ namespace XMMSQt
 	{
 		qint32 type;
 		*m_stream >> type;
-		if (type != XMMS_OBJECT_CMD_ARG_COLL) {
-			qWarning ("wanted type %d but got %d", XMMS_OBJECT_CMD_ARG_COLL, type);
+		if (type != XMMSV_TYPE_COLL) {
+			qWarning ("wanted type %d but got %d", XMMSV_TYPE_COLL, type);
 			return 0;
 		}
 
@@ -235,15 +237,15 @@ namespace XMMSQt
 		qint32 type;
 		*m_stream >> type;
 		switch (type) {
-			case XMMS_OBJECT_CMD_ARG_UINT32:
+			case XMMSV_TYPE_UINT32:
 				quint32 ui;
 				*m_stream >> ui;
 				return QVariant (ui);
-			case XMMS_OBJECT_CMD_ARG_INT32:
+			case XMMSV_TYPE_INT32:
 				qint32 i;
 				*m_stream >> i;
 				return QVariant (i);
-			case XMMS_OBJECT_CMD_ARG_STRING:
+			case XMMSV_TYPE_STRING:
 				{
 					QString s = getString (false);
 					return QVariant (s);
@@ -260,8 +262,8 @@ namespace XMMSQt
 	{
 		qint32 type;
 		*m_stream >> type;
-		if (type != XMMS_OBJECT_CMD_ARG_UINT32) {
-			qWarning ("wanted type %d but got %d", XMMS_OBJECT_CMD_ARG_UINT32,
+		if (type != XMMSV_TYPE_UINT32) {
+			qWarning ("wanted type %d but got %d", XMMSV_TYPE_UINT32,
 			          type);
 			return 0;
 		}
@@ -278,7 +280,7 @@ namespace XMMSQt
 		qint32 type;
 		*m_stream >> type;
 
-		if (type == XMMS_OBJECT_CMD_ARG_DICT) {
+		if (type == XMMSV_TYPE_DICT) {
 			DBGRES ("'normal' dict found");
 			// Dict and PropDict have different serialization forms
 			quint32 size;
@@ -299,6 +301,8 @@ namespace XMMSQt
 				QVariant value = l.at (i);
 				ret.add (key, value);
 			} */
+#ifndef HAVE_XMMSV
+// FIXME: for now disabled in post-rv xmms2 (upcoming DrM and later)
 		} else if (type == XMMS_OBJECT_CMD_ARG_PROPDICT) {
 			DBGRES ("'prop' dict found");
 			QVariantList l = getList (false);
@@ -311,6 +315,7 @@ namespace XMMSQt
 				QVariant value = l.at (i);
 				ret.add (key, value, source);
 			}
+#endif
 		}
 
 		return ret;
@@ -322,8 +327,8 @@ namespace XMMSQt
 		if (checktype) {
 			qint32 type;
 			*m_stream >> type;
-			if (type != XMMS_OBJECT_CMD_ARG_LIST) {
-				qWarning ("wanted type %d but got %d", XMMS_OBJECT_CMD_ARG_LIST,
+			if (type != XMMSV_TYPE_LIST) {
+				qWarning ("wanted type %d but got %d", XMMSV_TYPE_LIST,
 				          type);
 				return QList<QVariant> ();
 			}
@@ -346,8 +351,8 @@ namespace XMMSQt
 	{
 		qint32 type;
 		*m_stream >> type;
-		if (type != XMMS_OBJECT_CMD_ARG_INT32) {
-			qWarning ("wanted type %d but got %d", XMMS_OBJECT_CMD_ARG_INT32,
+		if (type != XMMSV_TYPE_INT32) {
+			qWarning ("wanted type %d but got %d", XMMSV_TYPE_INT32,
 			          type);
 			return 0;
 		}
@@ -369,9 +374,9 @@ namespace XMMSQt
 		if (checktype) {
 			qint32 type;
 			*m_stream >> type;
-			if (type != XMMS_OBJECT_CMD_ARG_STRING) {
+			if (type != XMMSV_TYPE_STRING) {
 				qWarning ("wanted type %d but got %d",
-				          XMMS_OBJECT_CMD_ARG_STRING, type);
+				          XMMSV_TYPE_STRING, type);
 				return QString ();
 			}
 		}
@@ -395,8 +400,8 @@ namespace XMMSQt
 	{
 		qint32 type;
 		*m_stream >> type;
-		if (type != XMMS_OBJECT_CMD_ARG_BIN) {
-			qWarning ("wanted type %d but got %d", XMMS_OBJECT_CMD_ARG_BIN,
+		if (type != XMMSV_TYPE_BIN) {
+			qWarning ("wanted type %d but got %d", XMMSV_TYPE_BIN,
 			          type);
 			return QByteArray ();
 		}

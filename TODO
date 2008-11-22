@@ -1,0 +1,11 @@
++ set HAVE_XMMSV automatically
+	at the moment HAVE_XMMSV must be defined manually. The automatic detection
+	could rely on XMMS_IPC_PROTOCOL_VERSION >= 13, as soon as it is bumped
+	because of rv-split
+
++ check serialisations of lists, dicts, colls
+	afaik dicts can now also contain dicts, make sure the deserialisation
+	can handle that
+
++ rewrite propdict, perhaps into some QDict <QString, QDict<QString,QValue> >
+  subtype

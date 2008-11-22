@@ -11,6 +11,9 @@ CONFIG -= app_bundle
 QT -= gui
 QT += network
 
+# TODO: detect automatically
+#DEFINES += HAVE_XMMSV
+
 CONFIG += link_pkgconfig
 PKGCONFIG += xmms2-plugin
 
