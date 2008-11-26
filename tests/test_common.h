@@ -9,12 +9,12 @@ using namespace XMMSQt;
 do {\
     if (statement) {\
         if (!QTest::qVerify(true, #statement, (description), __FILE__, __LINE__)) {\
-			m_loop.exit();\
+			waitDone ();\
             return true;\
 		}\
     } else {\
         if (!QTest::qVerify(false, #statement, (description), __FILE__, __LINE__)) {\
-			m_loop.exit();\
+			waitDone ();\
             return true;\
 		}\
     }\

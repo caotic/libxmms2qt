@@ -16,7 +16,7 @@ TestBindata::add ()
 	m_testdata = f.readAll ();
 	m_client.bindata.add (m_testdata) (this, SLOT (cbAdd (QString)));
 	f.close ();
-	m_loop.exec ();
+	waitForAnswer ();
 }
 
 bool
@@ -28,7 +28,7 @@ TestBindata::cbAdd (QString hash)
 	    QCryptographicHash::hash (m_testdata, QCryptographicHash::Md5).toHex (),
 		"Returned String doesn't match md5 hash of data");
 
-	m_loop.exit ();
+	waitDone ();
 	return true;
 }
 
@@ -40,7 +40,7 @@ TestBindata::list ()
 	}
 	m_client.bindata.list ()(this, SLOT (cbList (QVariantList)), SLOT(cbFail (QString)));
 
-	m_loop.exec ();
+	waitForAnswer ();
 }
 
 bool
@@ -50,7 +50,7 @@ TestBindata::cbList (QVariantList list)
 
 	TVERIFY (list.contains (hash), "Server doesn't have the file we sent");
 
-	m_loop.exit ();
+	waitDone ();
 	return true;
 }
 
@@ -60,7 +60,7 @@ TestBindata::retrieve ()
 	m_client.bindata.retrieve (m_serverhash)
 	                          (this, SLOT (cbRetrieve (QByteArray)));
 
-	m_loop.exec ();
+	waitForAnswer ();
 }
 
 bool
@@ -69,7 +69,7 @@ TestBindata::cbRetrieve (QByteArray serverdata)
 	TVERIFY (m_testdata == serverdata,
 	         "Our local file is different from the retrieved one");
 
-	m_loop.exit ();
+	waitDone ();
 	return true;
 }
 
@@ -79,7 +79,7 @@ TestBindata::remove ()
 {
 	m_client.bindata.remove (m_serverhash) (this, SLOT (cbRemove ()));
 
-	m_loop.exec ();
+	waitForAnswer ();
 }
 
 bool
@@ -88,7 +88,7 @@ TestBindata::cbRemove ()
 #if XMMS_IPC_VERSION >=11
 	m_client.bindata.list ()(this, SLOT (cbRemove2 (QVariantList)));
 #else
-	m_loop.exit ();
+	waitDone ();
 #endif
 	return true;
 }
@@ -100,6 +100,6 @@ TestBindata::cbRemove2 (QVariantList list)
 
 	TVERIFY (!list.contains (hash), "Server still contains Bindata");
 
-	m_loop.exit ();
+	waitDone ();
 	return true;
 }
