@@ -301,7 +301,7 @@ namespace XMMSQt
 				QVariant value = l.at (i);
 				ret.add (key, value);
 			} */
-#ifndef HAVE_XMMSV
+#if !HAVE_XMMSV
 // FIXME: for now disabled in post-rv xmms2 (upcoming DrM and later)
 		} else if (type == XMMS_OBJECT_CMD_ARG_PROPDICT) {
 			DBGRES ("'prop' dict found");

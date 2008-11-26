@@ -3,7 +3,17 @@
  * any time.
  */
 
-#ifndef HAVE_XMMSV
+#include <xmmsc/xmmsc_idnumbers.h>
+
+#ifdef HAVE_XMMSV
+#undef
+#define HAVE_XMMSV 1
+#else
+#define HAVE_XMMSV (XMMS_IPC_PROTOCOL_VERSION >= 13)
+#endif
+
+
+#if !HAVE_XMMSV
 
 // #define XMMSV_TYPE_NONE
 // #define XMMSV_TYPE_ERROR
