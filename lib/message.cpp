@@ -250,6 +250,13 @@ namespace XMMSQt
 					QString s = getString (false);
 					return QVariant (s);
 				}
+			// For DrM and later
+			case XMMSV_TYPE_DICT:
+				{
+					//FIXME:
+					qDebug ("Dict");
+					return QVariant ();
+				}
 			default:
 				qWarning ("Message::getValue(): Type not handled: %u", type);
 				return QVariant ();
@@ -308,13 +315,14 @@ namespace XMMSQt
 			QVariantList l = getList (false);
 
 			DBGRES ("list is %d", l.size ());
-			for (int i = 0; i < l.size (); i ++)
-			{
-				QString source = l.at (i ++).toString ();
-				QString key = l.at (i ++).toString ();
-				QVariant value = l.at (i);
-				ret.add (key, value, source);
-			}
+			return PropDict (l);
+//			for (int i = 0; i < l.size (); i ++)
+//			{
+//				QString source = l.at (i ++).toString ();
+//				QString key = l.at (i ++).toString ();
+//				QVariant value = l.at (i);
+//				ret.add (key, value, source);
+//			}
 #endif
 		}
 

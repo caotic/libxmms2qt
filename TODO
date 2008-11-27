@@ -9,3 +9,5 @@
 
 + rewrite propdict, perhaps into some QDict <QString, QDict<QString,QValue> >
   subtype
+
++ decode 'url' field in propdict

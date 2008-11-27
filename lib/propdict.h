@@ -14,29 +14,21 @@
  *  Lesser General Public License for more details.
  */
 
+#ifndef __PROPDICT_H__
+#define __PROPDICT_H__
+
 #include <QObject>
 #include <QMap>
 #include <QRegExp>
 #include <QVariant>
-
-#ifndef __PROPDICT_H__
-#define __PROPDICT_H__
 
 namespace XMMSQt
 {
 
 	class PropDict : public QObject
 	{
-		Q_OBJECT
 		public:
-			PropDict () : QObject ()
-			{
-				m_source.append (QRegExp ("server"));
-				m_source.append (QRegExp ("client/.*"));
-				m_source.append (QRegExp ("plugin/id3v2"));
-				m_source.append (QRegExp ("plugin/.*"));
-				m_source.append (QRegExp (".*"));
-			};
+			PropDict () : QObject () {initSourcePref ();}
 
 			PropDict (const PropDict &src) : QObject (src.parent ())
 			{
@@ -44,8 +36,22 @@ namespace XMMSQt
 				m_prop = src.m_prop;
 			};
 
+			PropDict (const QVariantMap& src) : QObject ()
+			{
+				initSourcePref ();
+				// TODO: Make sure we really have a propdict
+				m_prop = src;
+			}
+
+			// The pre-rv-split serialisation
+			PropDict (const QVariantList& src);
+
 			void setSource (const QList<QRegExp> &l)
 			{
+				if (l.size () == 0) {
+					qDebug ("Propdict: empty source preference rejected");
+					return;
+				}
 				m_source = l;
 			};
 
@@ -55,48 +61,11 @@ namespace XMMSQt
 			};
 
 			void add (const QString &key, const QVariant &val,
-			          const QString &source = QString ())
-			{
-				QVariantList l;
-				if (m_prop.contains (key)) {
-					l = m_prop[key];
-				}
+			          const QString &source = QString ());
 
-				l.append (source);
-				l.append (val);
+			QVariantMap toDict () const;
 
-				m_prop[key] = l;
-			};
-
-			QVariant operator[] (const QString &key) const
-			{
-				if (m_prop.contains (key)) {
-					QVariantList l = m_prop[key];
-					QVariant ret;
-					qint32 lsrc = 0;
-					for (int i = 0; i < l.size (); i++) {
-						QString source = l.at (i++).toString ();
-						QVariant value = l.at (i);
-
-						if (lsrc != 0) {
-							for (int l = 0; l < m_source.size (); l++) {
-								if (m_source.at (l).indexIn (source)) {
-									lsrc = l;
-									ret = value;
-									break;
-								}
-							}
-						} else {
-							lsrc = m_source.size ();
-							ret = value;
-						}
-					}
-
-					return ret;
-				}
-
-				return QVariant ();
-			};
+			QVariant operator[] (const QString &key) const;
 
 			PropDict& operator= (const PropDict &src)
 			{
@@ -107,7 +76,10 @@ namespace XMMSQt
 
 
 		protected:
-			QMap<QString, QVariantList> m_prop;
+			void initSourcePref ();
+			QVariant getBestValue (const QVariantMap &) const;
+
+			QVariantMap m_prop;
 			QList<QRegExp> m_source;
 
 	};

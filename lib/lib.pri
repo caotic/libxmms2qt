@@ -46,5 +46,6 @@ SOURCES += bindata.cpp \
            result.cpp \
            stats.cpp \
            xform.cpp \
+           propdict.cpp \
 		   coll.cpp \
 		   collection.cpp
