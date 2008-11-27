@@ -86,4 +86,6 @@ namespace XMMSQt
 
 }
 
+Q_DECLARE_METATYPE (XMMSQt::PropDict)
+
 #endif

@@ -50,7 +50,14 @@ namespace XMMSQt
 			sdict = m_prop[key].toMap ();
 		}
 
-		sdict[source] = val;
+		// If we get the request to add a QVarianMap we just ignore 'source'
+		// and merge the new map into the one we already have for 'key'
+		if (val.canConvert (QVariant::Map)) {
+			QVariantMap v = val.toMap ();
+			sdict.unite (v);
+		} else {
+			sdict[source] = val;
+		}
 
 		m_prop[key] = sdict;
 	};
@@ -66,7 +73,12 @@ namespace XMMSQt
 			QVariant v = it.value ();
 			// TODO: This should work for DrL. But for DrM and later, v might
 			// be a plain value and no list. 
-			ret[it.key ()] = getBestValue (v.toMap ());
+			if (v.canConvert (QVariant::Map)) {
+				ret[it.key ()] = getBestValue (v.toMap ());
+			} else {
+				ret[it.key ()] = v;
+			}
+			++it;
 		}
 		return ret;
 	}
@@ -77,7 +89,12 @@ namespace XMMSQt
 		if (!m_prop.contains (key))
 			return QVariant ();
 
-		return getBestValue (m_prop[key].toMap ());
+		QVariant v = m_prop[key];
+		if (v.canConvert (QVariant::Map)) {
+			return getBestValue (v.toMap ());
+		} else {
+			return v;
+		}
 	}
 
 	void

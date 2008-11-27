@@ -250,13 +250,21 @@ namespace XMMSQt
 					QString s = getString (false);
 					return QVariant (s);
 				}
+#if !HAVE_XMMSV
+			case XMMS_OBJECT_CMD_ARG_PROPDICT:
+				return QVariant::fromValue (getPropDict (type));
+#endif
 			// For DrM and later
 			case XMMSV_TYPE_DICT:
 				{
-					//FIXME:
-					qDebug ("Dict");
-					return QVariant ();
+					return QVariant (getDict (type));
 				}
+			case XMMSV_TYPE_LIST:
+			case XMMSV_TYPE_COLL:
+			// FIXME
+				qWarning ("Message::getValue not yet supported for LIST and" \
+				          "COLL");
+				break;
 			default:
 				qWarning ("Message::getValue(): Type not handled: %u", type);
 				return QVariant ();
@@ -279,54 +287,67 @@ namespace XMMSQt
 		return r;
 	}
 
-	PropDict
-	Message::getDict ()
-	{
-		PropDict ret;
-
-		qint32 type;
-		*m_stream >> type;
-
-		if (type == XMMSV_TYPE_DICT) {
-			DBGRES ("'normal' dict found");
-			// Dict and PropDict have different serialization forms
-			quint32 size;
-			*m_stream >> size;
-			for (quint32 i = 0; i < size; i ++)
-			{
-				QString key = getString (false);
-				QVariant value = getValue ();
-				ret.add (key, value);
-			}
-			// The serialization of dict differs from the serialization of
-			// PropDict and VariantList. Leaveing this code in here in case
-			// that changes in the future
-			/* QVariantList l = getList (false);
-			for (int i = 0; i < l.size (); i ++)
-			{
-				QString key = l.at (i ++).toString ();
-				QVariant value = l.at (i);
-				ret.add (key, value);
-			} */
-#if !HAVE_XMMSV
-// FIXME: for now disabled in post-rv xmms2 (upcoming DrM and later)
-		} else if (type == XMMS_OBJECT_CMD_ARG_PROPDICT) {
-			DBGRES ("'prop' dict found");
-			QVariantList l = getList (false);
-
-			DBGRES ("list is %d", l.size ());
-			return PropDict (l);
-//			for (int i = 0; i < l.size (); i ++)
-//			{
-//				QString source = l.at (i ++).toString ();
-//				QString key = l.at (i ++).toString ();
-//				QVariant value = l.at (i);
-//				ret.add (key, value, source);
-//			}
-#endif
+	QVariantMap
+	Message::getDict (qint32 type) {
+		if (type == TYPE_UNDEFINED) {
+			*m_stream >> type;
 		}
 
-		return ret;
+		switch (type) {
+			case XMMSV_TYPE_DICT:
+			{
+				QVariantMap ret;
+				// Dict and PropDict have different serialization forms
+				quint32 size;
+				*m_stream >> size;
+				for (quint32 i = 0; i < size; i ++)
+				{
+					QString key = getString (false);
+					QVariant value = getValue ();
+					ret[key] = value;
+				}
+				return ret;
+			}
+			break;
+#if !HAVE_XMMSV
+			case XMMS_OBJECT_CMD_ARG_PROPDICT:
+				return getPropDict (type).toDict ();
+				break;
+#endif
+			default:
+				qWarning ("Called Message::getDict with unsupported " \
+				          "dict type: %i", type);
+				break;
+		}
+		return QVariantMap ();
+	}
+
+	PropDict
+	Message::getPropDict (qint32 type)
+	{
+		if (type == TYPE_UNDEFINED) {
+			*m_stream >> type;
+		}
+
+		switch (type) {
+			case XMMSV_TYPE_DICT:
+				return PropDict (getDict (type));
+#if !HAVE_XMMSV
+// FIXME: for now disabled in post-rv xmms2 (upcoming DrM and later)
+			case XMMS_OBJECT_CMD_ARG_PROPDICT:
+			{
+				DBGRES ("'prop' dict found");
+				QVariantList l = getList (false);
+
+				DBGRES ("list is %d", l.size ());
+				return PropDict (l);
+			}
+#endif
+			default:
+				qWarning ("Called Message::getPropDict with unsupported " \
+				          "dict type: %i", type);
+		}
+		return PropDict ();
 	}
 
 	QVariantList

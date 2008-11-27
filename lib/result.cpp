@@ -105,7 +105,7 @@ namespace XMMSQt
 					QMetaObject::invokeMethod (m_object, sig,
 					                           Q_RETURN_ARG (bool, ret),
 					                           Q_ARG (PropDict,
-				                                      m_message.getDict ()));
+				                                      m_message.getPropDict ()));
 				} else if (param == "QByteArray") {
 					QMetaObject::invokeMethod (m_object, sig,
 					                           Q_RETURN_ARG (bool, ret),

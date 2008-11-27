@@ -3,11 +3,6 @@
 	could rely on XMMS_IPC_PROTOCOL_VERSION >= 13, as soon as it is bumped
 	because of rv-split
 
-+ check serialisations of lists, dicts, colls
-	afaik dicts can now also contain dicts, make sure the deserialisation
-	can handle that
-
-+ rewrite propdict, perhaps into some QDict <QString, QDict<QString,QValue> >
-  subtype
++ check serialisations of lists and colls in rv-split
 
 + decode 'url' field in propdict

@@ -24,6 +24,8 @@
 #include "propdict.h"
 #include "coll.h"
 
+static const qint32 TYPE_UNDEFINED = -1;
+
 namespace XMMSQt
 {
 
@@ -71,7 +73,8 @@ namespace XMMSQt
 		QString getString (const bool &checktype = true);
 		QVariant getValue ();
 		QVariantList getList (const bool &checktype = true);
-		PropDict getDict ();
+		QVariantMap getDict (qint32 type = TYPE_UNDEFINED);
+		PropDict getPropDict (qint32 type = TYPE_UNDEFINED);
 		QByteArray getBindata ();
 		Coll::Coll *getColl ();
 
