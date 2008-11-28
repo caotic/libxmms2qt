@@ -266,7 +266,8 @@ namespace XMMSQt
 
 		data.replace ('+', ' ');
 #if QT_VERSION >= 0x040400
-		return (QString (QByteArray::fromPercentEncoding (data)));
+		QByteArray ret = QByteArray::fromPercentEncoding (data);
+		return QString::fromUtf8 (ret);
 #else
 		// FIXME: add a compatibility implementation here
 		if (data.contains ('%'))

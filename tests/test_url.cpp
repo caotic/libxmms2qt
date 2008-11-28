@@ -33,6 +33,9 @@ setTestUrls ()
 	QTest::newRow ("No encoding necessary") << "file:///Test.ext";
 	QTest::newRow ("Whitespaces") << "file:///Test Name.ext";
 	QTest::newRow ("Ascii special characters") << "file:///!$\%&/()=?\\.~<>";
+	// Those seem to be encoded in unicode....
+	QTest::newRow ("Latin1 characters ") << ("ÀÁÂÃÄÅÆàáâãäåæß.€¥");
+	QTest::newRow ("Japanese characters") << QString::fromWCharArray (L"漢字とひらがなとカタカナ");
 }
 
 #ifdef HAVE_CBINDINGS
