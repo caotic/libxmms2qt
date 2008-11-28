@@ -2,29 +2,39 @@
 #include "test_bindata.h"
 #include "test_error.h"
 #include "test_coll.h"
+#include "test_url.h"
 
 int
 main (int argc, char **argv)
 {
 	QCoreApplication app (argc, argv);
+	// ret will count the total number of failed tests
+	int ret = 0;
 
 	{
+		TestUrl urltest;
+		ret += QTest::qExec (&urltest, argc, argv);
+	}
+	{
 		TestError error;
-		QTest::qExec (&error, argc, argv);
+		ret += QTest::qExec (&error, argc, argv);
 	}
 	{
 		TestColl coll;
-		QTest::qExec (&coll, argc, argv);
+		ret += QTest::qExec (&coll, argc, argv);
 	}
 	{
 		TestPlaylist playlist;
-		QTest::qExec (&playlist, argc, argv);
+		ret += QTest::qExec (&playlist, argc, argv);
 	}
 
 	{
 		TestBindata bindata;
-		QTest::qExec (&bindata, argc, argv);
+		ret += QTest::qExec (&bindata, argc, argv);
 	}
+
+	qDebug () << "Sum of failed tests: " << ret;
+	return ret;
 }
 
 //QTEST_MAIN(TestBasics);

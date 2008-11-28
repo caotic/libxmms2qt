@@ -45,6 +45,8 @@ namespace XMMSQt
 			static QString encodeUrl (const QString &,
 			                          const QStringList &args = QStringList ());
 
+			static QString decodeUrl (const QString &);
+
 		public slots:
 			Result add (const QUrl &, const QStringList &args = QStringList ()) const;
 			Result add (const QString &,

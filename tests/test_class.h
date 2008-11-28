@@ -33,6 +33,7 @@ class TestClass : public QObject
 		{
 			Q_ASSERT_X (b, "connected", "failed to connect to server");
 			waitDone ();
+			QVERIFY (b); // don't execute any other command if connection fails
 		};
 
 		void cbFail (QString errMsg)

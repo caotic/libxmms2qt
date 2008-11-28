@@ -204,24 +204,33 @@ namespace XMMSQt
 		return m_client->queueMsg (msg);
 	}
 
+#if QT_VERSION >= 0x040400
+	//Characters that should not be % encoded
+	// ' ' (Space) is in here, because it is encoded as + and should not be
+	// caught by QByteArray's percentEncode method
+	static const QByteArray excludeEnc (" :/-._");
+	//Characters that normally would not be % encoded
+	static const QByteArray includeEnc ("~");
+#else
+	static const QByteArray goodChar = ":/-._";
 	#define GOODCHAR(a) ((((a) >= 'a') && ((a) <= 'z')) || \
-						 (((a) >= 'A') && ((a) <= 'Z')) || \
-						 (((a) >= '0') && ((a) <= '9')) || \
-						 ((a) == ':') || \
-						 ((a) == '/') || \
-						 ((a) == '-') || \
-						 ((a) == '.') || \
-						 ((a) == '_'))
+	                     (((a) >= 'A') && ((a) <= 'Z')) || \
+	                     (((a) >= '0') && ((a) <= '9')) || \
+	                     (goodChar.contains (a)))
+#endif
 
 	/* TODO: need to add support for arguments here */
 	QString
 	Medialib::encodeUrl (const QString &src, const QStringList &args)
 	{
-		if (args.size () > 0) {
-			qDebug ("Medialib: Sorry adding files with arguments is not supported yet");
-		}
-
 		QString ret;
+#if QT_VERSION >= 0x040400
+		QByteArray data = src.toUtf8 (); // this might have to be toLatin1()
+		QByteArray enc = data.toPercentEncoding (excludeEnc, includeEnc);
+		enc.replace (' ', '+');
+
+		ret = QString (enc);
+#else
 		static const char hex[17] = "0123456789abcdef";
 
 		for (int i = 0; i < src.size (); i ++)
@@ -237,8 +246,34 @@ namespace XMMSQt
 				ret += hex[(chr & 0x0f)];
 			}
 		}
+#endif
+		if (args.size () > 0) {
+			for (int i = 0; i < args.size (); i++) {
+				ret.append ( (i == 0) ? '?' : '&');
+				// Perhaps I should check for '?' and '&' here.
+				// But the c bindings don't so I left it out
+				ret.append (args[i]);
+			}
+		}
 
 		return ret;
+	}
+
+	QString
+	Medialib::decodeUrl (const QString &urlenc)
+	{
+		QByteArray data = urlenc.toAscii ();
+
+		data.replace ('+', ' ');
+#if QT_VERSION >= 0x040400
+		return (QString (QByteArray::fromPercentEncoding (data)));
+#else
+		// FIXME: add a compatibility implementation here
+		if (data.contains ('%'))
+			qWarning ("Url could not be decoded correctly, please upgrade to Qt 4.4");
+
+		return QString (data);
+#endif
 	}
 
 }

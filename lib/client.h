@@ -14,8 +14,8 @@
  *  Lesser General Public License for more details.
  */
 
-#ifndef __XMMS_CLIENT_H__
-#define __XMMS_CLIENT_H__
+#ifndef __XMMSQT_CLIENT_H__
+#define __XMMSQT_CLIENT_H__
 
 #include <QObject>
 #include <QTcpSocket>

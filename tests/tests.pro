@@ -20,11 +20,13 @@ OBJECTS_DIR = .obj
 #QMAKE_LFLAGS += -Wl,-rpath,..
 
 CONFIG += link_pkgconfig
-PKGCONFIG += xmms2-plugin
+PKGCONFIG += xmms2-plugin xmms2-client
+DEFINES += HAVE_CBINDINGS
 
 
 # Input
-HEADERS += test_playlist.h \
+HEADERS += test_url.h \
+           test_playlist.h \
            test_bindata.h \
 		   test_common.h \
 		   test_class.h \
@@ -32,6 +34,7 @@ HEADERS += test_playlist.h \
 		   test_coll.h
 
 SOURCES += main.cpp \
+           test_url.cpp \
            test_playlist.cpp \
            test_bindata.cpp \
 		   test_error.cpp \
