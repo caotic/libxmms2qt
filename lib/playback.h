@@ -17,7 +17,6 @@
 #ifndef __PLAYBACK_H__
 #define __PLAYBACK_H__
 
-#include <QObject>
 #include "object.h"
 #include "result.h"
 

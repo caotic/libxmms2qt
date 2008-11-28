@@ -18,7 +18,6 @@
 #define __OBJECT_H__
 
 #include <QObject>
-#include <xmmsc/xmmsc_idnumbers.h>
 
 namespace XMMSQt
 {

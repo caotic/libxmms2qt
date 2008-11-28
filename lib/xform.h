@@ -26,6 +26,9 @@ class QUrl;
 namespace XMMSQt
 {
 
+	/** @class Xform xform,h "FIXME:path"
+	 *  @brief This class is used to browse the servers filesystem
+	 */
 	class Xform : public BaseObject
 	{
 		public:

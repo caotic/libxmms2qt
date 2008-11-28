@@ -155,11 +155,11 @@ namespace XMMSQt
 	}
 
 	Result
-	Playlist::remove (quint32 id, const QString &playlist)
+	Playlist::remove (quint32 pos, const QString &playlist)
 	{
 		Message msg (XMMS_IPC_OBJECT_PLAYLIST, XMMS_IPC_CMD_REMOVE_ENTRY);
 		msg.add (playlist);
-		msg.add (id);
+		msg.add (pos);
 		return m_client->queueMsg (msg);
 	}
 

@@ -19,7 +19,6 @@
 
 #include <QStringList>
 
-#include <xmmsc/xmmsc_idnumbers.h>
 #include "object.h"
 #include "result.h"
 #include "typedefs.h"

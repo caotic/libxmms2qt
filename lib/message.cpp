@@ -315,8 +315,8 @@ namespace XMMSQt
 				break;
 #endif
 			default:
-				qWarning ("Called Message::getDict with unsupported " \
-				          "dict type: %i", type);
+				qWarning ("Called Message::getDict with unsupported type: %i",
+				          type);
 				break;
 		}
 		return QVariantMap ();
@@ -333,7 +333,6 @@ namespace XMMSQt
 			case XMMSV_TYPE_DICT:
 				return PropDict (getDict (type));
 #if !HAVE_XMMSV
-// FIXME: for now disabled in post-rv xmms2 (upcoming DrM and later)
 			case XMMS_OBJECT_CMD_ARG_PROPDICT:
 			{
 				DBGRES ("'prop' dict found");
@@ -345,7 +344,7 @@ namespace XMMSQt
 #endif
 			default:
 				qWarning ("Called Message::getPropDict with unsupported " \
-				          "dict type: %i", type);
+				          "type: %i", type);
 		}
 		return PropDict ();
 	}

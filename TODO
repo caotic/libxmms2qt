@@ -1,8 +1,11 @@
 + set HAVE_XMMSV automatically
-	at the moment HAVE_XMMSV must be defined manually. The automatic detection
-	could rely on XMMS_IPC_PROTOCOL_VERSION >= 13, as soon as it is bumped
-	because of rv-split
+	If xmms2d alredy uses xmmsv_t, but XMMS_IPC_PROTOCOL_VERSION is still 12,
+	we must still define HAVE_XMMSV manually. But as the
+	XMMS_IPC_PROTOCOL_VERSION will be changed to 13 before the release, this
+	shouldn't be a problem
 
 + check serialisations of lists and colls in rv-split
+
++ add visualization
 
 + decode 'url' field in propdict

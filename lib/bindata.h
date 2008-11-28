@@ -14,15 +14,13 @@
  *  Lesser General Public License for more details.
  */
 
-#include <QObject>
-#include <QByteArray>
-
 #ifndef __BINDATA_H__
 #define __BINDATA_H__
 
-#include <QObject>
+#include <QByteArray>
 #include "object.h"
 #include "result.h"
+
 namespace XMMSQt
 {
 

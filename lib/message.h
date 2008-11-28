@@ -14,12 +14,12 @@
  *  Lesser General Public License for more details.
  */
 
+#ifndef __XMMS_MESSAGE_H__
+#define __XMMS_MESSAGE_H__
+
 #include <QDataStream>
 #include <QVariant>
 #include <QList>
-
-#ifndef __XMMS_MESSAGE_H__
-#define __XMMS_MESSAGE_H__
 
 #include "propdict.h"
 #include "coll.h"

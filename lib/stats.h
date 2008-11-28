@@ -19,11 +19,14 @@
 
 #include "object.h"
 #include "result.h"
-#include <xmmsc/xmmsc_idnumbers.h>
 
 namespace XMMSQt
 {
 
+	/** @class Stats stats.h "FIXME: add filepath"
+	 *  @brief This class is used to get various status information from the
+	 *         server.
+	 */
 	class Stats : public BaseObject {
 		public:
 			Stats (Client *client) : BaseObject (client)

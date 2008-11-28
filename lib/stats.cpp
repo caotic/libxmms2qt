@@ -16,6 +16,7 @@
 
 #include "stats.h"
 #include "client.h"
+#include <xmmsc/xmmsc_idnumbers.h>
 
 namespace XMMSQt
 {
