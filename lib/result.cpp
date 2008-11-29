@@ -101,6 +101,11 @@ namespace XMMSQt
 					                           Q_RETURN_ARG (bool, ret),
 					                           Q_ARG (QVariantList,
 				                                      m_message.getList ()));
+				} else if (param == "QVariantMap") {
+					QMetaObject::invokeMethod (m_object, sig,
+				                               Q_RETURN_ARG (bool, ret),
+					                           Q_ARG (QVariantMap,
+					                                  m_message.getDict ()));
 				} else if (param == "PropDict") {
 					QMetaObject::invokeMethod (m_object, sig,
 					                           Q_RETURN_ARG (bool, ret),
