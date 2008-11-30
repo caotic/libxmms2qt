@@ -13,6 +13,8 @@ MOC_DIR     = .moc
 OBJ_DIR	    = .obj
 
 # Input
-HEADERS += playlistmodel.h \
+HEADERS += cache.h \
+           playlistmodel.h
 
-SOURCES += playlistmodel.cpp \
+SOURCES += cache.cpp \
+           playlistmodel.cpp

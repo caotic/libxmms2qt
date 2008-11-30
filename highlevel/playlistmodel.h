@@ -17,7 +17,7 @@
 #ifndef __PLAYLISTMODEL_H__
 #define __PLAYLISTMODEL_H__
 
-#include "client.h"
+//#include "client.h"
 
 #include <QObject>
 
@@ -28,7 +28,11 @@
 //#include "script.h"
 
 
+
 namespace XMMSQt {
+	class Client;
+	class Cache;
+	class PropDict;
 	class PlaylistModelItem;
 
 	class PlaylistModel : public QStandardItemModel
@@ -64,17 +68,18 @@ namespace XMMSQt {
 	//		void cbNewScript (bool);
 
 		private:
-			void setMetaData (PlaylistModelItem *, const QHash<QString,
-							  QVariant> &);
+			void setMetaData (PlaylistModelItem *, const PropDict &);
 			QList<PlaylistModelItem *> getItemById (quint32);
 
 
 			QString m_name;
 			Client *m_client;
+			Cache *m_cache;
 			QModelIndex m_current_idx;
 			QSize m_sizehint;
 //			Script *m_script;
 			bool m_has_script;
+
 	};
 
 	class PlaylistModelItem : public QStandardItem

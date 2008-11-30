@@ -63,6 +63,11 @@ namespace XMMSQt
 			void add (const QString &key, const QVariant &val,
 			          const QString &source = QString ());
 
+			bool contains (const QString &key) const
+			{
+				return m_prop.contains (key);
+			}
+
 			QVariantMap toDict () const;
 
 			QVariant operator[] (const QString &key) const;
@@ -73,7 +78,6 @@ namespace XMMSQt
 				m_source = src.m_source;
 				return *this;
 			};
-
 
 		protected:
 			void initSourcePref ();

@@ -15,6 +15,8 @@
  */
 
 #include "playlistmodel.h"
+#include "client.h"
+#include "cache.h"
 
 namespace XMMSQt
 {
@@ -25,13 +27,16 @@ namespace XMMSQt
 		m_client = client;
 		m_name = "_active";
 
+//FIXME: It should be possible to give the Cache pointer in the constructor
+		m_cache = new Cache (m_client);
+
 		QStringList h (tr ("Playlist"));
 		setHorizontalHeaderLabels (h);
 
 		connect (client, SIGNAL (connected (bool)),
 		         this, SLOT (gotConnection (bool)));
-//		connect (client->cache (), SIGNAL (entryChanged (uint32_t)),
-//		         this, SLOT (entryChanged (uint32_t)));
+		connect (m_cache, SIGNAL (entryChanged (quint32)),
+		         this, SLOT (entryChanged (quint32)));
 		connect (parent, SIGNAL (pvGeneralSizeHint (const QSize &)),
 		         this, SLOT (cbGeneralSizeHint (const QSize &)));
 
@@ -119,8 +124,6 @@ namespace XMMSQt
 		clear ();
 
 		int pos = 0;
-//		for (list.first (); list.isValid (); ++list) {
-//			quint32 id = *list;
 		foreach (QVariant id, list) {
 			PlaylistModelItem *entry = new PlaylistModelItem (id.toUInt ());
 			setItem (pos, entry);
@@ -130,7 +133,7 @@ namespace XMMSQt
 	}
 
 	bool
-	PlaylistModel::handleChange (const QVariantMap &chg)//const Xmms::Dict &chg)
+	PlaylistModel::handleChange (const QVariantMap &chg)
 	{
 		qint32 change = chg.value ("type").toInt ();
 		qint32 pos = 0, npos = 0;
@@ -239,12 +242,7 @@ namespace XMMSQt
 
 		if (role == Qt::DisplayRole && !QStandardItemModel::data (idx, ReadyRole).toBool ()) {
 			PlaylistModelItem *it = fake->item (idx.row ());
-#if 0
-			QHash<QString, QVariant> d = m_client->cache ()->get_info (it->id ());
-#else
-			QHash <QString, QVariant> d;
-			d["title"] = QString::number (it->id ());
-#endif
+			PropDict d = m_cache->get_info (it->id ());
 
 			fake->setMetaData (it, d);
 		}
@@ -273,7 +271,7 @@ namespace XMMSQt
 	}
 
 	void
-	PlaylistModel::setMetaData (PlaylistModelItem *it, const QHash<QString, QVariant> &data)
+	PlaylistModel::setMetaData (PlaylistModelItem *it, const PropDict &data)
 	{
 		QString display;
 		QString extras;
@@ -289,7 +287,7 @@ namespace XMMSQt
 			if (data.contains ("artist")) {
 				display += data["artist"].toString ();
 			} if (data.contains ("title")) {
-//				display += " - ";
+				display += " - ";
 				display += data["title"].toString ();
 			}
 		}
@@ -318,11 +316,7 @@ namespace XMMSQt
 	{
 		qDebug ("%d changed", id);
 		QList<PlaylistModelItem *> l = getItemById (id);
-#if 0
-		QHash<QString, QVariant> d = m_client->cache ()->get_info (id);
-#else
-		QHash <QString, QVariant> d;
-#endif
+		PropDict d = m_cache->get_info (id);
 		for (int i = 0; i < l.size (); i ++) {
 			setMetaData (l.at (i), d);
 		}

@@ -1,0 +1,5 @@
+Makefile.static
+libxmmsclientqt.so*
+libxmmsqt_highlevel.so*
+tests/tests
+testfile2.mp3
