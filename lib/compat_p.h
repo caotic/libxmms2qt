@@ -13,8 +13,9 @@
 #endif
 
 
-#if !HAVE_XMMSV
-
+#if HAVE_XMMSV
+#include <xmmsc/xmmsc_value.h>
+#else
 // #define XMMSV_TYPE_NONE
 // #define XMMSV_TYPE_ERROR
 #define XMMSV_TYPE_UINT32  XMMS_OBJECT_CMD_ARG_UINT32

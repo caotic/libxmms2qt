@@ -25,8 +25,6 @@
 #include "result.h"
 #include "coll.h"
 
-#include <xmmsc/xmmsc_idnumbers.h>
-
 #include "compat_p.h"
 
 namespace XMMSQt
