@@ -23,6 +23,7 @@
 
 #include <QList>
 #include <QVariant>
+#include <QPointer>
 #include <QStandardItemModel>
 
 //#include "script.h"
@@ -35,13 +36,23 @@ namespace XMMSQt {
 	class PropDict;
 	class PlaylistModelItem;
 
+	class PlaylistModelDelegate : public QObject {
+		Q_OBJECT
+		public:
+			virtual QString formatEntry (const PropDict &) {return QString ();}
+			virtual QString formatExtras (const PropDict &) {return QString ();}
+	};
+
 	class PlaylistModel : public QStandardItemModel
 	{
 		Q_OBJECT
 		public:
-			PlaylistModel (QObject *parent, Client *);
+			PlaylistModel (QObject *parent, Client *, Cache * = NULL);
 			QVariant data (const QModelIndex &, int role = Qt::DisplayRole) const;
 			void updateItem (const QModelIndex &);
+
+			bool setDelegate (PlaylistModelDelegate *);
+			PlaylistModelDelegate *delegate ();
 
 			enum Roles {
 				CoverRole = Qt::UserRole,
@@ -77,6 +88,7 @@ namespace XMMSQt {
 			Cache *m_cache;
 			QModelIndex m_current_idx;
 			QSize m_sizehint;
+			QPointer<PlaylistModelDelegate> m_delegate;
 //			Script *m_script;
 			bool m_has_script;
 

@@ -21,14 +21,18 @@
 namespace XMMSQt
 {
 
-	PlaylistModel::PlaylistModel (QObject *parent, Client *client)
+	PlaylistModel::PlaylistModel (QObject *parent, Client *client, Cache *cache)
 		: QStandardItemModel (parent)
 	{
 		m_client = client;
 		m_name = "_active";
+		m_delegate = NULL;
 
-//FIXME: It should be possible to give the Cache pointer in the constructor
-		m_cache = new Cache (m_client);
+		if (cache) {
+			m_cache = cache;
+		} else {
+			m_cache = new Cache (m_client);
+		}
 
 		QStringList h (tr ("Playlist"));
 		setHorizontalHeaderLabels (h);
@@ -46,6 +50,46 @@ namespace XMMSQt
 
 //		connect (m_script, SIGNAL (newScript (bool)),
 //		         this, SLOT (cbNewScript (bool)));
+	}
+
+	/** XMMS2 connection */
+	void
+	PlaylistModel::gotConnection (bool b)
+	{
+		if (!b)
+			return;
+
+		m_client->playlist.activePlaylist () (this, SLOT (handleCurrentPls (QString)));
+		m_client->playlist.listEntries (m_name) (this, SLOT (handleList (QVariantList)));
+
+#if (XMMS_IPC_PROTOCOL_VERSION > 10)
+		m_client->playlist.currentPos () (this, SLOT (handleUpdatePos (QVariantMap)));
+		m_client->playlist.broadcastPlaylistCurrentPos () (this, SLOT (handleUpdatePos (QVariantMap)));
+#else
+		m_client->playlist.currentPos () (this, SLOT (handleUpdatePos (quint32)));
+		m_client->playlist.broadcastPlaylistCurrentPos () (this, SLOT (handleUpdatePos (quint32)));
+#endif
+
+		m_client->playlist.broadcastPlaylistChanged () (this, SLOT (handleChange (QVariantMap)));
+		m_client->playlist.broadcastPlaylistLoaded () (this, SLOT (handlePlsLoaded (QString)));
+	}
+
+
+	bool
+	PlaylistModel::setDelegate (PlaylistModelDelegate *delegate)
+	{
+		// Only allow to set a delegate if none is set at the moment
+		if (m_delegate)
+			return false;
+
+		m_delegate = delegate;
+		return true;
+	}
+
+	PlaylistModelDelegate *
+	PlaylistModel::delegate ()
+	{
+		return m_delegate;
 	}
 
 	void
@@ -79,32 +123,6 @@ namespace XMMSQt
 	PlaylistModel::cbGeneralSizeHint (const QSize &s)
 	{
 		m_sizehint = s;
-	}
-
-
-	/** XMMS2 connection */
-	void
-	PlaylistModel::gotConnection (bool b)
-	{
-		if (!b)
-			return;
-
-		m_client->playlist.activePlaylist () (this, SLOT (handleCurrentPls (QString)));
-		m_client->playlist.listEntries (m_name) (this, SLOT (handleList (QVariantList)));
-#if (XMMS_IPC_PROTOCOL_VERSION > 10)
-		m_client->playlist.currentPos () (this, SLOT (handleUpdatePos (QVariantMap)));
-#else
-		m_client->playlist.currentPos () (this, SLOT (handleUpdatePos (quint32)));
-#endif
-
-		m_client->playlist.broadcastPlaylistChanged () (this, SLOT (handleChange (QVariantMap)));
-#if (XMMS_IPC_PROTOCOL_VERSION > 10)
-		m_client->playlist.broadcastPlaylistCurrentPos () (this, SLOT (handleUpdatePos (QVariantMap)));
-#else
-		m_client->playlist.broadcastPlaylistCurrentPos () (this, SLOT (handleUpdatePos (quint32)));
-#endif
-
-		m_client->playlist.broadcastPlaylistLoaded () (this, SLOT (handlePlsLoaded (QString)));
 	}
 
 	bool
@@ -283,6 +301,11 @@ namespace XMMSQt
 		}
 #endif
 
+		if (m_delegate) {
+			display = m_delegate->formatEntry (data);
+			extras = m_delegate->formatExtras (data);
+		}
+
 		if (display.isNull ()) {
 			if (data.contains ("artist")) {
 				display += data["artist"].toString ();
@@ -293,7 +316,8 @@ namespace XMMSQt
 		}
 
 		if (extras.isNull ()) {
-			extras = "Edit playlist.js to add info here...";
+//			extras = "Edit playlist.js to add info here...";
+			extras = "No extra info available...";
 		}
 
 		it->setData (QVariant (display), Qt::DisplayRole);
