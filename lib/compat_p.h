@@ -14,7 +14,7 @@
 
 
 #if HAVE_XMMSV
-#include <xmmsc/xmmsc_value.h>
+#include <xmmsc/xmmsv.h>
 #else
 // #define XMMSV_TYPE_NONE
 // #define XMMSV_TYPE_ERROR

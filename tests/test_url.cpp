@@ -9,7 +9,7 @@
 
 #if HAVE_CBINDINGS
 #if HAVE_XMMSV
-#include <xmmsc/xmmsc_value.h>
+#include <xmmsc/xmmsv.h>
 #else
 #include <xmmsclient/xmmsclient.h>
 #endif

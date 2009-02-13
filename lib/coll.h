@@ -17,10 +17,17 @@
 #ifndef __XMMSCLIENTPP_COLL_H__
 #define __XMMSCLIENTPP_COLL_H__
 
+#include <xmmsc/xmmsc_idnumbers.h>
+
 #include <QObject>
 #include <QString>
 #include <QMap>
+
+#if XMMS_IPC_PROTOCOL_VERSION >= 13
+#include <xmmsc/xmmsv_coll.h>
+#else
 #include <xmmsc/xmmsc_coll.h>
+#endif
 
 #include "typedefs.h"
 #include "message.h"
