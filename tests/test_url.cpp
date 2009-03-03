@@ -10,11 +10,13 @@
 #if HAVE_CBINDINGS
 #if HAVE_XMMSV
 #include <xmmsc/xmmsv.h>
+extern "C" char *_xmmsc_medialib_encode_url_old (const char *url, int narg,
+                                                 const char **args);
 #else
 #include <xmmsclient/xmmsclient.h>
-#endif
 extern "C" char *_xmmsc_medialib_encode_url (const char *url, int narg,
                                              const char **args);
+#endif
 #endif
 
 
@@ -84,7 +86,11 @@ cEncodeUrl (const QString &url, QStringList args = QStringList ())
 		}
 	}
 
+#if HAVE_XMMSV
+	char *p_enc = _xmmsc_medialib_encode_url_old (url_ba.constData(), narg, c_args);
+#else
 	char *p_enc = _xmmsc_medialib_encode_url (url_ba.constData(), narg, c_args);
+#endif
 	free (c_args);
 	ret = QString::fromUtf8 (p_enc);
 	free (p_enc);
