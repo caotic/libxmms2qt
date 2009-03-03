@@ -235,10 +235,12 @@ namespace XMMSQt
 		qint32 type;
 		*m_stream >> type;
 		switch (type) {
+#if !HAVE_XMMSV
 			case XMMSV_TYPE_UINT32:
 				quint32 ui;
 				*m_stream >> ui;
 				return QVariant (ui);
+#endif
 			case XMMSV_TYPE_INT32:
 				qint32 i;
 				*m_stream >> i;
@@ -275,7 +277,7 @@ namespace XMMSQt
 	{
 		qint32 type;
 		*m_stream >> type;
-		if (type != XMMSV_TYPE_UINT32) {
+		if (type != XMMSV_TYPE_UINT32 && type != XMMSV_TYPE_INT32) {
 			qWarning ("wanted type %d but got %d", XMMSV_TYPE_UINT32,
 			          type);
 			return 0;
